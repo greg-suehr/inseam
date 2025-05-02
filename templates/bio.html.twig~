@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inseam{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+  <style>
+    body {
+      background-color: #cccccc;
+      font-family: Verdana, sans-serif;
+      font-size: 12px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 900px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border: 1px solid #999;
+      padding: 20px;
+    }
+
+    .flex {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header {
+      background: linear-gradient(to right, #d0d0d0, #f0f0f0);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #999;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .nav {
+      margin-top: 10px;
+      background-color: #eeeeee;
+      padding: 8px;
+      border: 1px solid #999;
+    }
+
+    .nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #0033cc;
+      font-weight: bold;
+    }
+
+    .profile {
+      width: 330px;
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .profile-pic {
+      flex: 0 0 180px;
+    }
+
+    .profile-pic img {
+      width: 180px;
+      height: auto;
+      border: 2px solid #000;
+    }
+
+    .profile-info {
+      margin-left: 20px;
+    }
+
+    .profile-info h2 {
+      margin-top: 0;
+    }
+
+    .details, .blurbs, .shows, .links {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+    }
+
+    .section-title {
+      background-color: #dddddd;
+      padding: 5px;
+      font-weight: bold;
+      border-bottom: 1px solid #aaa;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 11px;
+      text-align: center;
+      color: #555;
+    }
+  </style>
+
+  <div class="container">
+    <div class="header">
+      <h1>Inseam</h1>
+      <div class="status">📍 Pittsburgh, PA</div>
+    </div>
+
+    <div class="nav">
+      <a href="{{ path('app_home') }">Home</a>
+      <a href="{{ path('app_bio') }">Bio</a>
+      <a href="#">Tour</a>
+      <a href="#">Music</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="flex">
+    <div class="l-column">
+    <div class="profile">
+      <div class="profile-pic">
+        <img src="your-band-photo.jpg" alt="Band Photo">
+      </div>
+      <div class="profile-info">
+        <p>Emo revival music from Pittsburgh, PA
+        {% if login_info %}
+          <br><br>Last Login: {{ login_info.last_login | date('m/d/Y') }}
+        {% else %}
+          <br><br>Status: Online Now!
+        {% endif %}          
+        </p>
+      </div>
+    </div>
+    <div class="contact-info">
+      <p><strong>Status:</strong> not touring :(</p>
+      <p><strong>Mood:</strong> fine</p>
+    </div>
+
+    <div class="links">
+      <div class="section-title">Find Us</div>
+      <strong>greg</strong>
+      <ul>
+        <li><a href="#">Spotify</a></li>
+        <li><a href="#">Bandcamp</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+    </div>
+    
+    <div class="r-column">
+    <div class="blurbs">
+      <div class="section-title">Inseam's Blurbs</div>
+      <p>
+        <strong>About Us</strong>
+        <br>
+        Inseam gnaws hungrily in inconceivable, unlighted chambers beyond time amidst the muffled, maddening beating of vile drums and the thin, monotonous whine of accursed flutes and also we're a band
+      </p>
+
+      <p>
+        <strong></strong>
+      </p>
+      
+      <p>
+        <strong></strong>
+      </p>      
+    </div>
+
+    <div class="shows">
+      <div class="section-title">Upcoming Shows</div>
+      <ul>
+        {% for show in upcoming_shows %}       
+          <li><strong>{{ show.date | date('M d') }}</strong> – {{ show.location_name }}</li>
+        {% else %}
+          <li>No upcoming shows :(</li>
+        {% endfor %}
+      </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="footer">
+      © 2025 Inseam
+    </div>
+  </div>
+{% endblock %}
