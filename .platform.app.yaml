@@ -38,7 +38,7 @@ web:
         "/assets/controllers": { root: "public/assets/controllers", expires: 365d }
 
 relationships:
-    postgresql: 'postgresql:postgresql'
+    postgresql: 'database:postgresql'
 
 hooks:
     build: |
