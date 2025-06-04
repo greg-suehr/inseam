@@ -7,6 +7,9 @@ dependencies:
         composer/composer: "^2"
 
 mounts:
+  'var':
+    source: local
+    source_path: var
   'web/uploads':
     source: local
     source_path: uploads
