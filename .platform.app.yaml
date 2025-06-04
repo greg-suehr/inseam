@@ -2,6 +2,10 @@ name: app
 
 type: 'php:8.4'
 
+dependencies:
+    php:
+        composer/composer: "^2"
+
 mounts:
   'web/uploads':
     source: local
@@ -11,3 +15,19 @@ disk: 2048
 
 relationships:
     postgresql: 'postgresql:postgresql'
+
+hooks:
+    build: |
+        set -x -e
+
+        curl -fs https://get.symfony.com/cloud/configurator | bash
+        # php-ext-install blackfire X.Y.Z
+
+	NODE_VERSION=22 symfony-build
+        npm install
+        npm run build
+
+    deploy: |
+        set -x -e
+
+        symfony-deploy
