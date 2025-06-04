@@ -3,10 +3,11 @@ name: app
 type: 'php:8.4'
 
 dependencies:
-  php: 
-    composer/composer: "^2" 
+  php:
     ext-pdo_pgsql: true
     ext-pgsql: true
+  composer:
+    composer/composer: "^2"
 
 runtime:
     extensions:
