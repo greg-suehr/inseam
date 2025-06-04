@@ -1,3 +1,4 @@
-postgresql:
+database:
     type: postgresql:16
+    size: S
     disk: 256
