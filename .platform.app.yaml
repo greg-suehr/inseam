@@ -2,7 +2,7 @@ name: app
 
 type: 'php:8.4'
 
-dependencies:
+dependencies:ext-pdo_pgsql: true
   php:
     ext-pdo_pgsql: true
     ext-pgsql: true
