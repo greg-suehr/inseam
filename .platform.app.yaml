@@ -5,8 +5,6 @@ type: 'php:8.4'
 dependencies:
   php: 
     composer/composer: "^2" 
-    ext-pdo_pgsql: true
-    ext-pgsql: true
 
 runtime:
     extensions:
