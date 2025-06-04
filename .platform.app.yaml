@@ -21,11 +21,6 @@ hooks:
         set -x -e
 
         curl -fs https://get.symfony.com/cloud/configurator | bash
-        # php-ext-install blackfire X.Y.Z
-
-        NODE_VERSION=22 symfony-build
-        npm install
-        npm run build
 
     deploy: |
         set -x -e
