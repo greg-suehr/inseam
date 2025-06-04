@@ -2,11 +2,8 @@ name: app
 
 type: 'php:8.4'
 
-dependencies:ext-pdo_pgsql: true
+dependencies:
   php:
-    ext-pdo_pgsql: true
-    ext-pgsql: true
-  composer:
     composer/composer: "^2"
 
 runtime:
@@ -39,7 +36,7 @@ web:
         "/assets/controllers": { root: "public/assets/controllers", expires: 365d }
 
 relationships:
-    postgresql: 'postgresql:postgresql'
+    database: 'postgresql:postgresql'
 
 hooks:
     build: |
