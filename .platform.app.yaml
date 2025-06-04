@@ -17,9 +17,6 @@ runtime:
         - xsl
 
 
-variables:
-    php:
-        opcache.preload: config/preload.php
 build:
     flavor: none
 
