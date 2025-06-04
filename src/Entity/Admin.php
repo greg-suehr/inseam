@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AdminRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,9 +42,38 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     private \DateTimeInterface $defaultLastLogin;
 
+    #[ORM\Column(length: 255)]
+    private ?string $bio = null;
+
+    /**
+     * @var Collection<int, BioTag>
+     */
+    #[ORM\OneToMany(targetEntity: BioTag::class, mappedBy: 'profile', orphanRemoval: true)]
+    private Collection $bioTags;
+
+    /**
+     * @var Collection<int, Blurb>
+     */
+    #[ORM\OneToMany(targetEntity: Blurb::class, mappedBy: 'profile')]
+    private Collection $blurbs;
+
+    /**
+     * @var Collection<int, BioLink>
+     */
+    #[ORM\OneToMany(targetEntity: BioLink::class, mappedBy: 'profile', orphanRemoval: true)]
+    private Collection $bioLinks;
+
   public function __construct(?\DateTimeInterface $defaultLastLogin = null)
   {
       $this->defaultLastLogin = $defaultLastLogin ?? new \DateTime("2011-06-29");
+      $this->bioTags = new ArrayCollection();
+      $this->blurbs = new ArrayCollection();
+      $this->bioLinks = new ArrayCollection();
+  }
+
+  public function __toString()
+  {
+        return $this->username;
   }
   
     public function getId(): ?int
@@ -140,6 +171,108 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastLogin(?\DateTimeInterface $last_login): static
     {
         $this->last_login = $last_login;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(string $bio): static
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BioTag>
+     */
+    public function getBioTags(): Collection
+    {
+        return $this->bioTags;
+    }
+
+    public function addBioTag(BioTag $bioTag): static
+    {
+        if (!$this->bioTags->contains($bioTag)) {
+            $this->bioTags->add($bioTag);
+            $bioTag->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBioTag(BioTag $bioTag): static
+    {
+        if ($this->bioTags->removeElement($bioTag)) {
+            // set the owning side to null (unless already changed)
+            if ($bioTag->getProfile() === $this) {
+                $bioTag->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Blurb>
+     */
+    public function getBlurbs(): Collection
+    {
+        return $this->blurbs;
+    }
+
+    public function addBlurb(Blurb $blurb): static
+    {
+        if (!$this->blurbs->contains($blurb)) {
+            $this->blurbs->add($blurb);
+            $blurb->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlurb(Blurb $blurb): static
+    {
+        if ($this->blurbs->removeElement($blurb)) {
+            // set the owning side to null (unless already changed)
+            if ($blurb->getProfile() === $this) {
+                $blurb->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BioLink>
+     */
+    public function getBioLinks(): Collection
+    {
+        return $this->bioLinks;
+    }
+
+    public function addBioLink(BioLink $bioLink): static
+    {
+        if (!$this->bioLinks->contains($bioLink)) {
+            $this->bioLinks->add($bioLink);
+            $bioLink->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBioLink(BioLink $bioLink): static
+    {
+        if ($this->bioLinks->removeElement($bioLink)) {
+            // set the owning side to null (unless already changed)
+            if ($bioLink->getProfile() === $this) {
+                $bioLink->setProfile(null);
+            }
+        }
 
         return $this;
     }

@@ -27,7 +27,8 @@ final class SiteController extends AbstractController
         
         return $this->render('myspace.html.twig', [
             'controller_name' => 'SiteController',
-            'login_info'      => $adminUser ? $adminUser->getLastLogin : null,
+            'user'            => $adminUser,
+            'last_login'      => $adminUser ? $adminUser->getLastLogin() : null,
             'upcoming_shows'  => $showRepo->findUpcoming(),
         ]);
     }
@@ -39,7 +40,7 @@ final class SiteController extends AbstractController
         
         return $this->render('bio.html.twig', [
             'controller_name' => 'SiteController',
-            'login_info'      => $adminUser ? $adminUser->getLastLogin : null,
+            'last_login'      => $adminUser ? $adminUser->getLastLogin() : null,
         ]);
     }
 }

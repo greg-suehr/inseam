@@ -122,26 +122,27 @@
         <img src="your-band-photo.jpg" alt="Band Photo">
       </div>
       <div class="profile-info">
-        <p>Emo revival music from Pittsburgh, PA
-        {% if login_info %}
-          <br><br>Last Login: {{ login_info.last_login | date('m/d/Y') }}
+        <p>{{ user.bio }}</p>
+        {% if last_login %}
+          <br><br>Last Login: {{ last_login | date('m/d/Y') }}
         {% else %}
           <br><br>Status: Online Now!
         {% endif %}          
         </p>
       </div>
     </div>
-    <div class="contact-info">
-      <p><strong>Status:</strong> not touring :(</p>
-      <p><strong>Mood:</strong> fine</p>
+    <div class="profile-tags">
+      {% for tag in user.getBioTags %}
+      <p><strong>{{ tag.title }}:</strong> {{ tag.text }}</p>
+      {% endfor %}
     </div>
 
     <div class="links">
       <div class="section-title">Find Us</div>
       <ul>
-        <li><a href="#">Spotify</a></li>
-        <li><a href="#">Bandcamp</a></li>
-        <li><a href="#">Instagram</a></li>
+        {% for link in user.getBioLinks %}
+        <li><a href="{{ link.hyperlink }}">{{ link.title }}</a></li>
+        {% endfor %}
       </ul>
     </div>
     </div>
@@ -149,19 +150,13 @@
     <div class="r-column">
     <div class="blurbs">
       <div class="section-title">Inseam's Blurbs</div>
+      {% for blurb in user.getBlurbs %}
       <p>
-        <strong>About Us</strong>
+        <strong>{{ blurb.title }}</strong>
         <br>
-        Inseam gnaws hungrily in inconceivable, unlighted chambers beyond time amidst the muffled, maddening beating of vile drums and the thin, monotonous whine of accursed flutes and also we're a band
+        {{ blurb.text }}
       </p>
-
-      <p>
-        <strong></strong>
-      </p>
-      
-      <p>
-        <strong></strong>
-      </p>      
+      {% endfor %}
     </div>
 
     <div class="shows">

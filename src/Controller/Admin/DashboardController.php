@@ -2,6 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Admin;
+use App\Entity\Blurb;
+use App\Entity\BioLink;
+use App\Entity\BioTag;
+use App\Entity\Show;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -30,6 +35,10 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Admins', 'fas fa-user', Admin::class);
+        yield MenuItem::linkToCrud('Blurbs', 'fas fa-scroll', Blurb::class);
+        yield MenuItem::linkToCrud('Links', 'fas fa-chain', BioLink::class);        
+        yield MenuItem::linkToCrud('Tags', 'fas fa-tag', BioTag::class);
+        yield MenuItem::linkToCrud('Shows', 'fas fa-calendar', Show::class);
     }
 }
