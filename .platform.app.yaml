@@ -1,10 +1,10 @@
 name: app
 
-type: 'php:8.4'
+type: php:8.4
 
 dependencies:
-  php: 
-    composer/composer: "^2" 
+    php: 
+        composer/composer: "^2" 
 
 runtime:
     extensions:
@@ -16,13 +16,12 @@ runtime:
         - sodium
         - xsl
 
-mounts:
-  'var':
-    source: local
-    source_path: var
-  'web/uploads':
-    source: local
-    source_path: uploads
+
+variables:
+    php:
+        opcache.preload: config/preload.php
+build:
+    flavor: none
 
 disk: 2048
 
@@ -35,8 +34,16 @@ web:
         "/build": { root: "public/build", expires: 365d }
         "/assets/controllers": { root: "public/assets/controllers", expires: 365d }
 
+mounts:
+  'var':
+    source: local
+    source_path: var
+  'web/uploads':
+    source: local
+    source_path: uploads
+
 relationships:
-    postgresql: 'database:postgresql'
+    database: 'database:postgresql'
 
 hooks:
     build: |
