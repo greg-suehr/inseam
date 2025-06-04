@@ -1,3 +1,3 @@
 postgresql:
-    type: postgresql:17
+    type: postgresql:16
     disk: 256
