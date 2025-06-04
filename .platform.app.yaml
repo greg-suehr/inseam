@@ -6,6 +6,16 @@ dependencies:
     php:
         composer/composer: "^2"
 
+runtime:
+    extensions:
+        - apcu
+        - ctype
+        - iconv
+        - mbstring
+        - pdo_pgsql
+        - sodium
+        - xsl
+
 mounts:
   'var':
     source: local
