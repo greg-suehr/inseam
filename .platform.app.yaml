@@ -13,6 +13,15 @@ mounts:
 
 disk: 2048
 
+web:
+    locations:
+        "/":
+            root: "public"
+            expires: 1h
+            passthru: "/index.php"
+        "/build": { root: "public/build", expires: 365d }
+        "/assets/controllers": { root: "public/assets/controllers", expires: 365d }
+
 relationships:
     postgresql: 'postgresql:postgresql'
 
