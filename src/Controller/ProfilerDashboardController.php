@@ -36,7 +36,8 @@ class ProfilerDashboardController extends AbstractDashboardController
     public function index(): Response
     {
         /** @var \Doctrine\Common\Collections\Collection|Site[] $sites */
-        $sites = $this->getUser()->getSite();
+        $user = $this->getUser();
+        $sites = isset($user) ? $user->getSite() : null;
         $session = $this->requestStack->getCurrentRequest()->getSession();        
 
         if ($sites === null) {
