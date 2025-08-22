@@ -20,5 +20,17 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    ########################################################################
+    # Profile Module
+    ########################################################################
+    App\EventListener\TenantSchemaListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+
+    App\Middleware\TenantSchemaMiddleware:
+        arguments:
+            $siteContext: '@App\Service\SiteContext'
+            $enabled: false
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
