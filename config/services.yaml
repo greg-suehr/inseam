@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    import.media_dir: '%kernel.project_dir%/public/media'
+    import.media_base_url: '/media'
 
 services:
     # default configuration for services in *this* file
@@ -27,6 +29,42 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
 
+    App\Import\:
+        resource: '../src/Import/'
+        exclude:
+          - '../src/Import/Entity/'
+
+    App\Import\Storage\FilesystemAssetStorage:
+      arguments:
+        $mediaDir: '%import.media_dir%'
+        $mediaBaseUrl: '%import.media_base_url%'
+
+    App\Import\Storage\AssetStorage: '@App\Import\Storage\FilesystemAssetStorage'
+
+    App\Import\Tenancy\TenantContextAdaptor: ~
+
+    App\Import\Tenancy\TenantContext: '@App\Import\Tenancy\TenantContextAdaptor'
+
+    App\Import\Adapter\:
+      resource: '../src/Import/Adapter/*'
+      autowire: true
+      autoconfigure: true
+
+    App\Import\Adapter\StaticHttpAdaptor:
+        tags: ['app.importer']
+
+    App\Import\Adapter\SquarespaceAdaptor:
+        tags: ['app.importer']
+
+    App\Import\Adapter\WixAdaptor:
+        tags: ['app.importer']
+
+    App\Import\ImporterRegistry:
+      autowire: true
+      autoconfigure: true
+      arguments:      
+         $importers: !tagged_iterator { tag: 'app.importer', index_by: 'getKey' }
+
     App\Middleware\TenantSchemaMiddleware:
         arguments:
             $siteContext: '@App\Service\SiteContext'
@@ -34,3 +72,5 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    Symfony\Contracts\HttpClient\HttpClientInterface: '@http_client'
