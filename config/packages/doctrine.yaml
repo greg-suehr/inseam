@@ -24,6 +24,12 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+            Import:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Import/Entity'
+                prefix: 'App\Import\Entity'
+                alias: Import		
         controller_resolver:
             auto_mapping: false
 

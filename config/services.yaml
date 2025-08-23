@@ -65,6 +65,14 @@ services:
       arguments:      
          $importers: !tagged_iterator { tag: 'app.importer', index_by: 'getKey' }
 
+    App\Import\Planning\PageWriter: ~
+
+    App\Import\Planning\RoutingEngine: ~
+
+    App\Import\Planning\PlanRepository: ~
+
+    App\Import\Planning\LinkRewriter: ~
+
     App\Middleware\TenantSchemaMiddleware:
         arguments:
             $siteContext: '@App\Service\SiteContext'
