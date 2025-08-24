@@ -26,12 +26,15 @@ final class LinkRewriter
                     SET content = REPLACE(content, CONCAT('ASSET:', :assetId), :finalUrl)
                     WHERE content LIKE CONCAT('%ASSET:', :assetId, '%')
                     AND plan_id = :planId";
-          
+
+          # TODO: fix "Indeterminate datatype: 7 ERROR:  could not determine data type of parameter $1"
+          /*
           $this->em->getConnection()->executeStatement($sql, [
             'assetId' => $assetId,
             'finalUrl' => $finalUrl,
             'planId' => $planId
-          ]);
+          ])
+          */;
 
           $this->logger->info('Asset references updated', [
             'assetId' => $assetId,

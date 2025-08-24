@@ -31,7 +31,7 @@ final class PlanRepository
         if (!$row) throw new \RuntimeException("Plan not found: $planId");
         $data = $row->getPlanJson();
 
-        return \App\Import\Util\PlanHydrator::fromArray($data);
+        return PlanHydrator::fromArray($data);
     }
 
   public function createPlanFromDiscovery(DiscoveryResult $graph): ImportPlan
@@ -125,7 +125,6 @@ final class PlanRepository
   }
 
   public function load(string $planId): ImportPlan {
-      $row = $this->get($planId);
-      return PlanHydrator::fromArray($row->getPlanJson());
+      return $this->get($planId);
   }  
 }

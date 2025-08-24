@@ -2,6 +2,7 @@
 
 namespace App\Import\Planning;
 
+use App\Entity\PageContent;
 use App\Import\DTO\Planning\BlockNode;
 use App\Import\DTO\Planning\HeadingBlock;
 use App\Import\DTO\Planning\ImageBlock;
@@ -22,34 +23,41 @@ final class PageWriter
     public function upsert(string $route, PagePlanItem $page, StylePlan $styles, array $provenance): void
     {
         try {
-            $this->logger->info('Writing page', [
-                'route' => $route,
-                'pageId' => $page->pageId,
-                'sourceUrl' => $page->sourceUrl,
-                'planId' => $provenance['planId'] ?? null
-            ]);
+          $planId = (string)($provenance['planId'] ?? '');
+          
+          $this->logger->info('Writing page', [
+            'route' => $route,
+            'pageId' => $page->pageId,
+            'sourceUrl' => $page->sourceUrl,
+            'planId' => $planId ?? null
+          ]);
+          
+          $content = $this->renderBlockTree($page->blockTree);
+          
+          $finalContent = $this->applyStyles($content, $styles);
 
-            $content = $this->renderBlockTree($page->blockTree);
-
-            $finalContent = $this->applyStyles($content, $styles);
-
-            // TODO: Persist to your CMS
-            // Example: Create Page entity with route, content, metadata
-            // $pageEntity = new Page();            
-            // $pageEntity->setRoute($route);
-            // $pageEntity->setContent($finalContent);
-            // $pageEntity->setProvenance($provenance);
-            // $this->em->persist($pageEntity);
-            
-            $this->logger->info('Page written successfully', ['route' => $route]);
-
+          $repo = $this->em->getRepository(PageContent::class);
+          $row = $repo->findOneBy(['planId' => $planId, 'route' => $route]);
+          
+          if ($row) {
+            $row->setContent($finalContent);
+            $row->setProvenance($provenance);
+          } else {
+            $row = new PageContent($planId, $route, $finalContent, $provenance);
+          }
+          
+          $this->em->persist($row);
+          $this->em->flush();
+          
+          $this->logger->info('Page written successfully', ['route' => $route]);
+          
         } catch (\Exception $e) {
-            $this->logger->error('Failed to write page', [
-                'route' => $route,
-                'error' => $e->getMessage(),
-                'pageId' => $page->pageId
-            ]);
-            throw $e;
+          $this->logger->error('Failed to write page', [
+            'route' => $route,
+            'error' => $e->getMessage(),
+            'pageId' => $page->pageId
+          ]);
+          throw $e;
         }
     }
 

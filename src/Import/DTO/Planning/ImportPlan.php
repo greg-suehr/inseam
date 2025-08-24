@@ -17,5 +17,5 @@ final readonly class ImportPlan
         public StylePlan $styles,
         public ScriptPlan $scripts,
         public RedirectMap $redirects
-    ) {}
+    ) {}    
 }
