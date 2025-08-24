@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Import\Storage;
 
 use App\Import\DTO\Planning\AssetPlanItem;
@@ -7,7 +8,7 @@ use App\Import\Exception\AssetValidationException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Psr\Log\LoggerInterface;
 
-final class FilesystemAssetStorage implements AssetStorage
+final class FileSystemStorage implements AssetStorage
 {
   private const MAX_RETRIES = 3;
   private const RETRY_DELAY_MS = [100, 500, 1000];
