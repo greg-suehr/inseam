@@ -1,6 +1,7 @@
 *.sql
 *~
 /public/media/
+/tests/
 
 ###> symfony/framework-bundle ###
 /.env.local

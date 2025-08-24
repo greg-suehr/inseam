@@ -14,6 +14,7 @@ use App\Import\DTO\ContentGraph\StylesheetNode;
 use App\Import\Discovery\ContentGraphBuilder;
 use App\Import\Discovery\HtmlParser;
 use App\Import\Entity\ImportDiscovery;
+use App\Import\Render\PantherHeadlessRenderer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -40,8 +41,18 @@ final class DiscoveryEngine
         'platform' => $source->platform,
         'maxPages' => $policy->maxPages
       ]);
+
+      # DEBUG
+      # echo "enableHeadlessBrowser " . $policy->enableHeadlessBrowser . "\n";
+      # echo "platform " . $source->platform . "\n";
       
-      $crawler = new WebCrawler($this->http, $this->parser, $this->logger);
+      $renderer = ($policy->enableHeadlessBrowser || $source->platform === 'squarespace')
+        ? new PantherHeadlessRenderer()
+        : null;
+
+      $headless = isset($renderer);
+      
+      $crawler = new WebCrawler($this->http, $this->parser, $this->logger, $renderer, $headless);
       $crawlResult = $crawler->crawl(
         $source->entryUrlOrFile, 
         min($policy->maxPages, self::MAX_PAGES),

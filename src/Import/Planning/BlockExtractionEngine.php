@@ -2,20 +2,27 @@
 namespace App\Import\Planning;
 
 use App\Import\DTO\Planning\BlockNode;
-use App\Import\DTO\Planning\HeadingBlock;
-use App\Import\DTO\Planning\ImageBlock;
-use App\Import\DTO\Planning\ParagraphBlock;
-use App\Import\DTO\Planning\RootBlock;
+use App\Import\DTO\Planning\{HeadingBlock, ImageBlock, LinkBlock, ListBlock, ListItemBlock, ParagraphBlock, RootBlock};
+
+use Psr\Logger\LoggerInterface;
 
 final class BlockExtractionEngine
 {
+  public function __construct(
+  ) {}
+  
   /** Accept raw HTML and return a BlockNode tree */
   public function extract(string $html): BlockNode
   {
+#    echo "Starting extraction\n";
+
     $doc = new \DOMDocument();
     $old = libxml_use_internal_errors(true);
     $doc->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     libxml_use_internal_errors($old);
+
+    // Strip parse breaking svg, scripts, styles before content extractions
+    $this->sanitizeDOM($doc);
     
     $xpath = new \DOMXPath($doc);
     
@@ -24,8 +31,12 @@ final class BlockExtractionEngine
     
     // Choose a sensible root to traverse (main > article > largest texty node)
     $root = $this->pickContentRoot($xpath, $doc);
+
+#    echo print_r($root);
     
     $blocks = $this->buildBlocks($root);
+
+#    echo print_r($blocks);
     
     // Fallback if we somehow got nothing
     if (empty($blocks)) {
@@ -36,6 +47,15 @@ final class BlockExtractionEngine
     }
     
     return new RootBlock($blocks);
+  }
+
+  private function sanitizeDom(\DOMDocument $doc): void
+  {
+    $xp = new \DOMXPath($doc);
+
+    foreach ($xp->query('//head/script | //head/style | //head/svg') as $n) { $n->parentNode?->removeChild($n); }
+    foreach ($xp->query('//svg[@style="display:none" or contains(@style,"display:none")]') as $n) { $n->parentNode?->removeChild($n); }
+    foreach ($xp->query('//script | //style | //noscript | //template') as $n) { $n->parentNode?->removeChild($n); }
   }
     
   private function removeNoiseElements(\DOMXPath $xpath): void
@@ -48,7 +68,7 @@ final class BlockExtractionEngine
       '//header[not(contains(@class,"content"))]',
       '//footer',
       '//nav','//aside',
-      '//*[contains(translate(@class,"OVERLAY","overlay"),"overlay")]',
+#      '//*[contains(translate(@class,"OVERLAY","overlay"),"overlay")]',
     ];
     
     foreach ($noiseSelectors as $selector) {
@@ -120,6 +140,21 @@ final class BlockExtractionEngine
     
     return $images;
     }
+
+  private function extractLists(\DOMXPath $xpath): array
+  {
+    $blocks = [];
+    foreach ($xpath->query('//ul | //ol') as $list) {
+      $items = [];
+      foreach ($xpath->query('.//li', $list) as $item) {
+        $items[] = trim($item->textContent);
+      }
+      if (!empty($items)) {
+        $blocks[] = new ListBlock($list->tagName === 'ol', $items);
+      }
+    }
+    return $blocks;
+  }
   
   private function extractMeaningfulParagraphs(\DOMXPath $xpath): array
   {
@@ -243,19 +278,134 @@ final class BlockExtractionEngine
   /** Choose main content root without breaking if it's missing */
   private function pickContentRoot(\DOMXPath $xpath, \DOMDocument $doc): \DOMNode
   {
-    foreach (['//main', '//article', '//*[@id="content"]', '//*[contains(@class, "content")]'] as $q) {
+    foreach ([
+      '//main', '//*[@role="main"]', '//article',
+      '//*[@id="content"]', '//*[contains(@class, "content")]',
+      '//*[contains(@class,"page-content") or contains(@class,"content-wrapper")]'
+    ] as $q) {
+#      echo "checking " . $q . " for content root\n";
       $n = $xpath->query($q)?->item(0);
-      if ($n instanceof \DOMNode) return $n;
-    }
+      if ($n instanceof \DOMNode && $this->visibleTextLen($xpath, $n) > 50) return $n;
+    }    
 
     $candidates = $xpath->query('//div | //section | //body');
     $best = $doc->documentElement;
-    $bestLen = 0;
+    
+    $bestScore = -INF;
     foreach ($candidates as $cand) {
-      $len = mb_strlen($this->blockText($cand, 10000));
-      if ($len > $bestLen) { $bestLen = $len; $best = $cand; }
+       $text = $this->visibleTextLen($xpath, $n);
+       if ($text < 50) continue;
+
+       $tag = strtolower($n->nodeName);
+       $class = ' '.preg_replace('/\s+/', ' ', strtolower($n->attributes?->getNamedItem('class')?->nodeValue ?? '')).' ';
+       $id    = ' '.strtolower($n->attributes?->getNamedItem('id')?->nodeValue ?? '').' ';
+
+       if ($tag === 'header' || $tag === 'nav' || str_contains($class,' header ') ||
+           str_contains($class,' nav ') || str_contains($class,' menu ') || str_contains($id,'overlay')) {
+         continue;
+       }
+
+       $svgCount = $xpath->query('.//svg', $n)->length;
+       if ($svgCount >= 2 && $text < 1000) continue;
+
+       $p = $xpath->query('.//p', $n)->length;
+       $h = $xpath->query('.//h1|.//h2|.//h3|.//h4|.//h5|.//h6', $n)->length;
+       
+       $score = $text + (200 * $p) + (150 * $h); // Candidate scoring
+       if ($score > $bestScore) { $bestScore = $score; $best = $n; }
     }
+    
+#    echo "best is " . (isset($best) ? "set" : "null") . "\n";
+    
+    if ($best instanceof \DOMElement) {
+      printf(
+        "pickContentRoot selected: <%s id=\"%s\" class=\"%s\"> score=%d\n",
+        $best->tagName,
+        $best->getAttribute('id'),
+        $best->getAttribute('class'),
+        $bestScore
+      );
+    }
+
     return $best ?? $doc;
+  }
+
+  private function visibleTextLen(\DOMXPath $xp, ?\DOMNode $scope): int
+  {
+    if (is_null($scope)) {
+      return 0;
+    }
+    
+    $nodes = $xp->query('.//text()[not(ancestor::script or ancestor::style or ancestor::svg or ancestor::noscript or ancestor::template)]', $scope);
+    $sum = 0;
+    foreach ($nodes as $t) {
+        $sum += strlen(trim($t->nodeValue ?? ''));
+    }
+    return $sum;
+  }
+
+  /** Return best-effort plain text for any BlockNode. */
+  private function blockText(BlockNode|\DOMNode $b): string
+  {
+    if ($b instanceof \DOMNode) {
+      $raw = ($b instanceof \DOMElement)
+        ? $this->containerTextWithBlockBreaks($b)
+        : ($b->textContent ?? '');
+      return $this->normalizeWhitespace($raw);
+    }
+
+    if ($b instanceof ParagraphBlock) {
+      return $this->normalizeWhitespace($b->text);
+    }
+        
+    if ($b instanceof HeadingBlock) {
+      return $this->normalizeWhitespace($b->text);
+    }
+
+    if ($b instanceof ImageBlock) {
+      $parts = [];
+      if (property_exists($b, 'alt') && $b->alt)   $parts[] = $b->alt;
+      if (property_exists($b, 'caption') && $b->caption) $parts[] = $b->caption;
+      return $this->normalizeWhitespace(implode(' — ', $parts));
+    }
+
+    // TODO: implement GroupBlocks
+    if ($b instanceof RootBlock) {
+      $children = method_exists($b, 'getChildren') ? $b->getChildren() : (property_exists($b, 'children') ? $b->children : []);
+      return $this->blocksText($children);
+    }
+
+    // Fallbacks
+    if (method_exists($b, 'text')) {
+      /** @var string $t */
+      $t = $b->text();
+      return $this->normalizeWhitespace((string)$t);
+    }
+    if (property_exists($b, 'text')) {
+      /** @var mixed $t */
+      $t = $b->text;
+      return $this->normalizeWhitespace((string)$t);
+    }
+
+    return '';
+  }
+
+  /** Join multiple blocks’ text with paragraph breaks. */
+  private function blocksText(array $blocks): string
+  {
+    $parts = [];
+    foreach ($blocks as $child) {
+      $t = trim($this->blockText($child));
+      if ($t !== '') $parts[] = $t;
+    }
+
+    $joined = implode("\n\n", $parts);
+
+    $joined = str_replace("\r", '', $joined);
+    $joined = preg_replace('/[ \t]+/u', ' ', $joined);
+    $joined = preg_replace("/\n{3,}/u", "\n\n", $joined);
+    
+    return trim($joined);
   }
 
   /** Depth-first traversal yielding BlockNodes in source order */
@@ -263,14 +413,16 @@ final class BlockExtractionEngine
   {
     $out = [];
     $count = 0;
+
+#    echo "Building blocks...\n";
     
     $walker = function(\DOMNode $n) use (&$out, &$walker, $cap, &$count) {
         if ($count >= $cap) return;
         
         if ($n instanceof \DOMElement) {
           $tag = strtolower($n->tagName);
-          
-          // Skip structural elements that slipped through
+
+           // Skip structural elements that slipped through
           if (in_array($tag, ['nav','header','footer','aside'])) return;
           
           // Map headings
@@ -282,14 +434,35 @@ final class BlockExtractionEngine
             }
             return; // headings are leaf in our block model
           }
-          
+
           // Paragraph
           if ($tag === 'p') {
             $txt = $this->inlineText($n);
+            
             if ($this->isSubstantive($txt)) {
               $out[] = new ParagraphBlock($txt);
               $count++;
             }
+            return;
+          }
+
+          if ($tag === 'a') {
+            $txt = $this->inlineText($n);
+            $href = $this->hrefTarget($n);
+
+            if ($href === '' || str_starts_with($href, '#')) return; // skip anchors
+
+            $rel  = $this->isRel($n);
+            $external = $this->isExternal($href);
+            
+            $out[] = new LinkBlock(
+              text: $txt,
+              href: $href,
+              rel:  $rel,
+              external: $external,
+            );
+            $count++;
+
             return;
           }
           
@@ -358,8 +531,8 @@ final class BlockExtractionEngine
             $count++;
             return;
           }
-          
-          // Generic block container: recurse into children, but DON’T merge across boundaries
+
+          // Generic block container: recurse into children, but don't merge across boundaries
           if (in_array($tag, ['div','section','article','main'])) {
             foreach (iterator_to_array($n->childNodes) as $child) {
               $walker($child);
@@ -369,20 +542,20 @@ final class BlockExtractionEngine
           }
         }
         
-        // Text node directly under root-ish container → paragraphize
+        // Text node directly under root-ish container
         if ($n instanceof \DOMText) {
           $txt = $this->normalizeWhitespace($n->wholeText ?? '');
           if ($this->isSubstantive($txt)) {
             $out[] = new ParagraphBlock($txt);
             $count++;
           }
-        }
+        }        
         
         foreach (iterator_to_array($n->childNodes) as $child) {
           $walker($child);
           if ($count >= $cap) break;
         }
-        
+
         return;
     };
     
@@ -401,6 +574,35 @@ final class BlockExtractionEngine
     
     return $acc;
   }
+
+  /**
+   * Minimal DOM extractor that inserts paragraph breaks between blocky tags.
+   */
+  private function containerTextWithBlockBreaks(\DOMElement $el): string
+  {
+    $out = '';
+    foreach ($el->childNodes as $n) {
+      if ($n instanceof \DOMText) {
+        $out .= $n->nodeValue;
+        continue;
+      }
+      if ($n instanceof \DOMElement) {
+        $name = strtolower($n->tagName);
+        if ($name === 'br') { $out .= "\n"; continue; }
+
+        // Recurse
+        $out .= $this->containerTextWithBlockBreaks($n);
+        
+        if (in_array($name, [
+          'p','li','div','section','article','blockquote','pre',
+          'h1','h2','h3','h4','h5','h6'
+        ], true)) {
+          $out .= "\n\n";
+        }
+      }
+    }
+    return rtrim($out);
+  }
   
   private function inlineText(\DOMElement $el): string
   {
@@ -414,6 +616,87 @@ final class BlockExtractionEngine
     // Cap per-block to keep artifacts small
     if (mb_strlen($txt) > 4000) $txt = mb_substr($txt, 0, 4000) . '…';
     return $txt;
+  }
+
+  private function hrefTarget(\DOMElement $el): string
+  {
+    $href = trim($el->getAttribute('href'));
+    return $href;
+  }
+
+  private function isRel(\DOMElement $el): string
+  {
+    $rel  = $el->getAttribute('rel');
+    return $rel;
+  }
+
+  private function isExternal(string $href): bool
+  {
+    // treat empty/hash/relative as internal content links
+    $href = trim($href);
+    if ($href === '' || $href[0] === '#') return false;
+
+    // Skip non-http schemes (mailto:, tel:, javascript:, data:, blob:)
+    $scheme = strtolower(parse_url($href, PHP_URL_SCHEME) ?? '');
+    if ($scheme !== '' && !in_array($scheme, ['http', 'https'], true)) {
+        return false;
+    }
+
+    # TODO: make isExternal in BlockExtractionEngine good
+    
+    #$hrefHost = $this->hostFromUrl($href, $siteBase);
+    #$baseHost = $this->hostFromUrl($siteBase, $siteBase);
+    #if ($hrefHost === null || $baseHost === null) return false;
+
+    return preg_match('~^https?://~i', $href) === 1;
+  }
+
+  private function hostFromUrl(string $url, string $siteBase): ?string
+  {
+    if (str_starts_with($url, '//')) {
+      $baseScheme = parse_url($siteBase, PHP_URL_SCHEME) ?: 'https';
+      $url = $baseScheme . ':' . $url;
+    }
+    
+    $parsed = parse_url($url);
+    if (!$parsed) return null;
+    
+    if (!isset($parsed['host'])) {
+      $host = parse_url($siteBase, PHP_URL_HOST);
+      return $host ? strtolower($host) : null;
+    }
+    
+    return strtolower($parsed['host']);
+  }
+  
+  /**
+   * Cheap eTLD+1 fallback:
+   * - TODO: check out (jeremykendall/php-domain-parser).
+   */
+  private function registrableDomain(string $host): string
+  {
+    if (filter_var($host, FILTER_VALIDATE_IP)) return $host;
+    
+    $host = trim(strtolower($host), '.');
+    $parts = explode('.', $host);
+    $n = count($parts);
+    if ($n <= 2) return $host;
+    
+    $multiLabelSuffixes = [
+      'co.uk','ac.uk','gov.uk','org.uk','sch.uk',
+      'com.au','net.au','org.au',
+      'co.jp','ne.jp','or.jp',
+      'com.br','com.mx','com.sg','com.cn'
+    ];
+    
+    $lastTwo   = $parts[$n-2] . '.' . $parts[$n-1];
+    $lastThree = $parts[$n-3] . '.' . $lastTwo;
+    
+    if (in_array($lastTwo, $multiLabelSuffixes, true)) {
+      return $lastThree;
+    }
+    
+    return $lastTwo;
   }
 
   private function preservePreText(\DOMElement $el): string

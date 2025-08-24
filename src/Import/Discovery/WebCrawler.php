@@ -2,14 +2,20 @@
 
 namespace App\Import\Discovery;
 
+use App\Import\Render\HeadlessRenderer;
+use DOMDocument;
+use DOMXPath;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 use Psr\Log\LoggerInterface;
 
 final class WebCrawler {
   public function __construct(
     private HttpClientInterface $http,
     private HtmlParser $parser,
-    private LoggerInterface $logger
+    private LoggerInterface $logger,
+    private ?HeadlessRenderer $renderer = null,
+    private readonly bool $enableHeadlessBrowser = false
   ) {}
 
   public function crawl(
@@ -58,7 +64,7 @@ final class WebCrawler {
           $result->addError($item->url, $e->getMessage());
         }
       }
-
+      
       return $result;
     }
 
@@ -81,9 +87,33 @@ final class WebCrawler {
     }
     
     return 'maybe-page';
-  }  
+  }
 
-  private function fetchPage(string $url): string
+  private function fetchPage(string $url): string{
+    $html = $this->httpFetch($url);
+
+    if ($this->shouldHeadless($html, $url)) {
+      if ($this->renderer === null) {
+        $this->logger->warning('Headless requested but no renderer configured', ['url' => $url]);
+        return $html;
+      }
+      $this->logger->debug('Falling back to headless render', ['url' => $url]);
+      try {
+        # DEBUG
+        # echo "executing headless render\n";
+        return $this->renderer->renderToHtml($url, 'main, [role="main"], article, #content, .content, .page-content');
+      } catch (\Throwable $e) {
+        $this->logger->error('Headless render failed; continuing with static HTML', [
+          'url' => $url, 'error' => $e->getMessage()
+                ]);
+        return $html;
+      }
+    }
+    
+    return $html;
+  }
+
+  private function httpFetch(string $url): string
   {
     $response = $this->http->request('GET', $url, [
       'timeout' => 30,
@@ -105,6 +135,83 @@ final class WebCrawler {
       
       return $response->getContent();
     }
+
+  /**
+   * Heuristic: is this a JS-rendered shell (SPA) with little/no SSR content
+   */
+  private function looksLikeJsShell(string $html, string $url): bool
+  {
+    $minLength = 200;
+    if (strlen($html) < $minLength) {
+      return true;
+    }
+    
+    $lower = strtolower($html);
+    $spaMarkers = [
+      'id="__next"', 'id="root"', 'id="app"', 'data-reactroot', 'ng-version',
+      'vite/client', 'webpackJsonp', 'window.__apollo', 'window.__INITIAL_STATE__',
+      'squarespace'
+    ];
+
+    foreach ($spaMarkers as $marker) {
+      if (str_contains($lower, $marker)) {
+        if ($this->visibleCharRatio($lower) < 0.03) {
+          return true;
+        }
+      }
+    }
+
+    // Lightweight DOM pass
+    $doc = new DOMDocument();
+    // @ - Suppress parser warnings on sloppy HTML
+    @$doc->loadHTML($html);
+    $xp = new DOMXPath($doc);
+
+    // Count scripts and visible text density
+    $scriptCount = $xp->query('//script')->length;
+    $noscriptText = $this->stringLen($xp, '//noscript');
+    $bodyText = $this->textLen($xp, '//body');
+    
+    // If body text is extremely small, or scripts dominate, it's likely a shell
+    if ($bodyText < 400) {
+      if ($scriptCount >= 5) {
+        return true;
+      }
+
+      $phCount = $xp->query('//p | //h1 | //h2 | //h3')->length;
+      if ($phCount === 0) {
+        return true;
+      }
+    }
+
+    // Squarespace: many pages SSR very little, but put real content inside <noscript>
+    // If noscript has way more text than body, we didn’t get SSR content
+    if ($noscriptText > 0 && ($noscriptText > 4 * max(1, $bodyText))) {
+      return true;
+    }
+    
+    // If the <main> / [role=main] exists but contains almost no text, it’s client-filled
+    $mainLen = $this->textLen($xp, '//*[@role="main"] | //main | //article | //*[@id="content"]');
+    if ($mainLen < 150 && $scriptCount >= 8) {
+      return true;
+    }
+    
+    // Ratio catch-all: scripts/length heavy and visible character ratio tiny
+    $scriptRatio = $scriptCount / max(1, substr_count($lower, '<'));
+    if ($scriptRatio > 0.20 && $this->visibleCharRatio($lower) < 0.02) {
+      return true;
+    }
+    
+    // Squarespace domain hint
+    if (preg_match('~squarespace\.com|\.squarespace\.(?:com|site)~i', $url)) {
+      if ($this->visibleCharRatio($lower) < 0.035) {
+        return true;
+      }
+    }
+
+    # TODO: fix
+    return false;
+  }
 
   private function normalizeUrlKey(string $url): string
   {
@@ -140,5 +247,49 @@ final class WebCrawler {
     
     return $host === $base || str_ends_with($host, '.' . $base);
     }
+
+  private function shouldHeadless(string $html, string $url): bool
+  {
+    if (!$this->enableHeadlessBrowser) {
+      return false;
+    }
+
+    $res =  $this->looksLikeJsShell($html, $url);
+
+    return $res;
+  }
+
+  private function stringLen(DOMXPath $xp, string $xpath): int
+  {
+    $nodes = $xp->query($xpath);
+    $sum = 0;
+    foreach ($nodes as $n) {
+      $sum += strlen($xp->document->saveHTML($n) ?: '');
+    }
+    return $sum;
+  }  
+  
+  private function textLen(DOMXPath $xp, string $xpath): int
+  {
+    $nodes = $xp->query($xpath);
+    $sum = 0;
+    foreach ($nodes as $n) {
+      $sum += strlen(trim($n->textContent ?? ''));
+    }
+    return $sum;
+  }
+  
+  /** Approximate “visible” character ratio ignoring tags and script-heavy pages */
+  private function visibleCharRatio(string $lowerHtml): float
+  {
+    // Strip tags, shrink whitespace
+    $textish = preg_replace('~<script\b[^<]*(?:(?!</script>)<[^<]*)*</script>~i', '', $lowerHtml);
+    $textish = strip_tags($textish ?? '');
+    $textish = preg_replace('~\s+~', ' ', $textish ?? '');
+    $visible = strlen(trim($textish ?? ''));
+    $total = strlen($lowerHtml);
+    if ($total === 0) return 0.0;
+    return $visible / $total;
+  }
 }
 

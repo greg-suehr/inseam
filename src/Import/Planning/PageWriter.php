@@ -4,11 +4,8 @@ namespace App\Import\Planning;
 
 use App\Entity\PageContent;
 use App\Import\DTO\Planning\BlockNode;
-use App\Import\DTO\Planning\HeadingBlock;
-use App\Import\DTO\Planning\ImageBlock;
+use App\Import\DTO\Planning\{HeadingBlock, ImageBlock, LinkBlock, ParagraphBlock, RootBlock};
 use App\Import\DTO\Planning\PagePlanItem;
-use App\Import\DTO\Planning\ParagraphBlock;
-use App\Import\DTO\Planning\RootBlock;
 use App\Import\DTO\Planning\StylePlan;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -71,8 +68,9 @@ final class PageWriter
                                      $block->assetId,
                                      htmlspecialchars($block->alt),
                                      $block->width ? " width=\"{$block->width}\"" : '',
-                                     $block->height ? " height=\"{$block->height}\"" : ''
+                                     $block->height ? " height=\"{$block->height}\"" : ''                                    
         ),
+        LinkBlock::class => sprintf('<a href="%s">%s</a>', $block->href, $block->text), # TODO: verify
         default => '<p>Unknown block type</p>'
       };
       

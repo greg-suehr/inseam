@@ -1,0 +1,13 @@
+<!doctype html><html><head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Preview: {{ src }}</title>
+  <style>
+    body { margin:0; }
+    .banner { font: 12px/1.4 system-ui, sans-serif; padding:8px 12px; background:#111; color:#bbb; position:sticky; top:0; z-index:1 }
+    .banner a { color:#fff; text-decoration:underline; }
+  </style>
+</head><body>
+  <div class="banner">Previewing stored HTML from <a href="{{ src }}" target="_blank" rel="noopener">{{ src }}</a></div>
+  {{ html|raw }}
+</body></html>

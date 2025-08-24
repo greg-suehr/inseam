@@ -71,7 +71,15 @@ services:
 
     App\Import\Discovery\HtmlParser: ~
 
-    App\Import\Discovery\WebCrawler: ~
+    App\Import\Render\PantherHeadlessRenderer:
+      arguments:
+        $chromePath: 'chrome'
+        $connectTimeoutMs: 30000
+
+    App\Import\Discovery\WebCrawler:
+      arguments:
+        $renderer: '@App\Import\Render\PantherHeadlessRenderer'
+        $enableHeadlessBrowser: '%env(bool:IMPORT_ENABLE_HEADLESS)%'
 
     App\Import\Discovery\DiscoveryEngine: ~
 

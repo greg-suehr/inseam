@@ -1,0 +1,3 @@
+{% set level = b.level|default(2) %}
+{% if level < 1 or level > 6 %}{% set level = 2 %}{% endif %}
+<{{ 'h' ~ level }}>{{ b.text }}</{{ 'h' ~ level }}>

@@ -2,18 +2,10 @@
 
 namespace App\Import\Util;
 
-use App\Import\DTO\Planning\AssetPlanItem;
-use App\Import\DTO\Planning\BlockNode;
-use App\Import\DTO\Planning\HeadingBlock;
-use App\Import\DTO\Planning\ImageBlock;
-use App\Import\DTO\Planning\ImportPlan;
-use App\Import\DTO\Planning\PagePlanItem;
-use App\Import\DTO\Planning\ParagraphBlock;
+use App\Import\DTO\Planning\{AssetPlanItem, PagePlanItem, RoutePlanItem};
+use App\Import\DTO\Planning\{BlockNode, HeadingBlock, ImageBlock, LinkBlock, ParagraphBlock, RootBlock};
+use App\Import\DTO\Planning\{ImportPlan, ScriptPlan, StylePlan};
 use App\Import\DTO\Planning\RedirectMap;
-use App\Import\DTO\Planning\RootBlock;
-use App\Import\DTO\Planning\RoutePlanItem;
-use App\Import\DTO\Planning\ScriptPlan;
-use App\Import\DTO\Planning\StylePlan;
 
 final class PlanHydrator
 {
@@ -105,6 +97,7 @@ final class PlanHydrator
           'heading' => new HeadingBlock($data['level'], $data['text']),
           'paragraph' => new ParagraphBlock($data['text']),
           'image' => new ImageBlock($data['alt'], $data['width'], $data['height'], $data['assetId']),
+          'link' => new LinkBlock($data['text'], $data['href'], $data['rel'], $data['external']),
           default => new ParagraphBlock('Unknown block type: ' . $data['type'])
         };
     }
@@ -173,6 +166,7 @@ final class PlanHydrator
           HeadingBlock::class => $base + ['type' => 'heading', 'level' => $block->level, 'text' => $block->text],
           ParagraphBlock::class => $base + ['type' => 'paragraph', 'text' => $block->text],
           ImageBlock::class => $base + ['type' => 'image', 'alt' => $block->alt, 'width' => $block->width, 'height' => $block->height, 'assetId' => $block->assetId],
+          LinkBlock::class => $base + ['type' => 'link', 'text' => $block->text, 'href' => $block->href, 'rel' => $block->rel, 'external' => $block->external],
           default => $base + ['type' => 'unknown']
         };
     }
