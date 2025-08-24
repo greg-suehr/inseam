@@ -12,6 +12,7 @@ use App\Import\DTO\Planning\PagePlanItem;
 use App\Import\DTO\Planning\RedirectMap;
 use App\Import\DTO\Planning\RoutePlanItem;
 use App\Import\Entity\StoredImportPlan;
+use App\Import\Util\PlanHydrator;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class PlanRepository
@@ -65,7 +66,6 @@ final class PlanRepository
         redirects:$redirects
       );
 
-      # TODO: save(ImportPlan, sessionId) that writes via PlanHydrator::toArray()
       $this->save($plan);
       
       return $plan;
@@ -112,7 +112,20 @@ final class PlanRepository
   
   private function save(ImportPlan $plan): void
   {
-      \App\Import\Util\PlanHydrator::toArray($plan);
+      $row = $this->em->getRepository(StoredImportPlan::class)
+                  ->findOneBy(['planId' => $plan->planId])
+       ?? new StoredImportPlan(
+         '', # sessionId
+         $plan->planId,
+         '', # checksum
+         [''] # planJson         
+       );
+      $row->setPlanJson(PlanHydrator::toArray($plan));
+      $this->em->persist($row); $this->em->flush();      
   }
-  
+
+  public function load(string $planId): ImportPlan {
+      $row = $this->get($planId);
+      return PlanHydrator::fromArray($row->getPlanJson());
+  }  
 }

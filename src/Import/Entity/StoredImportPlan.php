@@ -11,8 +11,8 @@ class StoredImportPlan
     #[ORM\Id] #[ORM\GeneratedValue] #[ORM\Column(type:'bigint')]
     private ?int $id = null;
 
-    #[ORM\Column(type:'bigint')]
-    private int $sessionId;
+    #[ORM\Column(type:'string', length:64)]
+    private string $sessionId;
 
     #[ORM\Column(type:'string', length:64)]
     private string $planId;
@@ -26,7 +26,7 @@ class StoredImportPlan
     #[ORM\Column(type:'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 
-    public function __construct(int $sessionId, string $planId, string $checksum, array $planJson)
+    public function __construct(string $sessionId, string $planId, string $checksum, array $planJson)
     {
         $this->sessionId = $sessionId;
         $this->planId = $planId;

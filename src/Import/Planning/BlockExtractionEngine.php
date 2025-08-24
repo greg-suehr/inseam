@@ -2,9 +2,10 @@
 namespace App\Import\Planning;
 
 use App\Import\DTO\Planning\BlockNode;
-use App\Import\DTO\Planning\ParagraphBlock;
 use App\Import\DTO\Planning\HeadingBlock;
 use App\Import\DTO\Planning\ImageBlock;
+use App\Import\DTO\Planning\ParagraphBlock;
+use App\Import\DTO\Planning\RootBlock;
 
 final class BlockExtractionEngine
 {
@@ -80,10 +81,20 @@ final class BlockExtractionEngine
            if ($txt !== '') return new HeadingBlock($lvl, $txt);
          }
        }
+
+       if (empty($chunks)) {
+         $txt = trim(self::norm($doc->textContent ?? ''));
+         $chunks[] = new ParagraphBlock($txt);
+       }
        
-       return new ParagraphBlock('');
+       return new RootBlock($blocks);
     }
 
+  private static function norm(string $s): string
+  {
+      return preg_replace('/\s+/u', ' ', $s) ?? $s;
+    }
+  
   /** @param string[] $chunks */
   private static function collapse(array $chunks): string
   {

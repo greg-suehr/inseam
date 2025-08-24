@@ -10,6 +10,7 @@ use App\Import\DTO\Planning\ImportPlan;
 use App\Import\DTO\Planning\PagePlanItem;
 use App\Import\DTO\Planning\ParagraphBlock;
 use App\Import\DTO\Planning\RedirectMap;
+use App\Import\DTO\Planning\RootBlock;
 use App\Import\DTO\Planning\RoutePlanItem;
 use App\Import\DTO\Planning\ScriptPlan;
 use App\Import\DTO\Planning\StylePlan;
@@ -97,13 +98,14 @@ final class PlanHydrator
 
     private static function hydrateBlockNode(array $data): BlockNode
     {
-        $children = array_map([self::class, 'hydrateBlockNode'], $data['children'] ?? []);
+        $children = array_map([self::class, 'hydrateBlockNode'], $data['children'] ?? []);        
         
         return match ($data['type']) {
-            'heading' => new HeadingBlock($data['level'], $data['text']),
-            'paragraph' => new ParagraphBlock($data['text']),
-            'image' => new ImageBlock($data['alt'], $data['width'], $data['height'], $data['assetId']),
-            default => new ParagraphBlock('Unknown block type: ' . $data['type'])
+          'root' => new RootBlock($children),
+          'heading' => new HeadingBlock($data['level'], $data['text']),
+          'paragraph' => new ParagraphBlock($data['text']),
+          'image' => new ImageBlock($data['alt'], $data['width'], $data['height'], $data['assetId']),
+          default => new ParagraphBlock('Unknown block type: ' . $data['type'])
         };
     }
 
@@ -163,14 +165,15 @@ final class PlanHydrator
     private static function serializeBlockNode(BlockNode $block): array
     {
         $base = [
-            'children' => array_map([self::class, 'serializeBlockNode'], $block->children)
+          'children' => array_map([self::class, 'serializeBlockNode'], $block->children)
         ];
 
         return match (get_class($block)) {
-            HeadingBlock::class => $base + ['type' => 'heading', 'level' => $block->level, 'text' => $block->text],
-            ParagraphBlock::class => $base + ['type' => 'paragraph', 'text' => $block->text],
-            ImageBlock::class => $base + ['type' => 'image', 'alt' => $block->alt, 'width' => $block->width, 'height' => $block->height, 'assetId' => $block->assetId],
-            default => $base + ['type' => 'unknown']
+          RootBlock::class => $base + ['type' => 'root'],
+          HeadingBlock::class => $base + ['type' => 'heading', 'level' => $block->level, 'text' => $block->text],
+          ParagraphBlock::class => $base + ['type' => 'paragraph', 'text' => $block->text],
+          ImageBlock::class => $base + ['type' => 'image', 'alt' => $block->alt, 'width' => $block->width, 'height' => $block->height, 'assetId' => $block->assetId],
+          default => $base + ['type' => 'unknown']
         };
     }
 }
