@@ -20,7 +20,7 @@ class StoredImportPlan
     #[ORM\Column(type:'string', length:64)]
     private string $checksum;
 
-    #[ORM\Column(type:'json')] // Postgres jsonb if you prefer via columnDefinition
+    #[ORM\Column(type:'json')]
     private array $planJson;
 
     #[ORM\Column(type:'datetime_immutable')]
@@ -33,5 +33,18 @@ class StoredImportPlan
         $this->checksum = $checksum;
         $this->planJson = $planJson;
         $this->createdAt = new \DateTimeImmutable();
+    }
+
+  public function getId(): ?int { return $this->id; }
+  public function getSessionId(): int { return $this->sessionId; }
+  public function getPlanId(): string { return $this->planId; }
+  public function getChecksum(): string { return $this->checksum; }
+  public function getPlanJson(): array { return $this->planJson; }
+  public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
+
+  public function setPlanJson(array $planJson): self {
+        $this->planJson = $planJson;
+        $this->checksum = hash('sha256', json_encode($planJson));
+        return $this;
     }
 }

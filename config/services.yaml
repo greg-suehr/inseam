@@ -38,6 +38,8 @@ services:
       arguments:
         $mediaDir: '%import.media_dir%'
         $mediaBaseUrl: '%import.media_base_url%'
+        $http: '@Symfony\Contracts\HttpClient\HttpClientInterface'
+        $logger: '@logger'
 
     App\Import\Storage\AssetStorage: '@App\Import\Storage\FilesystemAssetStorage'
 
@@ -64,6 +66,14 @@ services:
       autoconfigure: true
       arguments:      
          $importers: !tagged_iterator { tag: 'app.importer', index_by: 'getKey' }
+
+    App\Import\Discovery\ContentGraphBuilder: ~
+
+    App\Import\Discovery\HtmlParser: ~
+
+    App\Import\Discovery\WebCrawler: ~
+
+    App\Import\Discovery\DiscoveryEngine: ~
 
     App\Import\Planning\PageWriter: ~
 

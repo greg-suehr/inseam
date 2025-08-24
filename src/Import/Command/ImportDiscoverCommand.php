@@ -1,4 +1,5 @@
-<?php // src/Import/Command/ImportDiscoverCommand.php
+<?php
+
 namespace App\Import\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;

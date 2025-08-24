@@ -14,7 +14,7 @@ class ImportDiscovery
     #[ORM\Column(type:'bigint')]
     private int $sessionId;
 
-    #[ORM\Column(type:'string', length:64)]
+    #[ORM\Column(type:'text')]
     private string $graphId;
 
     #[ORM\Column(type:'json')]
@@ -33,5 +33,22 @@ class ImportDiscovery
         $this->graphJson = $graphJson;
         $this->stats = $stats;
         $this->createdAt = new \DateTimeImmutable();
+    }
+
+  public function getId(): ?int { return $this->id; }
+  public function getSessionId(): int { return $this->sessionId; }
+  public function getGraphId(): string { return $this->graphId; }
+  public function getGraphJson(): array { return $this->graphJson; }
+  public function getStats(): ?array { return $this->stats; }
+  public function getCreatedAt(): \DateTimeImmutable { return $this->createdAt; }
+
+  public function setGraphJson(array $graphJson): self {
+        $this->graphJson = $graphJson;
+        return $this;
+    }
+
+  public function setStats(?array $stats): self {
+        $this->stats = $stats;
+        return $this;
     }
 }
