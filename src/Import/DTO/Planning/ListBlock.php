@@ -6,10 +6,10 @@ final readonly class ListBlock extends BlockNode
 {
   /** @param string[] $items */
   public function __construct(
-    string $type = "unordered",
-    array  $items = []
+    public string $order = 'ul',
+    public array  $items = []
   )
   {
-    parent::__construct([]);
+    parent::__construct($items);
   }
 }

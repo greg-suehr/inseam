@@ -89,9 +89,10 @@ final class WebCrawler {
     return 'maybe-page';
   }
 
-  private function fetchPage(string $url): string{
+  private function fetchPage(string $url): string
+  {
     $html = $this->httpFetch($url);
-
+    
     if ($this->shouldHeadless($html, $url)) {
       if ($this->renderer === null) {
         $this->logger->warning('Headless requested but no renderer configured', ['url' => $url]);
@@ -129,15 +130,15 @@ final class WebCrawler {
     }
     
     $contentType = $response->getHeaders()['content-type'][0] ?? '';
-      if (!str_contains($contentType, 'text/html')) {
-        throw new \RuntimeException("Non-HTML content type: $contentType");
-      }
-      
-      return $response->getContent();
+    if (!str_contains($contentType, 'text/html')) {
+      throw new \RuntimeException("Non-HTML content type: $contentType");
     }
+    
+    return $response->getContent();
+  }
 
   /**
-   * Heuristic: is this a JS-rendered shell (SPA) with little/no SSR content
+   * Is this a JS-rendered shell (SPA) with little/no SSR content
    */
   private function looksLikeJsShell(string $html, string $url): bool
   {

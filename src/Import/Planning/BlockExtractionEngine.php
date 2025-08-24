@@ -150,7 +150,7 @@ final class BlockExtractionEngine
         $items[] = trim($item->textContent);
       }
       if (!empty($items)) {
-        $blocks[] = new ListBlock($list->tagName === 'ol', $items);
+        $blocks[] = new ListBlock($list->tagName, $items);
       }
     }
     return $blocks;
@@ -293,26 +293,26 @@ final class BlockExtractionEngine
     
     $bestScore = -INF;
     foreach ($candidates as $cand) {
-       $text = $this->visibleTextLen($xpath, $n);
+       $text = $this->visibleTextLen($xpath, $cand);
        if ($text < 50) continue;
 
-       $tag = strtolower($n->nodeName);
-       $class = ' '.preg_replace('/\s+/', ' ', strtolower($n->attributes?->getNamedItem('class')?->nodeValue ?? '')).' ';
-       $id    = ' '.strtolower($n->attributes?->getNamedItem('id')?->nodeValue ?? '').' ';
+       $tag = strtolower($cand->nodeName);
+       $class = ' '.preg_replace('/\s+/', ' ', strtolower($cand->attributes?->getNamedItem('class')?->nodeValue ?? '')).' ';
+       $id    = ' '.strtolower($cand->attributes?->getNamedItem('id')?->nodeValue ?? '').' ';
 
        if ($tag === 'header' || $tag === 'nav' || str_contains($class,' header ') ||
            str_contains($class,' nav ') || str_contains($class,' menu ') || str_contains($id,'overlay')) {
          continue;
        }
 
-       $svgCount = $xpath->query('.//svg', $n)->length;
+       $svgCount = $xpath->query('.//svg', $cand)->length;
        if ($svgCount >= 2 && $text < 1000) continue;
 
-       $p = $xpath->query('.//p', $n)->length;
-       $h = $xpath->query('.//h1|.//h2|.//h3|.//h4|.//h5|.//h6', $n)->length;
+       $p = $xpath->query('.//p', $cand)->length;
+       $h = $xpath->query('.//h1|.//h2|.//h3|.//h4|.//h5|.//h6', $cand)->length;
        
        $score = $text + (200 * $p) + (150 * $h); // Candidate scoring
-       if ($score > $bestScore) { $bestScore = $score; $best = $n; }
+       if ($score > $bestScore) { $bestScore = $score; $best = $cand; }
     }
     
 #    echo "best is " . (isset($best) ? "set" : "null") . "\n";
@@ -492,7 +492,7 @@ final class BlockExtractionEngine
               if (!empty($itemBlocks)) $items[] = new ListItemBlock($itemBlocks);
             }
             if (!empty($items)) {
-              $out[] = new ListBlock(type: ($tag === 'ol' ? 'ordered' : 'unordered'), items: $items);
+              $out[] = new ListBlock(order: $tag, items: $items);
               $count++;
             }
             return;

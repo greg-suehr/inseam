@@ -3,7 +3,7 @@
 namespace App\Import\Util;
 
 use App\Import\DTO\Planning\{AssetPlanItem, PagePlanItem, RoutePlanItem};
-use App\Import\DTO\Planning\{BlockNode, HeadingBlock, ImageBlock, LinkBlock, ParagraphBlock, RootBlock};
+use App\Import\DTO\Planning\{BlockNode, HeadingBlock, ImageBlock, LinkBlock, ListBlock, ListItemBlock, ParagraphBlock, RootBlock};
 use App\Import\DTO\Planning\{ImportPlan, ScriptPlan, StylePlan};
 use App\Import\DTO\Planning\RedirectMap;
 
@@ -98,6 +98,8 @@ final class PlanHydrator
           'paragraph' => new ParagraphBlock($data['text']),
           'image' => new ImageBlock($data['alt'], $data['width'], $data['height'], $data['assetId']),
           'link' => new LinkBlock($data['text'], $data['href'], $data['rel'], $data['external']),
+          'list' => new ListBlock(order: ($data['listType'] ?? 'unordered'), items: $children),
+          'listItem' => new ListItemBlock($children),
           default => new ParagraphBlock('Unknown block type: ' . $data['type'])
         };
     }
@@ -161,12 +163,16 @@ final class PlanHydrator
           'children' => array_map([self::class, 'serializeBlockNode'], $block->children)
         ];
 
+        echo get_class($block) . "\n";
+
         return match (get_class($block)) {
           RootBlock::class => $base + ['type' => 'root'],
           HeadingBlock::class => $base + ['type' => 'heading', 'level' => $block->level, 'text' => $block->text],
           ParagraphBlock::class => $base + ['type' => 'paragraph', 'text' => $block->text],
           ImageBlock::class => $base + ['type' => 'image', 'alt' => $block->alt, 'width' => $block->width, 'height' => $block->height, 'assetId' => $block->assetId],
           LinkBlock::class => $base + ['type' => 'link', 'text' => $block->text, 'href' => $block->href, 'rel' => $block->rel, 'external' => $block->external],
+          ListBlock::class => $base + ['type' => 'list', 'order' => $block->order],
+          ListItemBlock::class => $base + ['type' => 'listItem'],
           default => $base + ['type' => 'unknown']
         };
     }
