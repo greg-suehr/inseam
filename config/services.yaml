@@ -34,14 +34,14 @@ services:
         exclude:
           - '../src/Import/Entity/'
 
-    App\Import\Storage\FilesystemAssetStorage:
+    App\Import\Storage\FileSystemStorage:
       arguments:
         $mediaDir: '%import.media_dir%'
         $mediaBaseUrl: '%import.media_base_url%'
         $http: '@Symfony\Contracts\HttpClient\HttpClientInterface'
         $logger: '@logger'
 
-    App\Import\Storage\AssetStorage: '@App\Import\Storage\FilesystemAssetStorage'
+    App\Import\Storage\AssetStorage: '@App\Import\Storage\FileSystemStorage'
 
     App\Import\Tenancy\TenantContextAdaptor: ~
 
