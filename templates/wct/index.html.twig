@@ -1,0 +1,307 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Whoever Condemns the Theater · Podcast{% endblock %}
+
+{% block body %}
+
+{% set sample_episodes = [
+{
+'title': 'Humankind',
+'short_description': "Jamie, a member of the Human Empire's Fleet among the stars, is writing a letter home to their family back on Earth. This surprises Glork, a near-immortal alien sent to observe humanity, and they get to talking about the philosophy of human nature.",
+'episode_number': 3,
+'published_at': '2025-08-26'|date('Y-m-d'),
+'duration_hms': '12:34',
+'audio_url': '/audio/episode-3-humankind.mp3',
+'page_url': path('wct_site', {'slug': 'humankind'}),
+'image_url': asset('images/episode-3-humankind.jpg')
+},
+{
+'title': 'In Defiance of Chekov',
+'short_description': "Samuel, a desperate and impulsive man, breaks into a surprisingly empty house and unexpectedly comes face-to-face with the homeowner, Anthony. Drawing a gun, the two enter a standoff and the robber gets far more than he bargained for when not only is Anthony unfazed by Samuel’s gun, but actually encourages it to be fired.",
+'episode_number': 2,
+'published_at': '2025-08-19'|date('Y-m-d'),
+'duration_hms': '9:47',
+'audio_url': '/audio/episode-2-chekov.mp3',
+'page_url': path('wct_site', {'slug': 'in-defiance-of-chekov'}),
+'image_url': asset('images/episode-2-chekov.jpg')
+},
+{
+'title': 'Mountain Lines',
+'short_description': "Two aging cartographers—Daniel Dickens and John Alexander Cullivan—stumble across one another on a mountain top in ye olde America. Their shared love for the craft quickly turns sour as they discover their opposing methodologies.",
+'episode_number': 1,
+'published_at': '2025-08-12'|date('Y-m-d'),
+'duration_hms': '11:22',
+'audio_url': '/audio/episode-1-mountain-lines.mp3',
+'page_url': path('wct_site', {'slug': 'mountain-lines'}),
+'image_url': asset('images/episode-1-mountain-lines.jpg')
+}
+] %}
+
+<style>
+  :root {
+    /* BRAND */
+    --c-brand: #272523;       /* primary brand */
+    --c-brand-contrast: #93C5FD; /* text on brand */
+
+    /* SURFACES */
+    --c-bg: #0B0B0B;          /* page background */
+    --c-surface: #272523;     /* cards, nav, footer */
+    --c-elevated: #1F1F1F;    /* elevated cards */
+
+    /* TEXT */
+    --c-text: #F3F4F6;        /* primary text */
+    --c-text-muted: #d3d3d3;  /* secondary text */
+
+    /* BORDERS */
+    --c-border: #2A2A2A;
+    --c-border-soft: #222222;
+
+    /* ACCENTS */
+    --c-accent: #93C5FD;      /* links / highlights */
+    --c-accent-2: #F59E0B;    /* subtle accent (tags, tiny chips) */
+
+    /* STATES */
+    --c-success: #22C55E;
+    --c-warning: #EAB308;
+    --c-error: #EF4444;
+  }
+
+  /* --------- Base & Layout --------- */
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: radial-gradient(1200px 600px at 10% -10%, rgba(147,197,253,0.08), transparent 60%),
+                radial-gradient(1000px 500px at 90% -20%, rgba(15,118,110,0.12), transparent 55%),
+                var(--c-bg);
+    color: var(--c-text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  a { color: var(--c-accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* --------- Header / Nav --------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(140%) blur(10px);
+    background: color-mix(in srgb, var(--c-surface) 80%, transparent);
+    border-bottom: 1px solid var(--c-border);
+  }
+  .site-header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 14px 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand-logo {
+    width: 40px; height: 40px; border-radius: 12px; background: var(--c-brand);
+    display: grid; place-items: center; color: var(--c-brand-contrast); font-weight: 800;
+    border: 1px solid var(--c-border-soft);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  .brand-title { font-size: 18px; font-weight: 700; letter-spacing: 0.2px; }
+  .brand-sub { font-size: 12px; color: var(--c-text-muted); }
+
+  .nav { display: flex; gap: 18px; align-items: center; }
+  .nav a { color: var(--c-text); font-weight: 600; opacity: 0.9; }
+  .nav a[aria-current="page"] { color: var(--c-accent); }
+
+  .cta {
+    display: flex; gap: 10px;
+  }
+  .button {
+    appearance: none; border: 0; cursor: pointer;
+    font-weight: 700; padding: 10px 14px; border-radius: 12px;
+    background: var(--c-brand); color: var(--c-brand-contrast);
+    border: 1px solid color-mix(in srgb, var(--c-brand) 70%, #000 30%);
+  }
+  .button.secondary { background: var(--c-elevated); color: var(--c-text); border-color: var(--c-border); }
+  .button:hover { filter: brightness(1.05); }
+
+  /* --------- Hero --------- */
+  .hero { padding: 48px 0 18px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; }
+  .hero-card {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--c-elevated) 86%, transparent), var(--c-elevated));
+    border: 1px solid var(--c-border);
+    border-radius: 20px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  }
+  .hero-media { aspect-ratio: 16/9; width: 100%; object-fit: cover; display: block; }
+  .hero-body { padding: 22px; }
+  .kicker { color: var(--c-accent); font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; font-size: 12px; }
+  .hero h1 { margin: 6px 0 8px; font-size: 36px; line-height: 1.15; }
+  .hero p.lead { color: var(--c-text-muted); font-size: 16px; }
+
+  .subscribe {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: 20px; padding: 20px;
+  }
+  .subscribe h2 { margin: 0 0 8px; font-size: 20px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .listen-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 12px; border-radius: 12px; border: 1px solid var(--c-border);
+    background: var(--c-elevated); color: var(--c-text); font-weight: 600; font-size: 14px;
+  }
+
+  /* --------- Episodes --------- */
+  .section { margin: 40px 0 10px; }
+  .section h2 { font-size: 24px; margin: 0 0 10px; }
+
+  .episodes {
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px;
+  }
+  .episode {
+    grid-column: span 12;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: 16px; overflow: hidden;
+    display: grid; grid-template-columns: 140px 1fr; min-height: 140px;
+  }
+  .episode img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .episode-body { padding: 14px 16px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 8px; }
+  .ep-meta { color: var(--c-text-muted); font-size: 13px; }
+  .ep-title { font-size: 18px; font-weight: 700; margin: 0; }
+  .ep-desc { color: var(--c-text-muted); font-size: 14px; margin: 0; }
+  .ep-actions { display: flex; gap: 10px; align-items: center; }
+  .pill { font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--c-border); background: var(--c-elevated); color: var(--c-text-muted); }
+
+  audio { width: 100%; height: 36px; }
+  .play {
+    padding: 8px 12px; border-radius: 10px; font-weight: 700;
+    background: var(--c-brand); color: var(--c-brand-contrast);
+    border: 1px solid color-mix(in srgb, var(--c-brand) 70%, #000 30%);
+  }
+  .play.secondary { background: var(--c-elevated); color: var(--c-text); border-color: var(--c-border); }
+
+  /* --------- Footer --------- */
+  .site-footer { margin-top: 40px; border-top: 1px solid var(--c-border); background: var(--c-surface); }
+  .site-footer-inner { max-width: 1100px; margin: 0 auto; padding: 20px 24px; display: flex; justify-content: space-between; gap: 16px; color: var(--c-text-muted); font-size: 14px; }
+
+  /* --------- Responsive --------- */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .episode { grid-template-columns: 100px 1fr; }
+  }
+  @media (max-width: 640px) {
+    .site-header-inner { flex-wrap: wrap; gap: 10px; }
+    .nav { order: 3; width: 100%; justify-content: center; padding-top: 6px; border-top: 1px dashed var(--c-border); }
+    .cta { order: 2; margin-left: auto; }
+    .hero h1 { font-size: 28px; }
+    .episode { grid-template-columns: 1fr; }
+  }
+</style>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="brand">
+      <div class="brand-logo">W</div>
+      <div>
+        <div class="brand-title">Whoever Condemns the Theater</div>
+        <div class="brand-sub">Weekly radio plays · New voices</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ path('wct_site') }}" aria-current="page">Home</a>
+      <a href="{{ path('wct_bio') }}">About</a>
+      <a href="{{ path('wct_contact') }}">Contact</a>
+      <a href="{{ path('wct_archive') }}">Episodes</a>
+    </nav>
+
+    <div class="cta">
+      <a class="button" href="#subscribe">Subscribe</a>
+      <a class="button secondary" href="{{ path('wct_submit') }}">Submit a Play</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <img class="hero-media" src="{{ hero_image_url|default(asset('images/wct-hero.jpg')) }}" alt="Studio microphones and scripts on a table">
+        <div class="hero-body">
+          <div class="kicker">New episode every Monday</div>
+          <h1>{{ hero_title|default('Theater for your commute.') }}</h1>
+          <p class="lead">{{ hero_subhead|default('Radio‑style adaptations of ten‑minute plays with cinematic sound. Emerging playwrights. Clean mixes. Archival permanence.') }}</p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap: wrap;">
+            <a class="play" href="#episodes">Listen Now</a>
+            <a class="play secondary" href="{{ path('wct_archive') }}">Browse All Episodes</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="subscribe" id="subscribe" aria-labelledby="subscribe-title">
+        <h2 id="subscribe-title">Listen on</h2>
+        <div class="badge-row">
+          <a class="listen-badge" href="{{ spotify_url|default('#') }}" rel="noopener" target="_blank">Spotify</a>
+          <a class="listen-badge" href="{{ apple_url|default('#') }}" rel="noopener" target="_blank">Apple Podcasts</a>
+          <a class="listen-badge" href="{{ rss_url|default('#') }}" rel="noopener" target="_blank">RSS</a>
+          <a class="listen-badge" href="{{ overcast_url|default('#') }}" rel="noopener" target="_blank">Overcast</a>
+        </div>
+        <p style="margin-top:12px; color: var(--c-text-muted); font-size:14px;">Prefer email? <a href="{{ path('wct_newsletter') }}">Get episode drops in your inbox</a>.</p>
+        
+        <section class="container section" id="episodes" aria-labelledby="episodes-title">
+          <h2 id="episodes-title">Latest Episodes</h2>
+          <div class="episodes">
+            {% for item in feedItems|default(sample_episodes) %}
+            <article class="episode" itemscope itemtype="https://schema.org/PodcastEpisode">
+              <meta itemprop="partOfSeries" content="Whoever Condemns the Theater" />
+              <a href="{{ item.page_url|default('#') }}" style="display:block;" aria-label="Episode cover">
+                <img src="{{ item.image_url|default(asset('images/episode-placeholder.jpg')) }}" alt="Episode art for {{ item.title }}">
+              </a>
+              <div class="episode-body">
+                <div class="ep-meta">
+                  <span class="pill">Ep {{ item.episode_number|default(loop.revindex0 is defined ? feedItems|length - loop.index0 : '?') }}</span>
+                  <span style="margin-left:8px;">{{ item.published_at|date('F j, Y') }}</span>
+                  {% if item.duration_hms is defined %}<span style="margin-left:8px;">· {{ item.duration_hms }}</span>{% endif %}
+                </div>
+                <h3 class="ep-title" itemprop="name">{{ item.title }}</h3>
+                <p class="ep-desc" itemprop="description">{{ item.short_description }}</p>
+                <div class="ep-actions">
+                  {% if item.audio_url is defined and item.audio_url %}
+                  <audio preload="none" controls>
+                    <source src="{{ item.audio_url }}" type="audio/mpeg" />
+                  </audio>
+                  {% endif %}
+                  <a class="play" href="{{ item.page_url|default('#') }}">Episode Page</a>
+                  {% if item.transcript_url is defined %}
+                  <a class="play secondary" href="{{ item.transcript_url }}">Transcript</a>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+            {% else %}
+            <p style="color: var(--c-text-muted);">Episodes will appear here once your feed is connected.</p>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>© {{ "now"|date('Y') }} Whoever Condemns the Theater</div>
+    <div>Recorded in Pittsburgh, PA · <a href="{{ path('wct_licensing') }}">Licensing</a> · <a href="{{ path('wct_privacy') }}">Privacy</a></div>
+  </div>
+</footer>
+
+{% endblock %}

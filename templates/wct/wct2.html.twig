@@ -1,0 +1,552 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Whoever Condemns the Theater · Podcast{% endblock %}
+
+{% block body %}
+
+{# ---------------------------
+   Enhanced Color System
+   Improved contrast while keeping charcoal/blue aesthetic
+   --------------------------- #}
+<style>
+  :root {
+    /* BRAND - Enhanced charcoal/blue palette */
+    --c-brand: #1E293B;       /* deeper charcoal for better contrast */
+    --c-brand-contrast: #E0F2FE; /* lighter blue-tinted white */
+
+    /* SURFACES */
+    --c-bg: #0F172A;          /* deeper navy background */
+    --c-surface: #1E293B;     /* charcoal surfaces */
+    --c-elevated: #334155;    /* lighter charcoal for elevation */
+
+    /* TEXT - Improved contrast ratios */
+    --c-text: #F8FAFC;        /* pure white for primary text */
+    --c-text-muted: #CBD5E1;  /* light gray-blue for secondary */
+    --c-text-soft: #94A3B8;   /* softer muted text */
+
+    /* BORDERS */
+    --c-border: #334155;      /* visible borders */
+    --c-border-soft: #475569; /* softer accent borders */
+
+    /* ACCENTS */
+    --c-accent: #7DD3FC;      /* brighter sky blue for better visibility */
+    --c-accent-hover: #38BDF8; /* darker blue for hover states */
+    --c-accent-2: #F59E0B;    /* warm amber accent */
+
+    /* STATES */
+    --c-success: #10B981;
+    --c-warning: #F59E0B;
+    --c-error: #EF4444;
+
+    /* GRADIENTS */
+    --gradient-hero: radial-gradient(1400px 700px at 20% -15%, rgba(125,211,252,0.12), transparent 70%),
+                     radial-gradient(1200px 600px at 80% -25%, rgba(30,41,59,0.8), transparent 65%);
+  }
+
+  /* --------- Base & Layout --------- */
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--gradient-hero), var(--c-bg);
+    color: var(--c-text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  a { 
+    color: var(--c-accent); 
+    text-decoration: none; 
+    transition: color 0.2s ease;
+  }
+  a:hover { 
+    color: var(--c-accent-hover);
+    text-decoration: underline; 
+  }
+
+  /* --------- Header / Nav --------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: saturate(140%) blur(12px);
+    background: color-mix(in srgb, var(--c-surface) 85%, transparent);
+    border-bottom: 1px solid var(--c-border-soft);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .site-header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 16px 24px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .brand-logo {
+    width: 44px; height: 44px; border-radius: 14px; 
+    background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-hover) 100%);
+    display: grid; place-items: center; 
+    color: var(--c-bg); font-weight: 900; font-size: 18px;
+    border: 2px solid color-mix(in srgb, var(--c-accent) 60%, transparent);
+    box-shadow: 0 6px 25px rgba(125,211,252,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .brand-title { 
+    font-size: 20px; font-weight: 800; letter-spacing: -0.2px; 
+    color: var(--c-text);
+  }
+  .brand-sub { 
+    font-size: 13px; color: var(--c-text-muted); 
+    font-weight: 500; letter-spacing: 0.3px;
+  }
+
+  .nav { display: flex; gap: 20px; align-items: center; }
+  .nav a { 
+    color: var(--c-text-muted); font-weight: 600; 
+    transition: color 0.2s ease;
+    position: relative;
+  }
+  .nav a:hover { color: var(--c-text); }
+  .nav a[aria-current="page"] { 
+    color: var(--c-accent); 
+  }
+  .nav a[aria-current="page"]::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--c-accent);
+    border-radius: 1px;
+  }
+
+  .cta {
+    display: flex; gap: 12px;
+  }
+  .button {
+    appearance: none; border: 0; cursor: pointer;
+    font-weight: 700; padding: 12px 18px; border-radius: 14px;
+    background: var(--c-accent); color: var(--c-bg);
+    border: 1px solid var(--c-accent);
+    transition: all 0.2s ease;
+    font-size: 14px;
+  }
+  .button.secondary { 
+    background: var(--c-elevated); color: var(--c-text); 
+    border-color: var(--c-border-soft); 
+  }
+  .button:hover { 
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(125,211,252,0.3);
+  }
+  .button.secondary:hover {
+    background: var(--c-border-soft);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  /* --------- Hero --------- */
+  .hero { padding: 60px 0 30px; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; }
+  .hero-card {
+    background: linear-gradient(180deg, 
+      color-mix(in srgb, var(--c-elevated) 90%, var(--c-accent) 5%), 
+      var(--c-elevated)
+    );
+    border: 1px solid var(--c-border-soft);
+    border-radius: 24px; overflow: hidden; 
+    box-shadow: 0 12px 50px rgba(0,0,0,0.3), 
+                0 0 0 1px rgba(125,211,252,0.1);
+    transition: transform 0.3s ease;
+  }
+  .hero-card:hover {
+    transform: translateY(-4px);
+  }
+  .hero-media { 
+    aspect-ratio: 16/9; width: 100%; object-fit: cover; display: block;
+    filter: saturate(1.1) contrast(1.05);
+  }
+  .hero-body { padding: 28px; }
+  .kicker { 
+    color: var(--c-accent); font-weight: 800; 
+    letter-spacing: 0.5px; text-transform: uppercase; 
+    font-size: 12px; margin-bottom: 8px;
+  }
+  .hero h1 { 
+    margin: 0 0 12px; font-size: 40px; line-height: 1.1; 
+    font-weight: 900; color: var(--c-text);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .hero p.lead { 
+    color: var(--c-text-muted); font-size: 17px; 
+    line-height: 1.5; margin: 0 0 20px;
+  }
+
+  .subscribe {
+    background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-elevated) 100%);
+    border: 1px solid var(--c-border-soft);
+    border-radius: 24px; padding: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .subscribe h2 { 
+    margin: 0 0 16px; font-size: 22px; 
+    color: var(--c-text); font-weight: 700;
+  }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .listen-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 14px; 
+    border: 1px solid var(--c-border-soft);
+    background: var(--c-bg); color: var(--c-text); 
+    font-weight: 600; font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  .listen-badge:hover {
+    background: var(--c-elevated);
+    border-color: var(--c-accent);
+    transform: translateY(-1px);
+  }
+
+  /* --------- Episodes --------- */
+  .section { margin: 50px 0 20px; }
+  .section h2 { 
+    font-size: 28px; margin: 0 0 24px; 
+    font-weight: 800; color: var(--c-text);
+  }
+
+  .episodes {
+    display: grid; gap: 20px;
+  }
+  .episode {
+    background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-elevated) 100%);
+    border: 1px solid var(--c-border-soft);
+    border-radius: 20px; overflow: hidden;
+    display: grid; grid-template-columns: 160px 1fr; 
+    min-height: 160px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .episode:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    border-color: var(--c-accent);
+  }
+  .episode img { 
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.3s ease;
+  }
+  .episode:hover img {
+    transform: scale(1.05);
+  }
+  .episode-body { 
+    padding: 20px 24px; 
+    display: grid; grid-template-rows: auto auto 1fr auto; 
+    gap: 10px; 
+  }
+  .ep-meta { 
+    color: var(--c-text-soft); font-size: 13px; 
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ep-title { 
+    font-size: 20px; font-weight: 700; margin: 0; 
+    color: var(--c-text); line-height: 1.3;
+  }
+  .ep-desc { 
+    color: var(--c-text-muted); font-size: 15px; 
+    margin: 0; line-height: 1.5;
+  }
+  .ep-actions { 
+    display: flex; gap: 12px; align-items: center; 
+    flex-wrap: wrap; margin-top: 4px;
+  }
+  .pill { 
+    font-size: 11px; padding: 6px 10px; border-radius: 999px; 
+    border: 1px solid var(--c-border-soft); 
+    background: var(--c-bg); color: var(--c-accent);
+    font-weight: 700; letter-spacing: 0.3px;
+  }
+
+  audio { 
+    width: 100%; height: 40px; 
+    border-radius: 8px;
+    background: var(--c-bg);
+  }
+  .play {
+    padding: 10px 16px; border-radius: 12px; font-weight: 700;
+    background: var(--c-accent); color: var(--c-bg);
+    border: 1px solid var(--c-accent);
+    transition: all 0.2s ease;
+    font-size: 14px;
+  }
+  .play:hover {
+    background: var(--c-accent-hover);
+    transform: translateY(-1px);
+  }
+  .play.secondary { 
+    background: var(--c-elevated); color: var(--c-text); 
+    border-color: var(--c-border-soft); 
+  }
+  .play.secondary:hover {
+    background: var(--c-border-soft);
+    border-color: var(--c-accent);
+  }
+
+  /* --------- Enhanced Visual Elements --------- */
+  .featured-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-hover) 100%);
+    color: var(--c-bg);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(125,211,252,0.3);
+  }
+
+  .episode-number {
+    background: linear-gradient(135deg, var(--c-accent) 0%, var(--c-accent-hover) 100%);
+    color: var(--c-bg);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(125,211,252,0.3);
+  }
+
+  /* --------- Footer --------- */
+  .site-footer { 
+    margin-top: 60px; 
+    border-top: 1px solid var(--c-border); 
+    background: linear-gradient(135deg, var(--c-surface) 0%, var(--c-bg) 100%);
+  }
+  .site-footer-inner { 
+    max-width: 1100px; margin: 0 auto; 
+    padding: 24px; display: flex; 
+    justify-content: space-between; gap: 16px; 
+    color: var(--c-text-soft); font-size: 14px; 
+  }
+
+  /* --------- Responsive --------- */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    .episode { grid-template-columns: 120px 1fr; min-height: 120px; }
+    .hero h1 { font-size: 32px; }
+  }
+  @media (max-width: 640px) {
+    .site-header-inner { flex-wrap: wrap; gap: 12px; padding: 12px 20px; }
+    .nav { 
+      order: 3; width: 100%; justify-content: center; 
+      padding-top: 12px; border-top: 1px dashed var(--c-border); 
+    }
+    .cta { order: 2; margin-left: auto; }
+    .hero { padding: 40px 0 20px; }
+    .hero h1 { font-size: 28px; }
+    .episode { 
+      grid-template-columns: 1fr; 
+      grid-template-rows: 200px 1fr;
+    }
+    .episode img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .container { padding: 16px; }
+  }
+
+  /* --------- Animation Enhancements --------- */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .episode {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  .episode:nth-child(1) { animation-delay: 0.1s; }
+  .episode:nth-child(2) { animation-delay: 0.2s; }
+  .episode:nth-child(3) { animation-delay: 0.3s; }
+
+  /* --------- Focus States for Accessibility --------- */
+  .button:focus-visible,
+  .listen-badge:focus-visible,
+  .play:focus-visible {
+    outline: 2px solid var(--c-accent);
+    outline-offset: 2px;
+  }
+</style>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="brand">
+      <div class="brand-logo">W</div>
+      <div>
+        <div class="brand-title">Whoever Condemns the Theater</div>
+        <div class="brand-sub">Weekly radio plays · New voices</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ path('wct_site') }}" aria-current="page">Home</a>
+      <a href="{{ path('wct_bio') }}">About</a>
+      <a href="{{ path('wct_contact') }}">Contact</a>
+      <a href="{{ path('wct_archive') }}">Episodes</a>
+    </nav>
+
+    <div class="cta">
+      <a class="button" href="#subscribe">Subscribe</a>
+      <a class="button secondary" href="{{ path('wct_submit') }}">Submit a Play</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <article class="hero-card" style="position: relative;">
+        {% if hero_featured|default(false) %}
+          <div class="featured-badge">Latest</div>
+        {% endif %}
+        <img class="hero-media" src="{{ hero_image_url|default(asset('images/wct-hero.jpg')) }}" alt="Studio microphones and scripts on a table">
+        <div class="hero-body">
+          <div class="kicker">New episode every Monday</div>
+          <h1>{{ hero_title|default('Theater for your commute.') }}</h1>
+          <p class="lead">{{ hero_subhead|default('Radio-style adaptations of ten-minute plays with cinematic sound. Emerging playwrights. Clean mixes. Archival permanence.') }}</p>
+          <div style="margin-top:20px; display:flex; gap:12px; flex-wrap: wrap;">
+            <a class="play" href="#episodes">Listen Now</a>
+            <a class="play secondary" href="{{ path('wct_archive') }}">Browse All Episodes</a>
+          </div>
+        </div>
+      </article>
+
+      <aside class="subscribe" id="subscribe" aria-labelledby="subscribe-title">
+        <h2 id="subscribe-title">Listen on</h2>
+        <div class="badge-row">
+          <a class="listen-badge" href="{{ spotify_url|default('#') }}" rel="noopener" target="_blank">
+            <span>🎵</span> Spotify
+          </a>
+          <a class="listen-badge" href="{{ apple_url|default('#') }}" rel="noopener" target="_blank">
+            <span>🍎</span> Apple Podcasts
+          </a>
+          <a class="listen-badge" href="{{ rss_url|default('#') }}" rel="noopener" target="_blank">
+            <span>📡</span> RSS
+          </a>
+          <a class="listen-badge" href="{{ pocketcasts_url|default('#') }}" rel="noopener" target="_blank">
+            <span>📱</span> Pocket Casts
+          </a>
+          <a class="listen-badge" href="{{ overcast_url|default('#') }}" rel="noopener" target="_blank">
+            <span>☁️</span> Overcast
+          </a>
+        </div>
+        <p style="margin-top:16px; color: var(--c-text-muted); font-size:14px;">
+          Prefer email? <a href="{{ path('wct_newsletter') }}" style="color: var(--c-accent); font-weight: 600;">Get episode drops in your inbox</a>.
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="container section" id="episodes" aria-labelledby="episodes-title">
+    <h2 id="episodes-title">Latest Episodes</h2>
+    <div class="episodes">
+      {# Sample episodes - replace with your dynamic content #}
+      {% set sample_episodes = [
+        {
+          'title': 'Humankind',
+          'short_description': 'A moving exploration of what connects us all in moments of crisis. Sarah Chen\'s debut play examines how strangers become family when the world shifts beneath our feet.',
+          'episode_number': 3,
+          'published_at': '2025-08-26'|date('Y-m-d'),
+          'duration_hms': '12:34',
+          'audio_url': '/audio/episode-3-humankind.mp3',
+          'page_url': path('wct_site', {'slug': 'humankind'}),
+          'image_url': asset('images/episode-3-humankind.jpg')
+        },
+        {
+          'title': 'In Defiance of Chekov',
+          'short_description': 'A meta-theatrical comedy that playfully breaks the fourth wall. Marcus Rodriguez challenges dramatic conventions while delivering genuine laughs and unexpected depth.',
+          'episode_number': 2,
+          'published_at': '2025-08-19'|date('Y-m-d'),
+          'duration_hms': '9:47',
+          'audio_url': '/audio/episode-2-chekov.mp3',
+          'page_url': path('wct_site', {'slug': 'in-defiance-of-chekov'}),
+          'image_url': asset('images/episode-2-chekov.jpg')
+        },
+        {
+          'title': 'Mountain Lines',
+          'short_description': 'Two hikers discover more than scenic views on a remote trail. Jamie Park\'s atmospheric piece weaves tension and revelation through intimate dialogue.',
+          'episode_number': 1,
+          'published_at': '2025-08-12'|date('Y-m-d'),
+          'duration_hms': '11:22',
+          'audio_url': '/audio/episode-1-mountain-lines.mp3',
+          'page_url': path('wct_site', {'slug': 'mountain-lines'}),
+          'image_url': asset('images/episode-1-mountain-lines.jpg')
+        }
+      ] %}
+
+      {% for item in feedItems|default(sample_episodes) %}
+      <article class="episode" itemscope itemtype="https://schema.org/PodcastEpisode">
+        <meta itemprop="partOfSeries" content="Whoever Condemns the Theater" />
+        <a href="{{ item.page_url|default('#') }}" style="display:block; position: relative; overflow: hidden;" aria-label="Episode cover">
+          <img src="{{ item.image_url|default(asset('images/episode-placeholder.jpg')) }}" alt="Episode art for {{ item.title }}">
+        </a>
+        <div class="episode-body">
+          <div class="ep-meta">
+            <div class="episode-number">{{ item.episode_number|default(loop.revindex0 is defined ? feedItems|length - loop.index0 : '?') }}</div>
+            <span>{{ item.published_at|date('F j, Y') }}</span>
+            {% if item.duration_hms is defined %}<span>· {{ item.duration_hms }}</span>{% endif %}
+          </div>
+          <h3 class="ep-title" itemprop="name">{{ item.title }}</h3>
+          <p class="ep-desc" itemprop="description">{{ item.short_description }}</p>
+          <div class="ep-actions">
+            {% if item.audio_url is defined and item.audio_url %}
+              <audio preload="none" controls>
+                <source src="{{ item.audio_url }}" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            {% endif %}
+            <a class="play" href="{{ item.page_url|default('#') }}">Episode Page</a>
+            {% if item.transcript_url is defined %}
+              <a class="play secondary" href="{{ item.transcript_url }}">Transcript</a>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% else %}
+      <div style="text-align: center; padding: 40px; color: var(--c-text-muted); background: var(--c-surface); border-radius: 16px; border: 1px dashed var(--c-border);">
+        <p style="font-size: 18px; margin: 0;">Episodes will appear here once your feed is connected.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div>© {{ "now"|date('Y') }} Whoever Condemns the Theater</div>
+    <div>
+      Recorded in Pittsburgh, PA · 
+      <a href="{{ path('wct_licensing') }}">Licensing</a> · 
+      <a href="{{ path('wct_privacy') }}">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+{% endblock %}
