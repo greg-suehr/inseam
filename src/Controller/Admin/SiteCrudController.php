@@ -6,6 +6,7 @@ use App\Entity\Site;
 use App\Message\ProvisionSiteSchema;
 use App\Service\SiteService;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -45,4 +46,9 @@ class SiteCrudController extends AbstractCrudController
             TextField::new('domain'),
         ];
     }
+
+  public function new(AdminContext $context)
+  {
+    return $this->redirectToRoute('site_create_from_template',  ['template' => "simple_site" ]);
+  }
 }

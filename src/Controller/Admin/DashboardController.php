@@ -6,7 +6,10 @@ use App\Entity\Admin;
 use App\Entity\Blurb;
 use App\Entity\BioLink;
 use App\Entity\BioTag;
+use App\Entity\Page;
+use App\Entity\PageContent;
 use App\Entity\Show;
+use App\Entity\Site;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -40,5 +43,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Links', 'fas fa-chain', BioLink::class);        
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', BioTag::class);
         yield MenuItem::linkToCrud('Shows', 'fas fa-calendar', Show::class);
+        yield MenuItem::linkToCrud('IH - Sites', 'fas fa-user', Site::class);
+        yield MenuItem::linkToCrud('IH - Pages', 'fas fa-scroll', Page::class);        
     }
 }

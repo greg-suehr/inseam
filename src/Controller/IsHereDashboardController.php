@@ -22,8 +22,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[AdminDashboard(routePath: '/profiler', routeName: 'profiler_admin')]
-class ProfilerDashboardController extends AbstractDashboardController
+#[AdminDashboard(routePath: '/ishere', routeName: 'ishere_admin')]
+class IsHereDashboardController extends AbstractDashboardController
 {
     public function __construct(
         private AdminUrlGenerator $adminUrlGenerator,
@@ -32,12 +32,12 @@ class ProfilerDashboardController extends AbstractDashboardController
         private CategoryRepository $categoryRepo,
     ) {}
   
-    #[Route("/profiler", name: "profiler_dashboard")]
+    #[Route("/ishere", name: "ishere_dashboard")]
     public function index(): Response
     {
         /** @var \Doctrine\Common\Collections\Collection|Site[] $sites */
         $user = $this->getUser();
-        $sites = isset($user) ? $user->getSite() : null;
+        $sites = isset($user) ? $user->getSites() : null;
         $session = $this->requestStack->getCurrentRequest()->getSession();        
 
         if ($sites === null) {
@@ -46,12 +46,12 @@ class ProfilerDashboardController extends AbstractDashboardController
             return $this->redirect($url);
         }
 
-        if (!$session->has('current_site_id')) {
+        if (!$session->has('current_site_id') and $sites) {
             $session->set('current_site_id', $sites->getId());
         }
 
         if (!$session->has('current_site_id')) {
-            return $this->redirectToRoute('select_site');
+            return $this->redirectToRoute('ishere_admin_site_index');
         }
 
         // At this point we have current_site_id set

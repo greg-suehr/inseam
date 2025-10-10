@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -48,6 +50,20 @@ class Page
 
     #[ORM\Column(length: 255)]
     private ?string $page_type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pages')]
+    private ?Site $site = null;
+
+    /**
+     * @var Collection<int, Block>
+     */
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'page', orphanRemoval: true)]
+    private Collection $blocks;
+
+    public function __construct()
+    {
+        $this->blocks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,5 +166,47 @@ class Page
     public function onPostPersist(): void
     {
     	$this->updated_at = new \DateTime();
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): static
+    {
+        $this->site = $site;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Block>
+     */
+    public function getBlocks(): Collection
+    {
+        return $this->blocks;
+    }
+
+    public function addBlock(Block $block): static
+    {
+        if (!$this->blocks->contains($block)) {
+            $this->blocks->add($block);
+            $block->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlock(Block $block): static
+    {
+        if ($this->blocks->removeElement($block)) {
+            // set the owning side to null (unless already changed)
+            if ($block->getPage() === $this) {
+                $block->setPage(null);
+            }
+        }
+
+        return $this;
     }
 }

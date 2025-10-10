@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
+#[UniqueEntity(fields: ['username'], message: 'This username is already taken.')]
+#[UniqueEntity(fields: ['email'], message: 'This email is already used.', ignoreNull: true)]
 class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -42,7 +44,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
     private \DateTimeInterface $defaultLastLogin;
 
-    #[ORM\Column(length: 255)]
+  #[ORM\Column(length: 255, nullable: true)]
     private ?string $bio = null;
 
     /**
@@ -276,4 +278,9 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+  public function getSites(): array
+  {
+      return [];
+  }
 }

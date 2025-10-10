@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class RssFeedController extends AbstractController
+final class aRssFeedController extends AbstractController
 {
     #[Route('/wct', name: 'wct_site')]
     public function index(): Response

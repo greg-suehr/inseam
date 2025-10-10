@@ -1,0 +1,32 @@
+{
+  "name": "Default Template",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "blocktree": [
+        {
+          "type": "section",
+          "children": [
+            { "type": "block", "text": "Welcome to your new site!" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About Us",
+      "blocktree": [
+        {
+          "type": "section",
+          "children": [
+            { "type": "block", "text": "About text here." }
+          ]
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "path": "default/logo.png" }
+  ]
+}

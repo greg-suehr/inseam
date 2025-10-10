@@ -38,9 +38,23 @@ class Site
     #[ORM\ManyToMany(targetEntity: ProfileUser::class, mappedBy: 'site')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, Page>
+     */
+    #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'site')]
+    private Collection $pages;
+
+    /**
+     * @var Collection<int, Asset>
+     */
+    #[ORM\OneToMany(targetEntity: Asset::class, mappedBy: 'site')]
+    private Collection $assets;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->pages = new ArrayCollection();
+        $this->assets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,6 +155,66 @@ class Site
     {
         if ($this->users->removeElement($user)) {
             $user->removeSite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Page>
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(Page $page): static
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages->add($page);
+            $page->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(Page $page): static
+    {
+        if ($this->pages->removeElement($page)) {
+            // set the owning side to null (unless already changed)
+            if ($page->getSite() === $this) {
+                $page->setSite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Asset>
+     */
+    public function getAssets(): Collection
+    {
+        return $this->assets;
+    }
+
+    public function addAsset(Asset $asset): static
+    {
+        if (!$this->assets->contains($asset)) {
+            $this->assets->add($asset);
+            $asset->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAsset(Asset $asset): static
+    {
+        if ($this->assets->removeElement($asset)) {
+            // set the owning side to null (unless already changed)
+            if ($asset->getSite() === $this) {
+                $asset->setSite(null);
+            }
         }
 
         return $this;
