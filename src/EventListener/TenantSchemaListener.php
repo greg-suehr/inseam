@@ -16,6 +16,7 @@ class TenantSchemaListener implements EventSubscriberInterface
     private LoggerInterface      $logger;
 
     public function __construct(
+      private bool $enabled,
       EntityManagerInterface $em,
       SiteContext $siteContext,
       LoggerInterface $logger
@@ -35,6 +36,10 @@ class TenantSchemaListener implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
+        if (!$this->enabled) {
+          return;
+        }
+        
         $this->logger->debug('TenantSchemaListener::onKernelRequest fired', [
             'isMainRequest' => $event->isMainRequest(),
             'pathInfo'      => $event->getRequest()->getPathInfo(),
