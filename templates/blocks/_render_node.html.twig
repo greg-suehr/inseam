@@ -1,0 +1,16 @@
+{% if node.type == 'section' %}
+  <section class="mb-4">
+    {% if node.children is defined %}
+      {% for child in node.children %}
+        {% include 'blocks/_render_node.html.twig' with { node: child } %}
+      {% endfor %}
+    {% endif %}
+  </section>
+{% elseif node.type == 'block' %}
+  {# Route by component if present, else a plain text block #}
+  {% if node.component is defined %}
+    {% include 'blocks/components/' ~ node.component ~ '.html.twig' with { props: node.props|default({}) } %}
+  {% else %}
+    <div class="mb-3">{{ node.text|default('') }}</div>
+  {% endif %}
+{% endif %}

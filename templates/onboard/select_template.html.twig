@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Choose a template{% endblock %}
+
+{% block body %}
+  <h1 class="mb-4">Choose a template</h1>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for template in templates %}
+      <div class="col">
+        <div class="card h-100">
+          {% if template.preview_image %}
+            <img src="{{ asset(template.preview_image) }}" class="card-img-top" alt="{{ template.name }} preview">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ template.name }}</h5>
+            <p class="card-text">{{ template.description ?? '' }}</p>
+
+            <div class="d-flex gap-2">
+              <a class="btn btn-outline-secondary"
+                 href="{{ path('site_template_preview', { id: template.id, slug: template.pages[0].slug }) }}">
+                 Preview
+              </a>
+
+              <form method="post" action="{{ path('site_create_from_template', { templateId: template.id }) }}" class="d-flex gap-2">
+                <input name="slug" class="form-control" placeholder="site-slug" required>
+                <button class="btn btn-primary" type="submit">Use template</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

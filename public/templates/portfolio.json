@@ -1,0 +1,176 @@
+{
+  "name": "Artist Profile Template",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "blocktree": [
+        {
+          "type": "section",
+          "key": "header",
+          "children": [
+            { "type": "block", "kind": "brand", "text": "SamsonAllen", "href": "/home" },
+            {
+              "type": "block",
+              "kind": "nav",
+              "items": [
+                { "label": "Bio", "href": "/bio" },
+                { "label": "Media", "href": "/media" }
+              ]
+            },
+            {
+              "type": "block",
+              "kind": "icon-links",
+              "items": [
+                { "label": "Email", "href": "mailto:hello@example.com" },
+                { "label": "Instagram", "href": "https://instagram.com/your-handle" },
+                { "label": "IMDb", "href": "https://www.imdb.com/name/nmXXXXXXX/" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "hero",
+          "children": [
+            {
+              "type": "block",
+              "kind": "image",
+              "src": "assets/headshot.jpg",
+              "alt": "Headshot"
+            },
+            {
+              "type": "block",
+              "kind": "title",
+              "text": "Samson Allen"
+            },
+            {
+              "type": "block",
+              "kind": "subtitle",
+              "text": "Actor"
+            },
+            {
+              "type": "block",
+              "kind": "links-inline",
+              "items": [
+                { "label": "Resume", "href": "/assets/SamsonAllen_Resume.pdf" },
+                { "label": "Film Reel", "href": "https://youtu.be/your-reel" }
+              ]
+            },
+            {
+              "type": "block",
+              "kind": "buttons",
+              "items": [
+                { "label": "Bio", "href": "/bio" },
+                { "label": "Media", "href": "/media" }
+              ]
+            },
+            {
+              "type": "block",
+              "kind": "image",
+              "src": "assets/feature-still.jpg",
+              "alt": "Feature still"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "footer",
+          "children": [
+            { "type": "block", "text": "© 2025 Samson Allen" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "media",
+      "title": "Media",
+      "blocktree": [
+        {
+          "type": "section",
+          "key": "header",
+          "children": [
+            { "type": "block", "kind": "brand", "text": "SamsonAllen", "href": "/home" },
+            {
+              "type": "block",
+              "kind": "nav",
+              "items": [
+                { "label": "Bio", "href": "/bio" },
+                { "label": "Media", "href": "/media" }
+              ]
+            },
+            {
+              "type": "block",
+              "kind": "icon-links",
+              "items": [
+                { "label": "Email", "href": "mailto:hello@example.com" },
+                { "label": "Instagram", "href": "https://instagram.com/your-handle" },
+                { "label": "IMDb", "href": "https://www.imdb.com/name/nmXXXXXXX/" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "gallery",
+          "children": [
+            {
+              "type": "block",
+              "kind": "gallery",
+              "items": [
+                {
+                  "title": "Nexum",
+                  "thumbnail": "assets/media/nexum.jpg",
+                  "href": "/media/nexum"
+                },
+                {
+                  "title": "Ladies' Room",
+                  "thumbnail": "assets/media/ladies-room.jpg",
+                  "href": "/media/ladies-room"
+                },
+                {
+                  "title": "Frankie & Fiona",
+                  "thumbnail": "assets/media/frankie-fiona.jpg",
+                  "href": "/media/frankie-fiona"
+                },
+                {
+                  "title": "Measure for Measure",
+                  "thumbnail": "assets/media/measure-for-measure.jpg",
+                  "href": "/media/measure-for-measure"
+                },
+                {
+                  "title": "Mother Americana",
+                  "thumbnail": "assets/media/mother-americana.jpg",
+                  "href": "/media/mother-americana"
+                },
+                {
+                  "title": "Tunnel",
+                  "thumbnail": "assets/media/tunnel.jpg",
+                  "href": "/media/tunnel"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "footer",
+          "children": [
+            { "type": "block", "text": "© 2025 Samson Allen" }
+          ]
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "path": "assets/headshot.jpg", "alt": "Headshot" },
+    { "path": "assets/feature-still.jpg", "alt": "Feature still" },
+    { "path": "assets/SamsonAllen_Resume.pdf" },
+    { "path": "assets/media/nexum.jpg", "alt": "Nexum poster" },
+    { "path": "assets/media/ladies-room.jpg", "alt": "Ladies' Room still" },
+    { "path": "assets/media/frankie-fiona.jpg", "alt": "Frankie & Fiona still" },
+    { "path": "assets/media/measure-for-measure.jpg", "alt": "Measure for Measure poster" },
+    { "path": "assets/media/mother-americana.jpg", "alt": "Mother Americana still" },
+    { "path": "assets/media/tunnel.jpg", "alt": "Tunnel poster" }
+  ]
+}

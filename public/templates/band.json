@@ -1,0 +1,111 @@
+{
+  "name": "Band Page",
+  "pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "blocktree": [
+        {
+          "type": "section",
+          "key": "header",
+          "children": [
+            { "type": "block", "text": "{{band_name}}" },
+            { "type": "block", "text": "{{band_location}}" }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "nav",
+          "children": [
+            {
+              "type": "block",
+              "kind": "nav",
+              "items": [
+                { "label": "Home", "href": "/home" },
+                { "label": "Bio", "href": "/bio" },
+                { "label": "Tour", "href": "/tour" },
+                { "label": "Merch", "href": "/store" },
+                { "label": "Music", "href": "/music" },
+                { "label": "Press", "href": "/press" },
+                { "label": "Contact", "href": "/contact" }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "profile",
+          "children": [
+            {
+              "type": "block",
+              "kind": "image",
+              "src": "your-band-photo.jpg",
+              "alt": "{{band_name}}",
+              "width": 180
+            },
+            {
+              "type": "block",
+              "text": "{{band_bio}}"
+            }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "blurbs",
+          "children": [
+            { "type": "block", "text": "### {{band_name}}’s Blurbs" },
+            { "type": "block", "text": "{{band_bio}}" }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "shows",
+          "children": [
+            { "type": "block", "text": "No upcoming shows." }
+          ]
+        },
+        {
+          "type": "section",
+          "key": "footer",
+          "children": [
+            { "type": "block", "text": "© 2025 {{copyright_name}}" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About",
+      "blocktree": []
+    },
+    {
+      "slug": "contact",
+      "title": "Contact",
+      "blocktree": []
+    },
+    {
+      "slug": "press",
+      "title": "Press",
+      "blocktree": []
+    },
+    {
+      "slug": "music",
+      "title": "Music",
+      "blocktree": []
+    },
+    {
+      "slug": "tour",
+      "title": "Tour",
+      "blocktree": []
+    }
+  ],
+  "assets": [
+    { "path": "your-band-photo.jpg", "alt": "Band photo of {{band_name}}" }
+  ],
+  "params": {
+    "band_name": "Inseam",
+    "band_location": "Pittsburgh, PA",
+    "band_bio": "Emo revival from Pittsburgh.",
+    "copyright_name": "{{band_name}}"
+  }
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %}Preview {{ template.name }}{% endblock %}
+
+{% block body %}
+  <nav class="mb-3">
+    {% for p in template.pages %}
+      <a class="btn btn-sm btn-outline-secondary me-2"
+         href="{{ path('site_template_preview', { id: template.id, slug: p.slug }) }}">
+        {{ p.title }}
+      </a>
+    {% endfor %}
+    <a class="btn btn-primary"
+       href="{{ path('site_template_select') }}">
+       Back to templates
+    </a>
+  </nav>
+
+  <h1 class="mb-4">{{ page.title }}</h1>
+
+  {# Minimal blocktree renderer that mirrors your live page partials #}
+  {% for node in page.blocktree %}
+    {% include 'blocks/_render_node.html.twig' with { node: node } %}
+  {% endfor %}
+{% endblock %}

@@ -74,6 +74,6 @@ class SiteCrudController extends AbstractCrudController
 
   public function new(AdminContext $context)
   {
-    return $this->redirectToRoute('site_create_from_template',  ['template' => "simple_site" ]);
+    return $this->redirectToRoute('site_template_select');
   }
 }

@@ -13,13 +13,11 @@ class SiteBuilder
   public function __construct(private EntityManagerInterface $em) {}
   
   public function createFromTemplate(array $templateData, string $siteName, string $owner): Site
-  {
-    dd($templateData);
-    
+  {    
     $site = new Site();
     $site->setName($siteName);
-    $site->setDomain($siteName);    
-    # TODO: user-site ownership
+    $site->setDomain($siteName);
+    $site->setOwner($owner);
 
     foreach ($templateData['pages'] as $pageData) {
       $page = new Page();
