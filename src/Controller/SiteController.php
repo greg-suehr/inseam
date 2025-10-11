@@ -25,10 +25,4 @@ class SiteController extends AbstractController
           'id' => $site->getId(),
         ]);
     }
-
-  #[Route('/site/{id}', name: 'site_dashboard')]
-  public function siteDashboard(
-  ): Response {
-    return $this->render('site/index.html.twig');
-  }
 }

@@ -65,12 +65,19 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: BioLink::class, mappedBy: 'profile', orphanRemoval: true)]
     private Collection $bioLinks;
 
+    /**
+     * @var Collection<int, Site>
+     */
+    #[ORM\OneToMany(targetEntity: Site::class, mappedBy: 'owner')]
+    private Collection $sites;
+
   public function __construct(?\DateTimeInterface $defaultLastLogin = null)
   {
       $this->defaultLastLogin = $defaultLastLogin ?? new \DateTime("2011-06-29");
       $this->bioTags = new ArrayCollection();
       $this->blurbs = new ArrayCollection();
       $this->bioLinks = new ArrayCollection();
+      $this->sites = new ArrayCollection();
   }
 
   public function __toString()
@@ -282,5 +289,27 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
   public function getSites(): array
   {
       return [];
+  }
+
+  public function addSite(Site $site): static
+  {
+      if (!$this->sites->contains($site)) {
+          $this->sites->add($site);
+          $site->setOwner($this);
+      }
+
+      return $this;
+  }
+
+  public function removeSite(Site $site): static
+  {
+      if ($this->sites->removeElement($site)) {
+          // set the owning side to null (unless already changed)
+          if ($site->getOwner() === $this) {
+              $site->setOwner(null);
+          }
+      }
+
+      return $this;
   }
 }

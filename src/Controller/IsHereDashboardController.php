@@ -3,9 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\Admin\SiteCrudController;
-use App\Entity\Category;
-use App\Entity\Content;
-use App\Entity\Page;
 use App\Entity\Site;
 use App\Entity\ProfileUser;
 use App\Repository\CategoryRepository;
@@ -21,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[AdminDashboard(routePath: '/ishere', routeName: 'ishere_admin')]
 class IsHereDashboardController extends AbstractDashboardController
@@ -35,56 +33,31 @@ class IsHereDashboardController extends AbstractDashboardController
     #[Route("/ishere", name: "ishere_dashboard")]
     public function index(): Response
     {
-        /** @var \Doctrine\Common\Collections\Collection|Site[] $sites */
         $user = $this->getUser();
-        $sites = isset($user) ? $user->getSites() : null;
-        $session = $this->requestStack->getCurrentRequest()->getSession();        
-
-        if ($sites === null) {
-            $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-            $url = $routeBuilder->setController(SiteCrudController::class)->generateUrl();
-            return $this->redirect($url);
-        }
-
-        if (!$session->has('current_site_id') and $sites) {
-            $session->set('current_site_id', $sites->getId());
-        }
-
-        if (!$session->has('current_site_id')) {
-            return $this->redirectToRoute('ishere_admin_site_index');
-        }
-
-        // At this point we have current_site_id set
-        $categories = $this->categoryRepo->findAll();
-        return $this->render('instance.html.twig', [
-          'categories' => $categories,
-          'site_name' =>  $session->get('current_site_id')
-                               ]
-        );
+        return $this->redirectToRoute('ishere_admin_site_index');
     }
 
-    public function configureMenuItems(): iterable
-    {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Sites', 'fa fa-globe', Site::class);
-        yield MenuItem::linkToCrud('Categories', 'fa fa-sliders', Category::class);
-        yield MenuItem::linkToCrud('Content', 'fa fa-database', Content::class);
-
-        // dynamically add "New Content" links per category
-        $categories = $this->categoryRepo->findAll(); // pulls all entries :contentReference[oaicite:0]{index=0}
-        foreach ($categories as $category) {
-          
-          $url = $this->generateUrl('content_new', [
-            'category' => $category->getId(),
-          ]);
-          
-          yield MenuItem::linkToURL(
-                sprintf('New %s!', $category->getName()),
-                'fa fa-plus-circle',
-                $url
-            );
-        }
-
-        yield MenuItem::linkToCrud('Pages', 'fa fa-file', Page::class);
-    }
+  #[Route('/ishere/sites/{id}/view', name: 'ishere_site_view', methods: ['POST','GET'])]
+  public function viewSite(Site $site): Response
+  {
+    $user = $this->getUser();
+    # TODO: reinforce access control
+    #if (!$user || !$user->getSites()->contains($site)) {
+    #  throw new AccessDeniedException('You do not have access to this site.');
+    #}
+    
+    $session = $this->requestStack->getCurrentRequest()->getSession();
+    $session->set('current_site_id', $site->getId());
+    
+    return $this->redirectToRoute('site_dashboard', );
+  }
+  
+  public function configureMenuItems(): iterable
+  {
+    yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+    yield MenuItem::linkToCrud('Sites', 'fa fa-database', Site::class);
+    yield MenuItem::linkToCrud('DNS', 'fa fa-globe', Site::class);        
+    yield MenuItem::linkToCrud('Analytics', 'fa fa-chart-simple', Site::class);
+    yield MenuItem::linkToCrud('Settings', 'fa fa-sliders', Site::class);
+  }
 }

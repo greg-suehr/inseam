@@ -50,6 +50,9 @@ class Site
     #[ORM\OneToMany(targetEntity: Asset::class, mappedBy: 'site')]
     private Collection $assets;
 
+    #[ORM\ManyToOne(inversedBy: 'sites')]
+    private ?Admin $owner = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -216,6 +219,18 @@ class Site
                 $asset->setSite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?Admin
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?Admin $owner): static
+    {
+        $this->owner = $owner;
 
         return $this;
     }
