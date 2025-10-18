@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Render;
 
-use App\Domain\Site;
+use App\Entity\Site;
 
 /**
  * Renders PageEditor block trees into HTML.
@@ -64,6 +64,75 @@ final class BlockRenderer
    */
   private function registerDefaultBlocks(): void
   {
+    // Paragraph block
+    $this->register('paragraph', function(array $block, BlockRenderer $ctx, Site $site) {
+      $text = $block['text'] ?? ($block['props']['text'] ?? '');
+      $blockId = isset($block['id']) ? ' data-block-id="' . $ctx->escape($block['id']) . '"' : '';
+      
+      return '<p class="block-paragraph"' . $blockId . '>' 
+        . $ctx->escape($text) 
+        . '</p>';
+    });
+
+    // Link block - standalone link styled as button or card
+    $this->register('link', function(array $block, BlockRenderer $ctx, Site $site) {
+      $href = $block['href'] ?? ($block['props']['href'] ?? '#');
+      $text = $block['text'] ?? ($block['props']['text'] ?? 'Link');
+      $external = $block['external'] ?? ($block['props']['external'] ?? false);
+      $blockId = isset($block['id']) ? ' data-block-id="' . $ctx->escape($block['id']) . '"' : '';
+      
+      $attrs = '';
+      if ($external) {
+        $attrs = ' rel="noopener noreferrer" target="_blank"';
+      }
+      
+      return '<p class="links block-link"' . $blockId . '>'
+        . '<a href="' . $ctx->escape($href) . '"' . $attrs . '>'
+        . $ctx->escape($text)
+        . '</a>'
+        . '</p>';
+    });
+
+    $this->register('section', function(array $block, BlockRenderer $ctx, Site $site) {
+      $children = $block['children'] ?? [];
+      $blockId = isset($block['id']) ? ' data-block-id="' . $ctx->escape($block['id']) . '"' : '';
+      $className = $block['className'] ?? ($block['props']['className'] ?? '');
+      
+      $classAttr = 'block-section';
+      if ($className) {
+        $classAttr .= ' ' . $ctx->escape($className);
+      }
+      
+      $html = '<section class="' . $classAttr . '"' . $blockId . '>';
+      foreach ($children as $child) {
+        $html .= $ctx->render($child, $site);
+      }
+      $html .= '</section>';
+      
+      return $html;
+    });
+
+    // List block - ordered or unordered
+    $this->register('list', function(array $block, BlockRenderer $ctx, Site $site) {
+      $items = $block['data']['items'] ?? ($block['props']['data']['items'] ?? []);
+      $order = $block['data']['order'] ?? ($block['props']['data']['order'] ?? false);
+      $blockId = isset($block['id']) ? ' data-block-id="' . $ctx->escape($block['id']) . '"' : '';
+      
+      if (empty($items)) {
+        return '<!-- Empty list block -->';
+      }
+      
+      $html = "<{$order} class=\"block-list\"{$blockId}>";
+      
+      foreach ($items as $item) {
+        $itemText = is_string($item) ? $item : ($item['text'] ?? '');
+        $html .= '<li>' . $ctx->escape($itemText) . '</li>';
+      }
+      
+      $html .= "</{$order}>";
+      return $html;
+    });
+    
     // Hero block
     $this->register('hero', function(array $block, BlockRenderer $ctx, Site $site) {
             $heading = $ctx->escape($block['props']['heading'] ?? '');

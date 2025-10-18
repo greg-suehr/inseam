@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Asset;
 
 final class AssetUrlResolver
 {

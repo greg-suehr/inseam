@@ -2,8 +2,8 @@
 
 namespace App\Twig;
 
-use App\Service\BlockRenderer;
-use App\Domain\Site;
+use App\Service\Render\BlockRenderer;
+use App\Entity\Site;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 

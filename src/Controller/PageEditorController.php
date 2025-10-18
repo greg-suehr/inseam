@@ -85,13 +85,14 @@ class PageEditorController extends AbstractController
     }
     
     $data = json_decode($request->getContent(), true);
-    
+
     if (!isset($data['blocktree'])) {
       return new JsonResponse(['error' => 'Invalid data'], 400);
     }
     
     $pageData = $page->getData();
     $pageData['blocktree'] = $data['blocktree'];
+    $pageData['html'] = '';
     $page->setData($pageData);
     
     $this->em->flush();

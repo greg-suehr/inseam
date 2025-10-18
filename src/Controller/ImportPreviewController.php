@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PageContentRepository;
-use App\Service\AssetUrlResolver;
+use App\Service\Asset\AssetUrlResolver;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

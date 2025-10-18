@@ -98,12 +98,12 @@ services:
             $siteContext: '@App\Service\SiteContext'
             $enabled: false
 
-    App\Service\BlockRenderer:
+    App\Service\Render\BlockRenderer:
         public: true
 
     App\Twig\BlockRendererTwigExtension:
         arguments:
-            $blockRenderer: '@App\Service\BlockRenderer'
+            $blockRenderer: '@App\Service\Render\BlockRenderer'
         tags:
             - { name: 'twig.extension' }
 
