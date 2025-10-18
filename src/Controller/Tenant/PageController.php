@@ -32,44 +32,9 @@ class PageController extends AbstractController
         $this->logger      = $logger;
     }
 
-    //#[Route("/p/{slug}", name: "tenant_page_show", requirements: ["slug"=>".+"])] 
     #[Route("/p/{siteDomain}/{slug}", name: "tenant_page_show", requirements: ["siteDomain" => ".+", "slug"=>".+"])]
     public function show(Request $request, string $siteDomain, string $slug): Response
     {
-          /*
-            The block below is part of a POC for per-tenant schema isolation
-          $current = $this->em->getConnection()->fetchOne('SELECT current_schema()');
-          $this->logger->info('Before query in controller, current_schema = '.$current);
-
-          $site = $this->em
-                     ->getRepository(Site::class)
-                     ->findOneBy([
-                       'domain' => $siteDomain
-                     ]);
-
-          $this->logger->warning("Site is \"$site\"");
-          if (!$site) {          
-            return $this->render("profile/$slug.html.twig");
-          }
-          else {
-            $schema = 'site_' . $site->getId();
-            $this->em->getConnection()->executeStatement("SET search_path TO \"$schema\", public");
-            $this->logger->warning("Controller enforced tenant scoping on site = \"$site\"");
-          }
-
-          $page = $this->em
-                     ->getRepository(Page::class)
-                     ->findOneBy([
-                         'slug'         => $slug,
-                         'is_published' => true,
-                     ]);
-
-        if (!$page) {
-          $this->logger->info("Failed search for slug \"$slug\" on search_path for site \"$site\"");
-            throw new NotFoundHttpException();
-        }
-          */
-
         $site = $this->em->getRepository(Site::class) ->findOneBy([
           'domain' => $siteDomain
         ]);
