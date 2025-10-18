@@ -11,7 +11,7 @@ security:
                 property: username
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler)|css|images|js)/
             security: false
         main:
             lazy: true
@@ -36,6 +36,7 @@ security:
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/ishere, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/site, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SiteController extends AbstractController
+class OnboardingController extends AbstractController
 {
   #[Route('/site/create/{templateId}', name: 'site_create_from_template')]
   public function createFromTemplate(
@@ -20,7 +20,7 @@ class SiteController extends AbstractController
         $templateData = $loader->load($templateId);
         
         $user = $this->getUser();
-        $site = $builder->createFromTemplate($templateData, $templateData['name'] ?? 'New Site', $user->getUserIdentifier());
+        $site = $builder->createFromTemplate($templateData, $templateData['name'] ?? 'New Site', $user);
         
         return $this->redirectToRoute('site_dashboard', [
           'id' => $site->getId(),

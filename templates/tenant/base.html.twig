@@ -1,0 +1,55 @@
+{# templates/base.html.twig #}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}{{ site.title|default('Site') }}{% endblock %}</title>
+    
+    {# Canonical URL #}
+    <link rel="canonical" href="{% block canonical %}https://{{ site.domain }}/{{ page.slug|default('') }}{% endblock %}"/>
+    
+    {# Open Graph / Social Meta Tags #}
+    {% block meta_tags %}
+        {% if page is defined and page.data.seo is defined %}
+            <meta property="og:title" content="{{ page.data.seo.og.title|default(page.title) }}">
+            <meta property="og:description" content="{{ page.data.seo.og.description|default(page.data.seo.description|default('')) }}">
+            <meta property="og:url" content="{{ page.data.seo.og.url|default('https://' ~ site.domain ~ '/' ~ page.slug) }}">
+            {% if page.data.seo.og.image is defined %}
+                <meta property="og:image" content="{{ page.data.seo.og.image }}">
+            {% endif %}
+            <meta name="twitter:card" content="summary_large_image">
+            
+            {% if page.data.seo.description is defined %}
+                <meta name="description" content="{{ page.data.seo.description }}">
+            {% endif %}
+        {% endif %}
+    {% endblock %}
+    
+    {# Critical CSS - inlined for faster LCP #}
+    <style>
+        {% block critical_css %}
+        /* Base critical styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; }
+        main { min-height: 100vh; }
+        img { max-width: 100%; height: auto; }
+        {% endblock %}
+    </style>
+    
+    {# Preload main stylesheet #}
+    <link rel="preload" as="style" href="/assets/app.css">
+    <link rel="stylesheet" href="/assets/app.css">
+    
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <main id="app">
+        {% block body %}{% endblock %}
+    </main>
+    
+    {# Deferred JS for better performance #}
+    <script src="/assets/app.js" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

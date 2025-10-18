@@ -16,6 +16,10 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    'page-editor' => [
+        'path' => './assets/page-editor.js',
+        'entrypoint' => true,
+    ],    
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

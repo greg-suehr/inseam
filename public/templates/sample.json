@@ -1,0 +1,119 @@
+{
+  "name": "Sample Site",
+  "description": "Demo template showing a hero, features grid, and CTA.",
+  "pages": [
+    {
+      "title": "Welcome to Our Site",
+      "slug": "welcome",
+      "data": {
+        "seo": {
+          "description": "Welcome to our amazing site with modern block-based content",
+          "canonical": "https://example.com/welcome",
+          "og": {
+            "title": "Welcome to Our Site",
+            "description": "Discover amazing content with our modern platform",
+            "image": "https://example.com/images/og-welcome.jpg",
+            "url": "https://example.com/welcome"
+          }
+        }
+      },
+      "blockTree": [
+        {
+          "id": "block-hero-1",
+          "type": "hero",
+          "props": {
+            "heading": "Welcome to IsHere",
+            "subheading": "Build beautiful, fast websites with our modern platform",
+            "backgroundImage": "https://images.unsplash.com/photo-1557683316-973673baf926"
+          }
+        },
+        {
+          "id": "block-container-1",
+          "type": "container",
+          "children": [
+            {
+              "id": "block-heading-1",
+              "type": "heading",
+              "props": {
+                "text": "Our Features",
+                "level": 2
+              }
+            },
+            {
+              "id": "block-grid-1",
+              "type": "grid",
+              "props": {
+                "columns": 3
+              },
+              "children": [
+                {
+                  "id": "block-richtext-1",
+                  "type": "richText",
+                  "props": {
+                    "html": "<h3>Fast & Modern</h3><p>Built with performance in mind, delivering content at lightning speed.</p>"
+                  }
+                },
+                {
+                  "id": "block-richtext-2",
+                  "type": "richText",
+                  "props": {
+                    "html": "<h3>Secure by Default</h3><p>Strict CSP and security headers protect your content and visitors.</p>"
+                  }
+                },
+                {
+                  "id": "block-richtext-3",
+                  "type": "richText",
+                  "props": {
+                    "html": "<h3>Easy to Use</h3><p>Block-based editing makes content management intuitive and powerful.</p>"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "block-button-1",
+              "type": "button",
+              "props": {
+                "text": "Get Started",
+                "url": "/signup",
+                "style": "primary"
+              }
+            }
+          ]
+        },
+        {
+          "id": "block-richtext-4",
+          "type": "richText",
+          "props": {
+            "html": "<h2>Why Choose Us?</h2><p>We provide a modern, secure, and performant platform for building websites. Our block-based approach gives you flexibility without complexity.</p><ul><li>Block-based content editing</li><li>Strict security by default</li><li>Optimized for search engines</li><li>Mobile-responsive design</li></ul>"
+          }
+        },
+        {
+          "id": "block-image-1",
+          "type": "image",
+          "props": {
+            "src": "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+            "alt": "Analytics dashboard showing website performance",
+            "caption": "Real-time analytics to track your site's performance"
+          }
+        }
+      ]
+    },
+    {
+      "slug": "about",
+      "title": "About",
+      "blocktree": []
+    },
+    {
+      "slug": "contact",
+      "title": "Contact",
+      "blocktree": []
+    }
+  ],
+  "assets": [
+    { "path": "https://example.com/images/og-welcome.jpg", "alt": "Hero" },
+    { "path": "https://images.unsplash.com/photo-1557683316-973673baf926", "alt": "Welcome" },
+    { "path": "https://images.unsplash.com/photo-1460925895917-afdab827c52f", "alt": "Analytics" }
+  ],
+  "styles": [],
+  "params": {}
+}

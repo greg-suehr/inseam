@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Admin;
 use App\Entity\Site;
 use App\Entity\Page;
 use App\Entity\Block;
@@ -12,7 +13,7 @@ class SiteBuilder
 {
   public function __construct(private EntityManagerInterface $em) {}
   
-  public function createFromTemplate(array $templateData, string $siteName, string $owner): Site
+  public function createFromTemplate(array $templateData, string $siteName, Admin $owner): Site
   {    
     $site = new Site();
     $site->setName($siteName);

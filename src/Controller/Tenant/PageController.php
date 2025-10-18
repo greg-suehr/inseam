@@ -13,6 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+  The Tenant PageController serves client site content directly from a `page.data`
+  blockTree through the Twig templating system.
+ */
 class PageController extends AbstractController
 {
     private SiteContext $siteContext;
@@ -32,6 +36,8 @@ class PageController extends AbstractController
     #[Route("/p/{siteDomain}/{slug}", name: "tenant_page_show", requirements: ["siteDomain" => ".+", "slug"=>".+"])]
     public function show(Request $request, string $siteDomain, string $slug): Response
     {
+          /*
+            The block below is part of a POC for per-tenant schema isolation
           $current = $this->em->getConnection()->fetchOne('SELECT current_schema()');
           $this->logger->info('Before query in controller, current_schema = '.$current);
 
@@ -61,6 +67,27 @@ class PageController extends AbstractController
         if (!$page) {
           $this->logger->info("Failed search for slug \"$slug\" on search_path for site \"$site\"");
             throw new NotFoundHttpException();
+        }
+          */
+
+        $site = $this->em->getRepository(Site::class) ->findOneBy([
+          'domain' => $siteDomain
+        ]);
+
+        if (!$site) {
+          $this->logger->info("Site \"$site\" not found");
+          throw new NotFoundHttpException();
+        }
+        
+        $page = $this->em->getRepository(Page::class)->findOneBy([
+            'site'      => $site->getId(),
+            'slug'         => $slug,
+            'is_published' => true,
+          ]); 
+                
+        if (!$page) {
+          $this->logger->info("Failed search for slug \"$slug\" on site \"$site\"");
+          throw new NotFoundHttpException();
         }
 
         return $this->render('tenant/page.html.twig', [

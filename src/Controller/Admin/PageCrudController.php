@@ -8,6 +8,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
@@ -60,5 +64,32 @@ class PageCrudController extends AbstractCrudController
        ->setParameter('owner', $this->getUser());
     
     return $qb;
+  }
+
+  public function configureActions(Actions $actions): Actions
+  {
+    $create = Action::new('create_in_builder', 'New Page')
+        ->linkToRoute('page_editor_create');
+    
+    $editInBuilder = Action::new('edit_in_builder', 'Edit')
+        ->linkToRoute('page_editor_edit', function (Page $p) {
+            return ['id' => $p->getId()];
+        });
+    
+    return $actions
+           ->add(Crud::PAGE_INDEX, $create)
+           ->add(Crud::PAGE_INDEX, $editInBuilder)
+           ->add(Crud::PAGE_DETAIL, $editInBuilder);
+  }
+
+  public function new(AdminContext $context)
+  {
+    return $this->redirectToRoute('page_editor_create');
+  }
+
+  public function edit(AdminContext $context)
+  {
+    $page = $context->getEntity()->getInstance();
+    return $this->redirectToRoute('page_editor_edit', ['id' => $page->getId()]);
   }
 }

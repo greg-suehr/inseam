@@ -1,7 +1,59 @@
-{% block title %}{{ page.title }} — {{ site.domain }}{% endblock %}
+{% extends 'tenant/base.html.twig' %}
+
+{% block title %}{{ page.title }} — {{ site.name }}{% endblock %}
+
+{% block critical_css %}
+{{ parent() }}
+/* Page-specific critical CSS for faster LCP */
+.hero { 
+    display: block; 
+    padding: clamp(24px, 6vw, 80px) 0; 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.hero h1 { 
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1; 
+    margin-bottom: 1rem;
+}
+.tenant-page { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 2rem 1rem; 
+}
+.rte { line-height: 1.8; }
+.rte h2 { margin-top: 2rem; margin-bottom: 1rem; }
+.rte p { margin-bottom: 1rem; }
+{% endblock %}
 
 {% block body %}
-  <article class="tenant-page">
-    {{ page.htmlContent|raw }}
-  </article>
+<article class="tenant-page" itemscope itemtype="https://schema.org/WebPage">
+    {% if page.data.blocks is defined and page.data.blocks is iterable %}
+        {# Render block tree from PageEditor #}
+        {% for block in page.data.blocks %}
+            {{ block|render_block(site)|raw }}
+        {% endfor %}
+    {% else %}
+        {# Fallback for legacy HTML content #}
+        <div class="legacy-content">
+            <h1>{{ page.title }}</h1>
+            {{ page.data.html|default(page.html|default(''))|raw }}
+        </div>
+    {% endif %}
+</article>
+{% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+{# Page-specific interactive modules #}
+{% if page.data.blocks is defined %}
+    {% for block in page.data.blocks %}
+        {% if block.type == 'carousel' or block.type == 'tabs' or block.type == 'filterTable' %}
+            <script type="module">
+                const el = document.querySelector('[data-module="{{ block.type }}"][data-block-id="{{ block.id }}"]');
+                if (el) import('/assets/blocks/{{ block.type }}.js').then(m => m.mount(el));
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 {% endblock %}

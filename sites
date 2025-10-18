@@ -1,0 +1,1803 @@
+show tables;
+show tables
+;
+show databas
+show database;
+use
+ls
+help
+\?
+\tables
+\exit
+exit
+\q
+hekp
+help
+\help
+SELECT version();
+select version()
+SELECT version();
+select version()
+SELECT SELECT version();
+SELECT version();
+SELECT current_date;
+SHOW TABLES;
+SHOW TABLE;
+SHOW;
+SHOW tables;
+\dt
+\dt .*
+\dt *.*
+\dt
+desc recipient;
+DESC recipient;
+SHOW recipient;
+\d recipient;
+\d
+\q
+\d recipient;
+\d
+\q
+\d user
+\h
+\SHOW
+\SHOW?
+\S?
+\?
+ \l
+\dt app
+\c app
+\dt app
+\dt 
+\d recipe_instruction
+\t user
+\t users
+\dt
+\d user
+\d unit
+\d unit
+\d recipe
+\d ingredient
+\d recipe_ingredient
+\d recipe_instruction
+\d recipe_instruction
+\d item
+\dt
+\d item
+INSERT INTO item (item_id, name, description, category, created_at, updated_at) VALUES (1, "Water", "Water!", "Basic", now(), now()) 
+SELECT * FROM item;
+SELECT * FROM item;
+INSERT INTO item (item_id, name, description, category, created_at, updated_at) VALUES (1, "Water", "Water!", "Basic", now(), now());
+INSERT INTO item (item_id, name, description, category, created_at, updated_at) VALUES (1, 'Water', 'Water!', 'Basic', now(), now());
+SELECT * FROM item;
+SELECT * FROM item;
+SELECT * FROM item;
+SELECT * FROM item;
+\d item
+SELECT * FROM item;
+SELECT * FROM item;
+SELECT * FROM user;
+SELECT * FROM "user";
+SELECT * FROM "user";
+UPDATE "user" SET password = "$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK";
+UPDATE "user" SET password = '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK';
+\d item
+\d item
+\d item
+\d item
+SELECT count(*) FORM item;
+SELECT count(*) FROM item;
+SELECT count(*) FROM item;
+DELETE FROM item;
+\d
+\dt
+\d recipe
+\d recipe_ingredient
+\d recipe_instruction
+\dt
+\d recipe
+SELECT * FROM recipe ORDER BY id DESC;
+xit
+exit
+\q
+SELECT * FROM user;
+SELECT * FROM \"user\"
+SELECT * FROM "user";
+SELECT * FROM `user`;
+\d user
+SELECT * FROM public.user
+SELECT * FROM recipe;
+SELECT * FROM recipe;
+SELECT * FROM public.user;
+SELECT * FROM recipe;
+\d recipe;
+\d unit
+SELECT * FROM unit;
+\d unit
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('serving', 'srv', 'template', 1, 1.0);
+SELECT * FROM unit;
+UPDATE unit SET name = 'servings' WHERE name = 'serving';
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('cup', 'c', 'volumetric', 2, 1.0);
+\d recipe_ingredient;
+\d recipe_ingredient;
+\d recipe_instruction
+SELECT * FROM recipe;
+SELECT * FROM recipe_ingredients;
+SELECT * FROM recipe_ingredient;
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('piece', 'p', 'template', 1, 1.0);
+SELECT * FROM recipe;
+delete from recipe;l
+delete from recipe;
+;
+delete from recipe;
+DELETE recipe, recipe_ingredient, recipe_instruction FROM recipe JOIN recipe_ingredient USING (recipe_id) JOIN recipe_instruction USING (recipe_id);
+DELETE FROM recipe_ingredient ;
+DELETE FROM recipe_instruction;
+DELETE FROM recipe;
+SELECT * FROM recipe;
+SELECT * FROM recipe\G
+\d recipe
+\d ingredient
+\d recipe_ingredient
+SELECT * FROM recipe_ingredient;
+SELECT * FROM recipe_ingredient;
+\d recipe_instruction;
+SELECT * FROM recipe;
+SELECT * FROM user;
+SELECT * FROM "user";
+\dt
+\d blog
+\d blog_post
+\d post_image
+\d recipe
+select * from recipe;
+\d recipe
+\d recipe_ingredient
+select * from recipe;
+\d recip
+\d recipe
+\d recipe_instruction
+\d unit
+ls
+ls
+SELECT * FROM ust;
+ls
+ls
+SELECT * FROM unit;
+select * from unit;
+DELETE * FROM units;
+DELETE FROM units;
+DELETE FROM unit;
+INSERT INTO unit (id, name, abbreviation, category, base_unit_id, conversion_factor) VALUES
+  (4, 'gram', 'g', 'Weight', 4, 1.0000),
+  (5, 'milligram', 'mg', 'Weight', 4, 0.0010),
+  (6, 'grain', 'grn', 'Weight', 4, 0.0648),
+  (7, 'scruple', 'scr', 'Weight', 4, 1.2960),
+  (8, 'dram', 'drm', 'Weight', 4, 3.8900),
+  (9, 'ounce', 'oz', 'Weight', 4, 28.3495),
+  (10, 'pound', 'lb', 'Weight', 4, 453.5924),
+  (11, 'kilogram', 'kg', 'Weight', 4, 1000.0000),
+  (12, 'milliliter', 'ml', 'Volume', 12, 1.0000),
+  (13, 'liter', 'L', 'Volume', 12, 1000.0000),
+  (14, 'teaspoon', 'tps', 'Volume', 12, 4.9300),
+  (15, 'tablespoon', 'tbs', 'Volume', 12, 9.8600),
+  (16, 'fluid ounce', 'floz', 'Volume', 12, 29.5700),
+  (17, 'cup', 'cup', 'Volume', 12, 236.5900),
+  (18, 'pint', 'pt', 'Volume', 12, 473.1800),
+  (19, 'quart', 'qt', 'Volume', 12, 946.3500),
+  (20, 'gallon', 'gal', 'Volume', 12, 3785.4100),
+  (21, 'servings', 'srv', 'Count', 21, 1.0000),
+  (22, 'each', 'ea', 'Count', 21, 1.0000),
+  (23, 'piece', 'pc', 'Count', 21, 1.0000),
+  (24, 'dozen', 'dz', 'Count', 21, 12.0000),
+  (25, 'millimeter', 'mm', 'Length', 25, 1.0000),
+  (26, 'centimeter', 'cm', 'Length', 25, 10.0000),
+  (27, 'inch', 'in', 'Length', 25, 25.4000),
+  (28, 'foot', 'ft', 'Length', 25, 304.8000),
+  (29, 'square centimeter', 'sqcm', 'Area', 29, 1.0000),
+  (30, 'square inch', 'sqin', 'Area', 29, 6.4516),
+  (31, 'square foot', 'sqft', 'Area', 29, 929.0300);
+SELECT * FROM unit;
+UPDATE recipe_ingredient SET unit_id = 17 WHERE unit_id = 2;
+DELETE FROM unit WHERE unit_id = 3;
+DELETE FROM unit WHERE unit_id = 3;
+DELETE FROM unit WHERE id = 2;
+DELETE FROM unit WHERE id = 3;
+UPDATE recipe SET unit_id = 23 WHERE unit_id = 3
+;
+UPDATE recipe SET unit_id = 23 WHERE unit_id = 3;
+UPDATE recipe SET serving_unit_id = 23 WHERE serving_unit_id = 3;
+DELETE FROM unit WHERE id = 3;
+DELETE FROM unit WHERE id = 1;
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ("Small", "Egg Weight", 1, 43), ("Medium", "Egg Weight", 1, 50), ("Large", "Egg Weight", 1, 57), ("Extra Large", "Egg Weight", 1, 64), ("Jumbo", "Egg Weight", 1, 71);
+SELECT * FROM unit;
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('small', 'Egg Size', 1, 43), ('medium', 'Egg Size', 1, 50), ('large', 'Egg Size', 1, 57), ('extra large', 'Egg Size', 1, 64), ('jumbo', 'Egg Size', 1, 71);
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('small', 's', 'Egg Size', 1, 43), ('medium', 'm', 'Egg Size', 1, 50), ('large', 'l', 'Egg Size', 1, 57), ('extra large', 'xl', 'Egg Size', 1, 64), ('jumbo', 'xxl', 'Egg Size', 1, 71);
+ALTER SEQUENCE unit_id_seq = 32;
+ALTER SEQUENCE unit_id_seq WITH 32;
+ALTER SEQUENCE unit_id_seq RESTART WITH 32;
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('small', 's', 'Egg Size', 1, 43), ('medium', 'm', 'Egg Size', 1, 50), ('large', 'l', 'Egg Size', 1, 57), ('extra large', 'xl', 'Egg Size', 1, 64), ('jumbo', 'xxl', 'Egg Size', 1, 71);
+SELECT * FROM unit
+;
+\d recipe
+\d recipe_ingredient
+\d recipe_instruction
+SELECT r.*
+FROM recipe r
+LEFT JOIN recipe_ingredient ri ON ri.recipe_id = r.id
+LEFT JOIN recipe_instruction rin ON rin.recipe_id = r.id
+WHERE ri.id IS NULL AND rin.id IS NULL;
+SELECT r.id
+FROM recipe r
+LEFT JOIN recipe_ingredient ri ON ri.recipe_id = r.id
+LEFT JOIN recipe_instruction rin ON rin.recipe_id = r.id
+WHERE ri.id IS NULL AND rin.id IS NULL;
+DELETE FROM recipe r
+WHERE NOT EXISTS (
+    SELECT 1 FROM recipe_ingredient ri WHERE ri.recipe_id = r.id
+)
+AND NOT EXISTS (
+    SELECT 1 FROM recipe_instruction rin WHERE rin.recipe_id = r.id
+);
+\d recipe
+\d recipe_ingredient
+\d blog_post
+\dt
+\d post+image
+\d post_image
+SELECT name FROM unit;
+SELECT name FROM unit WHERE name = 'serving';
+SELECT * FROM unit WHERE name = 'piece';
+INSERT INTO unit (name, cif (empty($ingredientData['name'])) {
+                throw new \Exception("Ingredient name cannot be empty.");
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) values ('serving', 'srv', 'Count', 21, 1.000);
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) values ('clove', 'clv', 'Count', 21, 1.000);
+\d item
+SELECT * FROM item WHERE name = "steak";
+SELECT * FROM item WHERE name LIKE 'steak';
+SELECT * FROM item WHERE name LIKE '%steak%';
+SELECT distinct(category) from item;
+SELECT name FROM item WHERE category = 'Animal foods'l;
+SELECT name FROM item WHERE category = 'Animal foods';
+SELECT name FROM item WHERE category = 'Animal foods' ORDER BY name;
+SELECT * FROM item WHERE name = "Cattle (Beef, Veal)"
+;
+SELECT * FROM item WHERE name = 'Cattle (Beef, Veal)';
+INSERT INTO item (name, description, scientific_name, subcategory, category, created_at, updated_at, fooddb_id) SELECT ('Steak', description, scientific_name, subcategory, category, created_at, updated_at, fooddb_id) FROM item WHERE id = 3474;
+INSERT INTO item (name, description, scientific_name, subcategory, category, created_at, updated_at, fooddb_id) SELECT ('Steak', "description", "scientific_name", "subcategory", "category", "created_at", "updated_at", "fooddb_id") FROM item WHERE id = 3474;
+INSERT INTO item (name, description, scientific_name, subcategory, category, created_at, updated_at, fooddb_id) SELECT 'Steak', "description", "scientific_name", "subcategory", "category", "created_at", "updated_at", "fooddb_id" FROM item WHERE id = 3474;
+SELECT * FROM item WHERE name = 'Cattle (Beef, Veal)';
+SELECT * FROM item WHERE name LIKE '%pepper%';
+SELECT id, name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at  FROM item WHERE name LIKE '%pepper%';
+SELECT id, name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at  FROM item WHERE name LIKE '%peppercorn%';
+SELECT distinct(subcategory) FROM item;
+SELECT distinct(subcategory) FROM item ORDER BY subcategory;
+SELECT distinct(subcategory) FROM item ORDER BY subcategory;
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ("White pepper", "Vegetables", "Piper nigrum", "Herbs and Species", 0, now(), now())
+;
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('White pepper', 'Vegetables', 'Piper nigrum', 'Herbs and Species', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Zucchini', 'Vegetables', 'Cucurbita pepo', 'Squashes', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Onion', 'Vegetables', 'Allium cepa', 'Onions', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Shiitake mushrooms', 'Vegetables', 'Lentinula edodes', 'Mushrooms', 0, now(), now());
+SELECT distinct(category) FROM item order by category;
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Mirin', 'Unclassified', null, 'Rice Wine', 0, now(), now());
+SELECT * FROM recipe;
+DELETE FROM recipe WHERE id = 54;
+DELETE FROM recipe WHERE id = 54;
+SELECT * FROM recipe;
+SELECT * FROM recipe_ingredient;
+SELECT * FROM recipe;
+SELECT * FROM recipe;
+DELETE FROM recipe_ingredient WHERE recipe_id = 76;
+DELETE FROM recipe_instruction WHERE recipe_id = 76;
+DELETE FROM recipe WHERE recipe_id = 76;
+DELETE FROM recipe WHERE id = 76;
+eixt
+eixt
+exit
+exitq
+\q
+SELECT * FROM item WHERE name like '%pank%';
+SELECT * FROM item WHERE name like '%pan%';
+SELECT name FROM item WHERE name like '%pan%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Panko breadcrumbs', 'Unclassified', null, 'Bread Crumbs', 0, now(), now());
+SELECT name FROM item WHERE name like '%egg%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Egg', 'Unclassified', null, 'Egg', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Eggs', 'Unclassified', null, 'Egg', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Eggs',Ras el hanoutlasHerbs and Spicesl, 'Herbs and Spices', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Ras el hanout', 'Herbs and Spices', '', 'Herbs and Spices', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Lemon zest', 'Fruits', '', 'Derivatives', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%oil%';
+SELECT name FROM item WHERE name LIKE '%chick%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Chickpeas', 'Vegetables', 'Cicer arietinum', 'Legumes', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%rais%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Golden raisin', category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE name = "Black raisin";
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Golden raisin', category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE name = 'Black raisin';
+SELECT id, name FROM item WHERE name LIKE '%oliv%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Green olive', 'Vegetables', 'Olea europaea', 'Olives', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%mint%';
+SELECT name FROM item WHERE name LIKE '%cilantro%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Mint', 'Vegetables', '', 'Herbs and Spices', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cilantro', 'Vegetables', '', 'Herbs and Spices', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%sheep%';
+SELECT name FROM item WHERE name LIKE '%lamb%';
+SELECT name FROM item WHERE category LIKE '%anim%';
+SELECT name FROM item WHERE category LIKE '%animal%';
+SELECT name FROM item WHERE subcategory LIKE '%animal%';
+SELECT name FROM item;
+SELECT distinct(category) FROM item;
+SELECT name FROM item WHERE subcategory LIKE '%Animal%';
+SELECT name FROM item WHERE category LIKE '%Animal%';
+SELECT name FROM item WHERE category LIKE '%Animal%' ORDER BY name;
+SELECT id, name FROM item WHERE category LIKE '%Animal%' ORDER BY name;
+UPDATE item SET name = 'Lamb' WHERE id = 4444;
+SELECT * FROM item WHERE name LIKE '%omat%';
+SELECT id, name FROM item WHERE name LIKE '%omat%';
+UPDATE item SET name = 'Tomato' WHERE id = 4142;
+SELECT id, name FROM item WHERE name LIKE '%ais%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Harissa', 'Vegetables', '', 'Herbs and Spices', 0, now(), now());
+SELECT id, name FROM item WHERE name LIKE '%live%';
+SELECT id, name FROM item WHERE name LIKE '%torti%';
+SELECT id, name FROM item WHERE name LIKE '%ime%';
+SELECT id, name FROM item WHERE name LIKE '%pepper%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Black pepper', category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE name = 'White pepper';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Chili powder', 'Vegetables', '', 'Herbs and Spices', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Lime juice', 'Fruits', '', 'Derivatives', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Chicken breast', category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE name = 'Chicken';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Flour tortillas', 'Grains', '', 'Tortillas', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Corn tortillas', 'Grains', '', 'Tortillas', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Corn tPork', 'Animal Products', 'Sus scrofa domesticus', 'Meat', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Pork', 'Animal Products', 'Sus scrofa domesticus', 'Meat', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cornstarch', 'unknown', '', 'Baking Goods', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cashews', 'unknown', 'Anacardium occidentale', 'Legumes', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Green Beans', 'Vegetables', 'Phaseolus vulgaris', 'Beans', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Chicken broth', 'Animal Products', 'Gallus gallus domesticus', 'Byproducts', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Green beans', 'Vegetables', 'Phaseolus vulgaris', 'Beans', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('White wine vinegar', 'unknown', '', 'Vinegar', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Mayonnaise', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Dijon mustard', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Garlic powder', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Lo mein noodeles', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Lo mein noodles', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Maggi liquid seasoning', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Scallions', 'Vegetables', '', 'Onions', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%cheese%';
+SELECT name FROM item WHERE name LIKE '%flour%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Bread flour', 'Baking Goods', '', 'Flour', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%yeast%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Yeast', 'Baking Goods', '', 'Flour', 0, now(), now());
+SELECT name FROM item WHERE name LIKE '%flakes%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Red pepper flakes', 'unkown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Provoline cheese', 'unkown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Provolone cheese', 'unkown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Oregano', 'unkown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Green olives', 'unkown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cider vinegar', 'unknown', '', 'Vinegar', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Goat cheese', 'Animal Products', '', 'Cheese', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Mesclun', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Baby spinach', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Paprika', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Barbecue sauce', 'unknown', '', 'unknown', 0, now(), now());
+SELECT * FROM item WHERE name = "Steak";
+SELECT * FROM item WHERE name LIKE '%steak%';
+SELECT * FROM item WHERE name LIKE '%beef%';
+SELECT * FROM item WHERE name LIKE '%cow%';
+SELECT * FROM item WHERE name LIKE '%%';
+SELECT id, name FROM item WHERE name LIKE '%%';
+SELECT id, name FROM item WHERE name LIKE '%beef%';
+SELECT id, name FROM item WHERE name LIKE '%bef%';
+SELECT id, name FROM item WHERE name LIKE '%%';
+SELECT id, name FROM item WHERE name LIKE '%sh%';
+SELECT id, name FROM item WHERE name LIKE '%ste%';
+SELECT id, name FROM item WHERE category LIKE '%animal%';
+SELECT id, name FROM item WHERE category LIKE '%Animal%';
+SELECT id, name FROM item WHERE lower(name) LIKE '%beef%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Filet mignon',  scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE id = 3474;
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Filet mignon',  category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE id = 3474;
+SELECT id, name FROM item WHERE lower(name) LIKE '%lemon%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Lemon juice',  category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE id = 3033;
+SELECT id, name FROM item WHERE lower(name) LIKE '%scallion%';';
+;;
+SELECT id, name FROM item WHERE lower(name) LIKE '%lemon%';
+SELECT id, name FROM item WHERE lower(name) LIKE '%scallion%';';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Scallion',  category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE id = 5012;
+SELECT id, name FROM item WHERE lower(name) LIKE '%scallion%';
+'
+;
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) SELECT 'Scallion',  category, scientific_name, subcategory, fooddb_id, created_at, updated_at FROM item WHERE id = 5012;
+SELECT id, name FROM item WHERE lower(name) LIKE '%salmon%';
+SELECT * FROM unit WHERE name = 'Each';
+SELECT * FROM unit WHERE name = 'each';
+SELECT * FROM unit WHERE id = 21;
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('Slice', 'slc', 'Count', 21, 1.0);
+UPDATE unit SET name = 'slice' WHERE name = 'Slice';
+SELECT id, name FROM item WHERE lower(name) LIKE '%milk%';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Pancetta', 'Animal products', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Mascarpone cheese', 'Animal products', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Pecorino Romano cheese', 'Animal products', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Basic', 'Vegetables', 'Herbs and spices', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Basil', 'Vegetables', 'Herbs and spices', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Penne', 'unknown', 'Pasta', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Farro', 'unknown', 'Pasta', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Feta cheese', 'unknown', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Sugar snap  peas', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Sugar snap peas', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cherry tomatoes', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Apples', 'Fruits', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Raisins', 'Fruits', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Blueberries', 'Fruits', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Tapioca', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Pie dough', '', '', 'unknown', 0, now(), now());
+SELECT * FROM unit WHERE id = 21;
+SELECt * FROM unit WHERE category = 'Volume';
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('Pinch', 'pch', 'Volume', 12, 0.6161);
+SELECT * FROM unit WHERE category = 'Volume';
+UPDATE unit SET name = 'pinch' WHERE name = 'Pinch';
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('Recipe', 'rcp', 'Count', 21, 1.000);
+UPDATE unit SET name = 'recipe' WHERE name = 'Recipe';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Strawberries', 'Fruits', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Rhubarb', 'Fruits', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Vegetable shortening', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Guanciale', 'Pasta', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Spaghetti', 'Pasta', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Bell pepper', 'Vegetables', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Tuna', 'Meat', '', 'unknown', 0, now(), now());
+INSERT INTO unit (name, abbreviation, category, base_unit_id, conversion_factor) VALUES ('filet', 'flt', 'Count', 21, 1.000);
+UPDATE unit SET name = 'fillet' WHERE name = 'filet';
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Tomato sauce', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Italian seasoning', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Tomato paste', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Fennel seeds', '', '', 'unknown', 0, now(), now());
+INSERT INTO item (name, category, scientific_name, subcategory, fooddb_id, created_at, updated_at) VALUES ('Cornmeal', '', '', 'unknown', 0, now(), now());
+ls
+show
+;
+show table'
+;
+';
+show table;
+\dt
+/dt
+\dt
+\dt
+SELECT * FROM sites;
+SELECT * FROM sites;
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '5 minutes';
+SELECT pg_terminate_backend(716);
+SELECT pg_terminate_backend(716);
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '5 minutes';
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '15 minutes';
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '30 minutes';
+\dt
+l\dt page
+l\dt sites
+\d sites
+\dt
+exit
+exit;
+\dt
+create table schema_subscriber_check_571c4cab63b941;
+\dt
+pd page
+\d page
+\d page
+SELECT * FROM site;
+SELECT * FROM sites;
+\d
+\dt
+SELECT
+  pid,
+  now() - pg_stat_activity.query_start AS duration,
+  query,
+  state
+FROM pg_stat_activity
+WHERE (now() - pg_stat_activity.query_start) > interval '15 minutes';
+SELECT * FROM pg_stat_activity;
+\d pg_stat_activity;
+SELECT pid, usename. application_name, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity;
+SELECT pid, usename, application_name, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity;
+SELECT pid, usename, application_name, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity;
+SELECT pid, usename, application_name, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity WHERE usename  = 'app';
+SELECT pid, usename, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity WHERE usename  = 'app';
+SELECT pid, usename, now() - pg_stat_activity.query_start AS duration, query FROM pg_stat_activity WHERE usename  = 'app';
+ls
+\dt
+\dt
+\dn
+\dnS
+SET search_path TO site_test;
+SET search_path TO site_test;
+\dt
+SET search_path TO site_4;
+\dt
+\d
+SET search_path TO public
+;
+\dt
+SELECT * FROM site;
+SELECT * FROM sites;
+SELECT * FROM user_site;
+DROP SCHEMA site_test;
+\dn
+DELETE FROM sites WHERE name !="quark";
+DELETE FROM sites WHERE name = "test";
+DELETE FROM sites WHERE name = "test";
+DELETE FROM sites WHERE name = `test`;
+DELETE FROM sites WHERE name = 'test';
+DELETE FROM sites WHERE name = 'zzz';
+SELECT sess_data
+  FROM sessions;
+\d sessions
+SELECT sess_id FROM sessions;
+SELECT * FROM user;
+SELECT * FROM sites;
+ls
+\d
+\dt
+SELECT * FROM user_site;
+SELECT * FROM user_site;
+SELECT * FROM sites;
+SELECT * FROM user;
+\d user;
+SELECT session_data FROM sessions LIMIT 1;
+SELECT sess_data FROM sessions LIMIT 1;
+\d sessions;
+SELECT * FROM user;
+desc user;
+SHOW search_path;
+SELECT * FROM "user";
+\d user_site;
+SELECT * FROM site;
+SELECT * FROM sites;
+INSERT (user_id, site_id) INTO user_site VALUES (6, 4);
+INSERT INTO user_site VALUES (6, 4);
+SET search_path = 'site_4';
+\d
+CREATE TABLE IF NOT EXISTS site_4.page (
+  id             INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  title          VARCHAR(255)      NOT NULL,
+  slug           VARCHAR(255)      NOT NULL,
+  data           JSONB             NOT NULL,
+  is_published   BOOLEAN           NOT NULL,
+  created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  updated_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  page_type      VARCHAR(255)      NOT NULL
+);
+\dt
+\d page
+SELECT * FROM public.sites
+;
+SELECT * FROM public.page;
+SELECT * FROM page;
+SELECT * FROM public.user;
+INSERT INTO public.user (username, name, email, is_verified, created_at, updated_at, last_login, password) SELECT "public", "Public User", email, is_verified, created_at, updated_at, last_login, password FROM public.user;
+INSERT INTO public.user (username, name, email, is_verified, created_at, updated_at, last_login, password) SELECT 'public', 'Public User', email, is_verified, created_at, updated_at, last_login, password FROM public.user;
+SELECT * FROM public.user;;
+INSERT INTO public.user (username, name, email, is_verified, created_at, updated_at, last_login, password, roles) SELECT 'public', 'Public User', email, is_verified, created_at, updated_at, last_login, password, roles FROM public.user;
+INSERT INTO public.user (username, name, email, is_verified, created_at, updated_at, last_login, password, roles) SELECT 'public', 'Public User', 'nobody@gregishere.com', is_verified, created_at, updated_at, last_login, password, roles FROM public.user;
+';
+';
+SET search_path = 'site_5';
+CREATE TABLE IF NOT EXISTS site_4.page (                                                                                                                               id             INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                           title          VARCHAR(255)      NOT NULL,                                                                                                                                 slug           VARCHAR(255)      NOT NULL,                                                                                                                                 data           JSONB             NOT NULL,                                                                                                                                 is_published   BOOLEAN           NOT NULL,                                                                                                                                 created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       updated_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       page_type      VARCHAR(255)      NOT NULL                                                                                                                                );
+SELECT * FROM page;
+SHOW search_path;
+\d
+CREATE TABLE IF NOT EXISTS site_5.page (                                                                                                                               id             INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                           title          VARCHAR(255)      NOT NULL,                                                                                                                                 slug           VARCHAR(255)      NOT NULL,                                                                                                                                 data           JSONB             NOT NULL,                                                                                                                                 is_published   BOOLEAN           NOT NULL,                                                                                                                                 created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       updated_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       page_type      VARCHAR(255)      NOT NULL                                                                                                                                );
+CREATE SCHEMA site_5;
+CREATE TABLE IF NOT EXISTS site_5.page (                                                                                                                               id             INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                           title          VARCHAR(255)      NOT NULL,                                                                                                                                 slug           VARCHAR(255)      NOT NULL,                                                                                                                                 data           JSONB             NOT NULL,                                                                                                                                 is_published   BOOLEAN           NOT NULL,                                                                                                                                 created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       updated_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       page_type      VARCHAR(255)      NOT NULL                                                                                                                                );
+SELECT * FROM public.sites;
+ CREATE SCHEMA site_6;
+CREATE TABLE IF NOT EXISTS site_6.page (                                                                                                                               id             INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                           title          VARCHAR(255)      NOT NULL,                                                                                                                                 slug           VARCHAR(255)      NOT NULL,                                                                                                                                 data           JSONB             NOT NULL,                                                                                                                                 is_published   BOOLEAN           NOT NULL,                                                                                                                                 created_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       updated_at     TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                       page_type      VARCHAR(255)      NOT NULL                                                                                                                                );
+\d
+\dt
+SET search_path = 'site_6';
+SELECT * FROM page;
+\d public.user_sites;
+\d public.user_site;
+INSERT INTO public.user_site VALUES (7, 6);
+SELECT * FROM public.user;
+INSERT INTO public.user_site VALUES (3, 6);
+SELECT * FROM page;
+SET search_path = 'public';
+\dt
+\dt
+\d content
+\dn
+\dn
+SELECT * FROM public.sites;
+SELECT * FROM public.sites;
+DELETE FROM public.sites WHERE name = 'hungry';
+\dn
+SELECT * FROM public.sites;
+\dn
+use site_9
+;
+SET search_url = 'site_9';
+SET search_path = 'site_9';
+\dt
+\d category
+\dn
+SET search_path = 'public';
+SET search_path = 'site_4';
+SELECT * FROM category;
+SELECT * FROM page;
+SELECT * FROM pages;
+\d
+\dt
+use public;
+SET search_path = 'public';
+SELECT * FROM user_site;
+SELECT * FROM category;
+SELECT * FROM pages;
+SELECT * FROM page;
+SELECT schema FROM category WHERE id = 1;
+SELECT schema FROM category WHERE id = 2;
+set search_path = 'site_4';
+SELECT schema FROM category WHERE id = 1;
+\dt
+\d
+\d
+\dt
+\dn
+\dt
+\d
+set search_path = 'public';
+\dt
+set search_path = 'site_4';
+\dt
+set search_path = 'public';
+SELECT * FROM category;¬
+SHOW search_path
+;
+SHOW search_path;
+\dt
+SELECT * FROM pages;
+SELECT * FROM page;
+SELEVT * FROM category;
+SELEC * FROM category;
+SELECT * FROM category;
+SELECT * FROM site_4.category;
+SELECT * FROM site_5.category;
+\dns;
+SELECT * FROM site_6.category;
+SELECT * FROM site_7.category;
+SELECT * FROM site_9.category;
+SELECT * FROM sites;
+DROP schema site_9
+;
+\dns;
+DROP schema site_9 cascade;
+DROP schema site_5 cascade;
+DROP schema site_4 cascade;
+DROP schema site_9 cascade;
+DROP schema site_10 cascade;
+\dns
+SHOW search_path;
+DELETE FROM sites;
+SELECT * FROM site;
+SELECT * FROM sites;
+SELECT * FROM user_sites;
+SELECT * FROM user_site;
+SELECT * FROM "user";
+INSERT INTO user (username, name, email, is_verfied, created_at, updated_at, last_login, password, roles) SELECT 'inseam', 'Inseam', 'inseam@gregishere.com', is_verfied, created_at, updated_at, last_login, password, roles);
+INSERT INTO user (username, name, email, is_verfied, created_at, updated_at, last_login, password, roles) SELECT 'inseam', 'Inseam', 'inseam@gregishere.com', is_verfied, created_at, updated_at, last_login, password, roles) WHERE name = 'Greg';
+INSERT INTO "user" (username, name, email, is_verfied, created_at, updated_at, last_login, password, roles) SELECT 'inseam', 'Inseam', 'inseam@gregishere.com', is_verfied, created_at, updated_at, last_login, password, roles) WHERE name = 'Greg';
+INSERT INTO "user" (username, name, email, is_verfied, created_at, updated_at, last_login, password, roles) SELECT 'inseam', 'Inseam', 'inseam@gregishere.com', is_verfied, created_at, updated_at, last_login, password, roles FROM "user" WHERE name = 'Greg';
+INSERT INTO "user" (username, name, email, is_verified, created_at, updated_at, last_login, password, roles) SELECT 'inseam', 'Inseam', 'inseam@gregishere.com', is_verified, created_at, updated_at, last_login, password, roles FROM "user" WHERE name = 'Greg';
+SELECT * FROM user;
+SELECT * FROM "user";
+SELECT * FROM user_site;
+INSERT INTO user_site VALUES (4, 11);
+SELECT * FROM public.page;
+SELECT * FROM schema_11.page;
+SHOW search_path;
+SELECT * FROM page;
+DELETE FROM page;
+fSELECT * FROM page;
+SELECT * FROM page;
+SELECT * FROM page;
+SHOW search_path;
+SELECT * FROM page;
+SELECT * FROM site_11.page;
+SELECT * FROM site_11'.page;
+';
+;
+;
+SELECT * FROM 'site_11'.page;
+SELECT * FROM "site_11".page;
+\dn
+SELECT * FROM sites;
+SELECT * FROM users;
+SELECT * FROM "user";
+\dn site_
+\dn site_6
+\dns site_6
+\dt site_6
+\dd site_6
+set search_path site_6
+\dt
+show search_path;
+show search_path;
+ set search_path site_6;
+set search_path = site_6;
+\dt
+set search_path = public;
+\dt
+SELECT * FROM sites;
+DROP schema_site_6;
+DROP schema site_6;
+CREATE SCHEMA IF NOT EXISTS site_11;
+CREATE TABLE IF NOT EXISTS $schemaName.page (                                                                                                           
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  title VARCHAR(255) NOT NULL,                                                                                                                          
+                                  slug VARCHAR(255) NOT NULL,                                                                                                                           
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  is_published BOOLEAN NOT NULL,                                                                                                                        
+                                  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  page_type VARCHAR(255) NOT NULL
+;
+);
+CREATE TABLE IF NOT EXISTS $schemaName.page (                                                                                                           
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  title VARCHAR(255) NOT NULL,                                                                                                                          
+                                  slug VARCHAR(255) NOT NULL,                                                                                                                           
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  is_published BOOLEAN NOT NULL,                                                               );
+CREATE TABLE IF NOT EXISTS page (                                                                                                           
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  title VARCHAR(255) NOT NULL,                                                                                                                          
+                                  slug VARCHAR(255) NOT NULL,                                                                                                                           
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  is_published BOOLEAN NOT NULL,                                                                                                                        
+                                  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  page_type VARCHAR(255) NOT NULL                                                                                                                       
+                                );
+SHOW search_path;
+SET search_path = 'site_11';
+CREATE TABLE IF NOT EXISTS page (                                                                                                           
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  title VARCHAR(255) NOT NULL,                                                                                                                          
+                                  slug VARCHAR(255) NOT NULL,                                                                                                                           
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  is_published BOOLEAN NOT NULL,                                                                                                                        
+                                  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  page_type VARCHAR(255) NOT NULL                                                                                                                       
+                                );
+CREATE TABLE IF NOT EXISTS category (                                                                                                                             
+            id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                                        
+            name VARCHAR(255) NOT NULL,                                                                                                                                                 
+            description TEXT NOT NULL,                                                                                                                                                  
+            schema JSONB NOT NULL,                                                                                                                                                      
+            created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                                            
+            updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL                                                                                                                             
+              );
+CREATE TABLE IF NOT EXISTS content (                                                                                                        
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  category_id INT NOT NULL,                                                                                                                             
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  CONSTRAINT fk_content_category FOREIGN KEY (category_id)                                                                                              
+                                    REFERENCES $schemaName.category(id)                                                                                                                 
+                                    ON DELETE CASCADE                                                                                                                                   
+                                );
+CREATE TABLE IF NOT EXISTS category (                                                                                                        
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  category_id INT NOT NULL,                                                                                                                             
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,                                                                                                      
+                                  CONSTRAINT fk_content_category FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE                                                                                                                                   
+                                );
+\d
+\dt
+\d category
+CREATE TABLE IF NOT EXISTS revision (                                                                                                       
+                                  id INT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,                                                                                                  
+                                  table_name VARCHAR(255) NOT NULL,                                                                                                                     
+                                  data JSONB NOT NULL,                                                                                                                                  
+                                  archived_at TIMESTAMP WITHOUT TIME ZONE NOT NULL                                                                                                      
+                                );
+SET search_path = public;
+SET search_path = site_11;
+INSERT INTO category SELECT * FROM public.category;
+INSERT INTO page SELECT * FROM public.page;
+DELETE FROM public.category;
+DELETE FROM public.page;
+\d page;
+SHOW search_path;
+SELECT * FROM page;
+SELECT * FROM public.page;
+SELECT FROM public.user;
+SELECT id, username FROM public.user;
+SELECT id, username FROM public.user_site;
+SELECT FROM public.user;
+SELECT id, username FROM public.user_site;
+SELECT id,username FROM public.user;
+SELECT * FROM public.user_site;
+DELETE FROM site_11.page;
+INSERT INTO site_11.page SELECT * FROM public.page;
+SELECT * FROM public.user;
+SELECT id, slug, is_published FROM site_11.page;
+\dt pst
+\dt post
+\dt blog_post
+\d blog_post
+\dt recipient
+\d recipient
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+\dt
+drop table sites;
+drop table sites cascade;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+DELETE FROM invite_log WHERE id = 6;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log WHERE event = "Said yes";
+SELECT * FROM invite_log WHERE event = 'Said yes';
+SELECT * FROM invite_log WHERE event = 'Said yes';
+\d
+SELECT * FROM "user";
+USE app;
+\connect app;
+\connect app;
+source data.dump
+;
+SELECT * FROM recipe;
+\connect app
+SELECT * FROM recipe;
+SELECT * FROM "user";
+SELECT * FORM blog_post;
+SELECT * FROM blog_post;
+\dt
+\dt
+select COUNT(*) from information_schema.columns;
+select COUNT(*) from information_schema.columns group by information_schema.columsn.table_name
+;
+select table_name, COUNT(*) from information_schema.columns group by information_schema.columns.table_name;
+SELECT * FROM recipe;
+SELECT * FROM "recipe";
+\d
+\;
+\l
+\connect app
+SELECT * FROM "recipe";
+use app;
+\connect main
+desc information_schema.columns;
+\df information_schema.columns;
+select schema_name, table_name, COUNT(*) from information_schema.columns group by information_schema.columns.table_name;
+select schema, table_name, COUNT(*) from information_schema.columns group by information_schema.columns.table_name;
+SELECT * FROM item;
+SELECT * FORM unit;
+SELECT * FROM unit;
+COPY public."user" (id, username, name, email, is_verified, created_at, updated_at, last_login, password, roles) FROM stdin;
+sELECT * FROM "user";
+COPY public."user" (id, username, name, email, is_verified, created_at, updated_at, last_login, password, roles) FROM stdin;
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]');
+\d "user";
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '["ROLE_ADMIN"]'), '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', 'katzen_user');
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '["ROLE_ADMIN"]', '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', 'katzen_user');
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', 'katzen_user');
+INSERT INTO "user" VALUES (1, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', 'profile_user');
+INSERT INTO "user" VALUES (1, 'gerg', 'Greg', 'gregory.suehr@gmail.com', false, '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', 'profile_user');
+INSERT INTO "user" VALUES (1, 'gerg', 'Greg', 'greg.suehr@gmail.com', false, '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', '2025-03-11 12:54:5', '2025-03-11 12:54:59', '2025-03-11 12:54:59', 'profile_user');
+\dt
+SELECT * FROM profile_user;
+SELECT * FROM profile_user_site;
+SELECT * FROM sites;
+SELEC T* FROM user;
+SELECT * FROM user;
+SELECT * FROM "user";
+SELECT * FROM profile_user;
+INSERT INTO profile_user_site (1, 11);
+INSERT INTO profile_user_site VALUES (1, 11);
+INSERT INTO profile_user VALUES (1);
+INSERT INTO profile_user_site (1, 11);
+INSERT INTO profile_user_site VALUES (1, 11);
+SELECT * FROM doctrine_migration_versions 
+;
+\connect main
+drop database app;
+create database app;
+SELECT * FROM "user";
+SELECT * FROM "profile_user";
+\connect main
+drop database app;
+create database app;
+COPY public."user" (id, username, name, email, is_verified, created_at, updated_at, last_login, password, roles, dtype) FROM stdin;
+COPY public."user" (id, username, name, email, is_verified, created_at, updated_at, last_login, password, roles, dtype) FROM stdin;
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '2025-03-11 12:54:59', '2025-03-11 12:54:59', '2025-03-11 12:54:59', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', 'katzen_user');
+INSERT INTO "user" VALUES (6, 'greg', 'Greg', 'gregory.suehr@gmail.com', false, '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', '["ROLE_ADMIN"]', '2025-03-11 12:54:59', '2025-03-11 12:54:59', '2025-03-11 12:54:59', 'katzen_user');
+SELECT * FROM profile_user;
+INSERT INTO profile_user VALUES (6);
+INSERT INTO katzen_user VALUES (6);
+DELETE FROM profile_user;
+\dt
+\df item
+\dt item
+if recipe
+\d recipe
+\d item
+\dt
+\dn
+\dnS
+\dt
+\d item
+\d recipe
+\d recipe
+\d- recipe
+\dv recipe
+\d
+\d
+\d?
+\?
+\d recipe
+\d recipe_list
+\d tag
+\d recipe_list
+\tag
+\d
+\recipe_list
+\d recipe_list
+\d tag
+\d recipe_list
+\d recipe_list_recipe
+\d tag
+\d recipe
+ALTER TABLE recipe_list ALTER COLUMN archived_at DROP NOT NULL;
+\d recipe_list
+\d recipe_list
+\d recipe
+SELECT * FROM recipe;
+SELECT * FROM recipe_lists;
+SELECT * FROM recipe_lists;
+SELECT * FROM recipe_list;
+\d recipe_list;
+ALTER TABLE recipe_list ALTER COLUMN archived_at DROP NOT NULL;
+\d recipe_list;
+SELECT * FROM recipe_list;
+SELECT * FROM recipe_list_recipe;
+SELECT * FROM recipe_list;
+SELECT * FROM tags;
+SELECT * FROM tag;
+\dt
+SELECT * FROM invite_log;
+SELECT count(*) FROM invite_log;
+SELECT count(*) FROM invite_log WHERE event = 'Said yes';
+SELECT count(*) FROM invite_log WHERE event = 'Said yes' OR event = 'Said no';
+SELECT * FROM invite_log WHERE event = 'Said yes' OR event = 'Said no';
+CREATE table ( code VARCHAR(255), name VARCHAR(255));
+CREATE table code_name (code VARCHAR(255), name VARCHAR(255)); CREATE INDEX idx_cd ON code_name (code);
+SELECT * FROM invite_log;
+SELECT count(*) FROM invite_log ;
+SELECT count(*) FROM invite_log JOIN code_name USING (code);
+INSERT INTO code_name VALUES ('2FEECE','Chris Adrion'),('A28423','Nick Jorgenson'),('E3A3FE','Marc Morris'),('7B5CB8','Josh Krytek'),('26926D','Michael Flickinger'),('DCF9ED','Kimberly Holdsworth'),('CEFA3B','John Cominitski'),('82F938','C.J. Haught'),('DDD53F','Chip Mace'),('674314','Noah Neal'),('A2C1D6','Alex ?'),('E9ADB5','Nick Mulvay'),('04483E','Logan White'),('7300B8','Matt Haupt'),('4D34A7','Max Muzik'),('CCDF72','Todd ?'),('0D4EA3','Aaron'),('B62E74','Sasha'),('BF5C0E','Trevor'),('0C3765','Brian Van Wormer'),('2A88B7','Sawyer Bressler'),('854702','Nicholas Suarez'),('35325F','Brandon Contin'),('346BBF','Luke Stamas'),('362349','Jess Deschutner'),('95628D','Marc Palombo'),('1D1DE8','M.A.C.'),('03F606','Zoie Sebreah'),('142A86','Sarah Kobuck'),('6CB708','LK'),('E329E3','Jay Chapman'),('3EA547','Julia Palisoto'),('93C5DD','Gabby Wilson'),('C132BB','Daniel Schrauder'),('D6C348','Shelby ?'),('B961BE','Erik Molino'),('DCC3ED','Veda ?'),('ED3F02','Aaron Swoger'),('A22D29','Samson'),('588876','Taylor Mickey'),('E6F266','Clarissa'),('BC1DDF','MC Carder'),('8ACD3C','A.J.'),('8ACD3D','Delana'),('2D40FA','Sela'),('99D511','Olivia'),('330DD8','Garrett'),('959D81','Graham'),('8EEAAE','Grace'),('154F92','Dallas'),('4594AA','Tanner'),('8318E2','Kristin Suehr'),('81C73D','Noah Suehr'),('346B58','Theresa Suehr'),('EFEC6C','Megan Daniel'),('135515','DeDe'),('46AF0A','LaNyse'),('E6521B','Caitlin Miller'),('9F0CE2','Nicole Smith'),('4A3010','Brian Daniel'),('746438','Butchie Daniel'),('7418FB','Jonathon Daniel'),('029F55','Jesse Lubert'),('3E9B0C','Aunt Bessi'),('80AD66','Aunt Deni'),('1EC530','Aunt Nana'),('DBA389','Uncle Chris'),('B26CD9','Uncle Kevin'),('A5525C','Samantha Jakiel')
+;
+SELECT count(*) FROM invite_log JOIN code_name USING (code);
+SELECT count(*) FROM invite_log LEFT JOIN code_name USING (code);
+UPDATE invite_log JOIN code_name USING (code) SET invite_log.name = code_name.name;
+UPDATE invite_log JOIN code_name USING (code) SET invite_log.name = code_name.name;
+UPDATE invite_log l SET l.name = c.name FROM code_name c WHERE l.code = c.code;
+UPDATE invite_log l SET name = c.name FROM code_name c WHERE l.code = c.code;
+SELECT * FROM invite_log WHERE event = 'Said yes' OR event = 'Said no';
+SELECT * FROM invite_log WHERE event = 'Said yes' OR event = 'Said no';
+SELECT * FROM invite_log;
+UPDATE invite_log l SET l.name = c.name FROM code_name c WHERE l.code = c.code;
+UPDATE invite_log l SET name = c.name FROM code_name c WHERE l.code = c.code;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log ORDER BY timestamp;
+SELECT * FROM invite_log WHERE event = 'said yes';
+\df recipe_list
+\d recipe_list
+SELECT * FROM tag;
+\d
+\dt
+\d invite_log
+SELECT * FROM recipe_tag;
+SELECT * FROM tag;
+\d
+DELETE FROM doctrine_migration_versions;
+\df tag;
+\d tag;
+SELECT * FROM recipe_tag;
+SELECT * FROM tag;
+ALTER TABLE tag ADD COLUMN obj_id INTEGER DEFAULT 0 NOT NULL;
+SELECT * FROM tag;
+SELECT * FROM recipe_list;
+UPDATE recipe_tag SET obj_id = 2 WHERE id <= 3;
+UPDATE tag SET obj_id = 2 WHERE id <= 3;
+UPDATE tag SET obj_id = 3 WHERE id >3;
+ALTER TABLE tag ALTER COLUMN obj_id DROP DEFAULT;
+\d tag;
+SELECT * FROM recipe_tag
+;
+SELECT * FROM tag;
+UPDATE tag SET value = 'active' WHERE value = 'Active';
+SELECT * FROM recipe_list_items;
+SELECT * FROM recipe_list_recipes;
+SELECT * FROM recipe_list_recipe;
+SELECT * FROM tag;
+UPDATE tag SET value = 'active' WHERE type = 'status';
+SELECT * FROM recipe_list;
+SELECT count(*) FROM invite_log;
+SELECT * FROM invite_log;
+UPDATE invite_log l SET l.name = c.name FROM code_name c WHERE l.code = c.code;
+UPDATE invite_log l SET name = c.name FROM code_name c WHERE l.code = c.code;
+SELECT * FROM invite_log;
+SELECT * FROM invite_log ORDER BY timestamp;
+ exit
+exit;
+exit();
+\d
+\dt
+\dt
+SELECT * FROM doctrine_migration_versions;
+DELETE FROM doctrine_migration_versions;
+SELECT * FROM katzen_user;
+\dt
+SELECT * FROM author;
+SELECT * FROM user;
+SELECT * FROM 'user';
+SELECT * FROM "user";
+\dt
+SELECT * FROM user;
+SELECT * FROM "user";
+SELECT * FROM sites;
+\dt
+\d recipe
+\d recipe_ingredient
+SELECT * FROM tags;
+SELECT * FROM tag;
+SELECT * FROM tags;
+SELECT * FROM tag;
+SELECT * FROM tag WHERE tag.type = 'menu' AND tag.value = 'current';
+SELECT * FROM tag WHERE tag.type = 'menu' AND tag.value = 'current';
+SELECT menu.* FROM tag JOIN menu ON (tag.obj_id = menu.id) WHERE tag.type = 'menu' AND tag.value = 'current'
+;
+SELECT menu.* FROM tag JOIN recipe_list AS menu ON (tag.obj_id = menu.id) WHERE tag.type = 'menu' AND tag.value = 'current'
+;
+SELECT menu.* FROM tag JOIN recipe_list AS menu ON (tag.obj_id = menu.id) WHERE tag.type = 'menu' AND tag.value = 'current'
+;
+SELECT * FROM tag;
+UPDATE tag SET value = '' WHERE id = 1;
+SELECT * FROM order;
+SELECT * FROM "order";
+SELECT * FROM order_items;
+SELECT * FROM order_item;
+SELECT * FROM order_items;
+SELECT * FROM order_item;
+SELECT * FROM order_item;
+SELECT * FROM order_item;
+SELECT * FROM order_item;
+SELECT * FROM order_item;
+SELECT * FROM order_item;
+SELECT * FROM "ordder";
+SELECT * FROM "order";
+DELETE FROM "order" WHERE id IN (1,4)
+DELETE FROM "order";
+DELETE FROM "order";
+DELETE FROM "order_item";
+DELETE FROM "order";
+\dt recipe
+\d recipe
+\d item
+\d
+\dt
+SELECT * FROM doctrine_migration_versions;
+SELECT * FROM doctrine_migration_versions;
+INSERT INTO doctrine_migration_versions (version, executed_at, execution_time) VALUES ('DoctrineMigrationsVersion20250725201422'. '2025-07-25 20:15:12', 112);
+INSERT INTO doctrine_migration_versions (version, executed_at, execution_time) VALUES ('DoctrineMigrationsVersion20250725201422', '2025-07-25 20:15:12', 112);
+SELECT * FROM doctrine_migration_versions;
+UPDATE doctrine_migration_versions SET version = 'DoctrineMigrations\\Version20250725201422' WHERE execution_time = 112;
+SELECT * FROM doctrine_migration_versions;
+UPDATE doctrine_migration_versions SET version = 'DoctrineMigrations\Version20250725201422' WHERE execution_time = 112;
+SELECT * FROM doctrine_migration_versions;
+SELECT * FROM stock_target
+;
+SELECT * FROM stock_target
+;
+SELECT * FROM stock_target
+;
+SELECT * FROM stock_target
+;
+SELECT * FROM stock_target
+;
+qexit
+exit;
+\d stock_transaction;
+SELECT * FROM stock_transactions;
+SELECT * FROM stock_transaction;
+DELETE FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+\d
+\dt
+SELECT * FROM messenger_messages;
+SELECT * FROM messenger_messages;
+SELECT * FROM messenger_messages;
+SELECT * FROM messenger_messages;
+SELECT * FROM messenger_messages;
+DELETE FROM messenger_messages;
+SELECT * FROM stock_transactions;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+\d messenger_messages;
+SELE CT id, queue_name, created_at FROM messenger_messages;
+SELECT id, queue_name, created_at FROM messenger_messages;
+SELECT id, queue_name, created_at FROM messenger_messages;
+SELECT * FROM stock_target;
+SELECT * FROM item WHERE id = 5011;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_target;
+SELECT * FROM stock_target WHERE item_id = 5011;
+SELECT * FROM stock_target WHERE item_id = 5012;
+\d stock_target;
+SELECT * FROM stock_target WHERE item_id = 4098;
+SELECT * FROM stock_target WHERE item_id = 4980;
+SELECT * FROM stock_target WHERE id = 4980;
+SELECT * FROM recipe_ingredient;
+SELECT * FROM recipe_ingredient WHERE supply_id = 4980;
+SELECT * FROM item WHERE item_id = 4980;
+SELECT * FROM item WHERE id = 4980;
+SELECT * FROM item  stock_target JOIN ON (item_id = item.id) WHERE item.id = 4980;
+SELECT * FROM item  stock_target JOIN item ON (item_id = item.id) WHERE item.id = 4980;
+\d stock_target;
+SELECT * FROM stock_target JOIN item ON (item_id = item.id) WHERE item.id = 4980;
+HIUB 
+JOIN * FROM stock_target WHERE item_id = 4980;
+SELECT * FROM  stock_target WHERE item_id = 4980;
+SELECT * FROM recipe WHERE title = 'Spaghetti Carbonara';
+SEEECT * FROM recipe_ingredient WHERE recipe_id = 123;
+SELECT * FROM recipe_ingredient WHERE recipe_id = 123;
+SELECT * FROM stock_targer WHERE item_id IN (4980, 4588, 4011, 4618, 5048, 4880, 5049);
+SELECT * FROM stock_target WHERE item_id IN (4980, 4588, 4011, 4618, 5048, 4880, 5049);
+INSERT INTO stock_target (name, current_qty, status, item_id) VALUES ('Egg', 0.00, 'OK', 4980);
+SELECT * FROM item WHERE id = 5048;
+INSERT INTO stock_target (name, current_qty, status, item_id) VALUES ('Guanciale', 0.00, 'OK', 5048);
+;
+SELECT * FROM item WHERE id = 5042l;
+SELECT * FROM item WHERE id = 5042;
+INSERT INTO stock_target (name, current_qty, status, item_id) VALUES ('Blueberries', 0.00, 'OK', 5042);
+SELECT * FROM item WHERE id = 4076;
+INSERT INTO stock_target (name, current_qty, status, item_id) VALUES ('Apple', 0.00, 'OK', 4076);
+SELECT * FROM item WHERE id = 5043;
+SELECT * FROm stock_target WHERE name = 'Tapioca';
+INSERT INTO stock_target (name, current_qty, status, item_id) VALUES ('Tapioca', 0.00, 'OK', 5043);
+SELECT * FROM stock_transactions;
+SELECT * FROM stock_transaction;
+\d stock*
+\dt stock*
+\dt stock*
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+SELECT * FROM stock_transaction;
+\d item
+\d recipe_ingredient;
+SELECT* FROM recipe_ingredient;
+SELECT * FROM item;
+SELECT * FROM item WHERE name = "Cornmeal";
+SELECT * FROM item WHERE name = 'Cornmeal';
+SELECT * FROM item WHERE name = 'Beefalo';
+SELECT count(*) FROM item;
+\d item'
+\d item;
+SELECT id, name, category, subcategory FROM item;
+SELECT id, name, category, subcategory FROM item WHERE category = 'Aquatic foods';
+DELETE FROM FROM item WHERE category = 'Aquatic foods';
+DELETE  FROM item WHERE category = 'Aquatic foods';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Cocoa and cocoa products';
+DELETE FROM item WHERE  category = 'Cocoa and cocoa products' AND id NOT IN (186, 688, 689, 690, 692);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Animal Foods';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Animal Food';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Animal foods';
+DELETE FROM item WHERE category = 'Animal foods' AND id NOT IN (333, 477, 499, 4994, 4444, 5026, 4973);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Baking goods';
+DELETE FROM item WHERE category = 'Baking goods' AND id NOT IN (632, 651, 655, 658, 661, 665, 667, 760, 768, 783);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Beverages';
+ DELETE FROM item WHERE category = 'Beverages' AND id NOT IN (272, 626, 627, 629, 633, 635, 707, 828, 915, 921);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Cereals and other ceraal products'
+;
+SELECT id, name, category, subcategory FROM item WHERE category = 'Cereals and other cereal products';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Cereals and cereal products';
+DELETE FROM item WHERE category = 'Cereals and cereal products' AND id NOT IN (129, 239, 273, 274, 277, 278, 713, 803, 805, 806, 808, 812);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Confectionaries';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Confectioneries';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Confectioneries';
+DELETE FROM item WHERE category = 'Confectioneries' WHERE id NOT IN (628, 630, 666, 704, 844, 845);
+DELETE FROM item WHERE category = 'Confectioneries' AND id NOT IN (628, 630, 666, 704, 844, 845);
+DELETE FROM item WHERE category = 'Dishes';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Fruits';
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes')
+;
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes', 'Watermelon', Strawberries', 'Blueberries', 'Cherries')
+;
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes', 'Watermelon', Strawberries', 'Blueberries', 'Cherries');
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes', 'Watermelon', 'Strawberries', 'Blueberries', 'Cherries'); 
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes', 'Watermelon', 'Strawberries', 'Blueberries', 'Cherries', 'Raisin');
+SELECT id, name FROM item WHERE category = 'Fruits' AND name IN ('Apple', 'Banana', 'Pear', 'Clementine', 'Grapes', 'Watermelon', 'Strawberries', 'Blueberries', 'Cherries', 'Raisins');
+DELETE FROM FROM item WHERE category = 'Fruits' AND id NOT IN (109, 156, 212, 963, 5041, 5042, 5045);
+DELETE  FROM item WHERE category = 'Fruits' AND id NOT IN (109, 156, 212, 963, 5041, 5042, 5045);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Fruits';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Gourds';
+DELETE FROM item WHERE category = 'Gourds' AND id NOT IN (56, 69, 287, 321);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Milk and milk products';
+DELETE FROM item WHERE category = 'Milk and milk products' AND id NOT IN (621, 622, 624, 652, 654, 693, 802, 846, 937, 938, 939, 940, 941, 942, 943, 953, 954, 957);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Nuts';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Nuts';
+DELETE FROM item WHERE category = 'Nuts' AND id NOT IN (15, 20, 48, 142, 144, 152, 612, 775);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Pulses';
+DELETE FROM item WHERE category = 'Pulses' WHERE id NOT IN (51, 102, 137, 887);
+DELETE FROM item WHERE category = 'Pulses' AND id NOT IN (51, 102, 137, 887);
+SELECT id, name, category, subcategory FROM item WHERE category = 'Vegetables';
+SELECT id, name, category, subcategory FROM item WHERE category = 'Vegetables' GROUP BY name;
+SELECT MIN(id), name, category, subcategory FROM item WHERE category = 'Vegetables' GROUP BY name;
+SELECT MIN(id), name, COALESCE(category), COALESCE(subcategory) FROM item WHERE category = 'Vegetables' GROUP BY name;
+SELECT MIN(id), name, category FROM item WHERE category = 'Vegetables' GROUP BY name, category;
+DELETE FROM item WHERE category = 'Vegetables' AND id NOT IN (11, 254, 976, 857, 966, 512, 249, 4977, 36, 5002, 4142, 182, 5023, 5028, 38, 4989, 99, 4987, 5039, 394, 4988, 5033, 178, 883, 179, 134, 219, 884, 882, 25);
+SELECT count(id), category FROM item GROUP BY category;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and spices' GROUP BY name, category;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and spices' GROUP BY name, category;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and Spices' GROUP BY name, category;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and Spices' GROUP BY name, category ORDER BY name;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and Spices' GROUP BY name, category ORDER BY name;
+SELECT MIN(id), name, category FROM item WHERE category = 'Herbs and Spices' GROUP BY name, category ORDER BY name;
+ DELETE FROM item WHERE category = 'Herbs and Spices' AND id NOT IN (291, 949, 43, 13, 183, 576, 945, 71, 17, 12, 210, 22, 122, 913, 135, 445, 163, 72, 199);
+SELECT count(id), category FROM item GROUP BY category;
+SELECT * FROM unit;
+SELECT abbreviation, id FROM unit;
+\d recipe_ingredient
+\d unit
+SELECT * FROM unit LIMIT 5;
+SELECT * FROM recipes;
+SELECT * FROM recipe;
+ SELECT id, title, created_at FROM recipe;
+ SELECT id, title, created_at FROM recipe;
+\df
+\ds
+\dt
+SELECT schema;
+SELECT schema();
+SELECT * FROM page;
+\dn
+SELECT * FROM `site_1.page;
+SELECT * FROM `site_1.page`;
+SELECT * FROM site_1.page;
+INSERT INTO site_1.page SELECT * FROM page;
+\dt
+\dt
+SELECT * FROM sites;
+\dt
+SELECT * FROM sites;
+\dt sites
+\d sites
+\dt
+\d
+\dt
+\d import_execution;
+ADD COLUMN started_at TIMESTAMP(0) WITHOUT TIME ZONE,
+ADD COLUMN completed_at TIMESTAMP(0) WITHOUT TIME ZONE,
+ADD COLUMN error_message TEXT;
+ALTER TABLE import_execution 
+ADD COLUMN started_at TIMESTAMP(0) WITHOUT TIME ZONE,
+ADD COLUMN completed_at TIMESTAMP(0) WITHOUT TIME ZONE,
+ADD COLUMN error_message TEXT;
+ALTER TABLE import_session 
+ADD COLUMN updated_at TIMESTAMP(0) WITHOUT TIME ZONE;
+SELECT * FROM import_session ORDER BY created_at DESC LIMIT 5;
+\dt
+SELECT * FROM import_discovery;
+SELECT * FROM import_discovery;
+\d import_discovery;
+\d discover_session;
+\d discovery_session;
+\dt
+\d content;
+\d page;
+ALTER TABLE import_discovery ALTER COLUMN graph_id TYPE text;
+SELECT * FROM import_sesion;
+SELECT * FROM import_session;
+SELECT * FROM import_session;
+SELECT * FROM import_discvoery;
+SELECT * FROM import_discvory;
+SELECT * FROM import_discovery;
+\d import_discovery;
+SELECT id, session_id, created_at FROM import_discovery;
+SELECT id, session_id, created_at, stats FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+\d
+\dt
+DELETE FROM import_discovery;
+\dt
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+\d
+\dt
+SELECT * FROm stored_import_plan;
+SELECT * FROm stored_import_plan;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+\d stored_import_plan;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+ls
+SELECT * FROM import_session;
+SELECT * FROM import_session;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT * FROM stored_import_plan;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+\d stored_import_plan;
+SELECT id, session_id FROM stored_import_plan;
+SELECT id, session_id FROM stored_import_plan;
+DELETE FROM import_discovery;
+\d length:64
+\d stored_import_plan;
+ALTER TABLE stored_import_plan ALTER COLUMN session_id TYPE string(64);
+ALTER TABLE stored_import_plan ALTER COLUMN session_id TYPE varchar(64);
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT * FROM stored_import_plan;
+SELECT * FROM stored_import_plan\G
+SELECT plan_json FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan;
+DELETE FROM import_discovery;
+SELECT plan_id FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_99df9cd8a2cb03ca';
+\dt
+CREATE TABLE IF NOT EXISTS page_content (
+  id BIGSERIAL PRIMARY KEY,
+  plan_id VARCHAR(64) NOT NULL,
+  route VARCHAR(2048) NOT NULL,
+  content TEXT NOT NULL,
+  provenance JSONB,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  CONSTRAINT uniq_plan_route UNIQUE (plan_id, route)
+);
+CREATE INDEX IF NOT EXISTS idx_page_content_plan ON page_content(plan_id);
+SELECT * FROM stored_import_plan
+;
+\d stored_import_plan;
+SELECT id, session_id, plan_id, char_len(plan_json), created_at FROM stored_import_plan;
+SELECT id, session_id, plan_id, JSONB_ARRAY_LENGTH(plan_json), created_at FROM stored_import_plan;
+SELECT id, session_id, plan_id, JSON_ARRAY_LENGTH(plan_json), created_at FROM stored_import_plan;
+SELECT id, session_id, plan_id, LENGTH(plan_json), created_at FROM stored_import_plan;
+\d stored_import_plan;
+SELECT id, session_id, plan_id, pg_column_size(plan_json), created_at FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_fb88dafdc9964f41';
+SELECT id, session_id, plan_id, pg_column_size(plan_json), created_at FROM stored_import_plan;
+SELECT * FROM sites;
+SELECT * FROM page_content;
+SELECT id, session_id, plan_id, pg_column_size(plan_json), created_at FROM stored_import_plan;
+SELECT * FROM page_content;
+\d
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_fb88dafdc9964f41';
+SELECT * FROM page_content;
+DELETE FROM page_content;
+SELECT * FROM page_content;
+SELECT * FROM page_content;
+DELETE FROM page_content;
+SELECT * FROM stored_import_plan;
+SELECT id, session_id, plan_id, pg_column_size(plan_json), created_at FROM stored_import_plan;
+DELETE FROM page_content;
+DELETE FROM page_content;
+DELETE FROM page_content;
+\d
+\dt
+SELECT * FROM import_execution;
+SELECT * FROM import_discovery;
+\d import_discovery;
+SELECT id, session_id, graph_id, stats, created_at FROM import_discovery;
+SELECT * FROM page_content;
+\d page_content;
+SELECT id, plan_id, route, created_at, updated_at FROM page_content
+;
+SELECT id, session_id, graph_id, stats, created_at, content FROM import_discovery;
+SELECT id, plan_id, route, created_at, updated_at, content FROM page_content;
+exi
+exit
+DELETE FROM page_content;
+DELETE FROM page_content;
+SELECT * FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT count(*) FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT content FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content;
+SELECT content FROM page_content;
+SELECT content FROM page_content;
+SELECT import_discovery;
+SELECT discovery_import;
+\dt
+\d import_discovery;
+\d import_execution;
+SELECT * FROM redirect_rule;
+\d stored_import_plan;
+SELECT plan_json FROM stored_import_plan;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT count(*) FROm stored_import_plan;
+DELETE FROM import_discovery;
+SELECT count(*) FROM import_discovery
+;
+SELECT count(*) FROM stored_import_plans;
+SELECT count(*) FROM stored_import_plans;
+SELECT count(*) FROM stored_import_plan;
+SELECT count(*) FROM page_content;
+\d stored_import_plan;
+SELECT id, session_id, plan_id, created_at FROM stored_import_plan;
+DELETE FROM stored_import_plan WHERE id NOT IN (1, 2, 20);
+SELECT id, session_id, plan_id, created_at FROM stored_import_plan;
+SELECT count(*) FROM page_content;
+\d page_content;
+SELECT id, plan_id created_at FROM page_content;
+SELECT * FROM page_content WHERE id = 93;
+SELECT content FROM page_content WHERE id = 93;
+DELETE FROM import_discovery;
+\d stored_import_plan;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_fd1d5c4da1e849ae';
+DELETE FROM import_discovery;
+SELECT max(id) FROM page_content;
+SELECT content FROM page_content WHERE id = 94;
+SELECT max(id) FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan WHERE id = 21;
+SELECT max(id) FROM page_content;
+SELECT max(id) FROM page_content;
+\dn
+SELECT id, plan_id, created_at FROM page_content;
+DELETE FROM DELETE FROM page_content WHERE id > 92;
+DELETE FROM page_content WHERE id > 92;
+SELECT count(*) FROM page_content;
+SELECT count(*) FROM page_content;
+SELECT content FROM page_content;
+DELETE FROM page_content WHERE id > 92;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_c206e83ba416800e';
+DELETE FROM page_content WHERE id > 92;
+SELECT id, content FROM page_content;
+SELECT id, content FROM page_content;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_6daefd9d140645bf';
+SELECT count(*) FROM page_content;
+SELECT id, content FROM page_content;
+\d page_content;
+SELECT id, plan_id, route, LENGTH(content) FROM page_content;
+\d
+\dt
+\d page_content;
+SELECT id, plan_id, route, LENGTH(content) FROM page_content;
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+DELETE * FROM page_content;
+DELETE FROM page_content;
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_2d4bc9e1cb39e530';
+\d page_content;
+DELETE * FROM page_content;
+DELETE FROM page_content;
+DELETE FROM import_discovery;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_2d4bc9e1cb39e530';
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+DELETE FROM import_discovery;
+DELETE FROM page_content;
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+DELETE FROM page_content;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_116eae0dee780db4';
+DELETE FROM page_content;
+DELETE FROM discovery_import;
+DELETE FROM import_discovery;
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+SELECT plan_json FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan WHERE plan_id = 'plan_62db7a3525f1b4e0';
+SELECT * FROM import_discover;
+SELECT * FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT id, session_id, plan_id, created_at FROM stored_import_plan;
+DELETE FROM import_discovery;
+SELECT id, session_id, plan_id, created_at FROM stored_import_plan;
+SELECT jsonb_extract_path(plan_json, 'pages') FROM stored_import_plan WHERE plan_id = 'plan_df1f22cfe8db94e4';
+SELECT plan_json -> 'pages' FROM stored_import_plan WHERE plan_id = 'plan_df1f22cfe8db94e4';
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+DELETE FROM import_discovery;
+SELECT plan_json -> 'pages' FROM stored_import_plan WHERE plan_id = 'plan_190a3ff5a5d691aa';
+SELECT id, plan_id, route, LENGTH(content), created_at FROM page_content ORDER BY created_at;
+\dt
+\dt
+\d order;
+ls
+exit
+exit()
+\q
+\d order;
+\d recipe_lit;
+\d recipe_list;
+SELECT * FROM order;
+SELECT * FROM order;
+SELECT * FROM "order";
+UPDATE "order" SET scheduled_at = '2025-08-26';
+UPDATE "order" SET scheduled_at = '2025-08-27' WHERE id = 7;
+UPDATE "order" SET scheduled_at = '2025-08-28' WHERE id = 8;
+SELECT * FROM "order";
+UPDATE "order" SET status = "pending"l
+;
+UPDATE "order" SET status = "pending";
+UPDATE "order" SET status = 'pending';
+\d stock_target;
+\d
+\dt
+\d stock_target;
+SELECT * FROM stock_transaction;
+\dt
+SELECT * FROM sites;
+INSERT INTO sites VALUES (1, 'inseam', 'inseam.com', 1, 1, '2025-09-01'
+);
+INSERT INTO sites VALUES (1, 'inseam', 'inseam.com', true, true, '2025-09-01');
+\dt
+SELECT * FROM page;
+SELECT * FROM rsvp_log;
+SELECT * FROM rsvp_log;
+SELECT * FROM rsvp_log;
+\dt
+SELECT * FROM rsvp_log;
+\dt
+SELECT * FROM blog_post;
+INSERT INTO blog_post VALUES (1, 'What blog?', 'A note about our current political climate.', 'Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.', '<p>Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.</p>', 2025-07-04, 2025-07-04, 1, null);
+INSERT INTO blog_post VALUES (1, 'What blog?', 'A note about our current political climate.', 'Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.', '<p>Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.</p>', 2025-07-04, 2025-07-04, 1, null);
+INSERT INTO blog_post VALUES (1, 'What blog?', 'A note about our current political climate.', 'Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.', '<p>Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.</p>', 2025-07-04, 2025-07-04, 1, null);
+INSERT INTO blog_post VALUES (1, 'What blog?', 'A note about our current political climate.', 'Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.', '<p>Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.</p>', '2025-07-04', '2025-07-04', 1, null);
+\d blog_post;
+INSERT INTO blog_post VALUES (1, 'What blog?', 'A note about our current political climate.', 'A note about our current political climate.', 'Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.', '<p>Freedom of thought and expression are paramount, I believe, for a society to "progress" (if you believe in that) or it to be something I care to participate in. Until further notice, my blog is not public access. If you feel my assessment is partisan, you probably do not know me very well. My blog will return. Until then, be better.</p>', '2025-07-04', '2025-07-04', 1, null);
+UPDATE blog_post SET summary = '' WHERE id = 1;
+SELECT * FROM "user";
+SELECT * FROM "user";
+INSERT INTO "user" (7, 'mulvayfam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', ["ROLE_ADMIN"], 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', ["ROLE_ADMIN"], 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', "ROLE_ADMIN", 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', 'ROLE_ADMIN', 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', 'ROLE_ADMIN', 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', 'ROLE_ADMIN', 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', ['ROLE_ADMIN'], 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', {'ROLE_ADMIN'}, 'katzen_user');
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', {'ROLE_ADMIN'}, 'katzen_user');
+SELECT * FROM "user";
+INSERT INTO "user" VALUES (7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', {'ROLE_ADMIN'}, 'katzen_user');
+INSERT INTO "user" SELECT * FROM "user" WHERE id = 1;
+INSERT INTO "user" SELECT 7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', roles, detype FROM "user" WHERE id = 1;
+INSERT INTO "user" SELECT 7, 'mulvayfam', 'Mulvay Fam', 'mulvayfam@icloud.com', false, '2025-09-07 21:32:54', '2025-09-07 21:32:54', '2025-09-07 21:32:54', '$2y$13$BYEDh6NG8dMxU5BlRthCl.efpIDGchTWNq6UrD4kdTDnGRWeFI.hK', roles, dtype FROM "user" WHERE id = 1;
+SELECT * FROM "user";
+UPDATE "user" SET password = "$2y$13$HgXyk5ebDiXDLFItbUdE1O.4AiX3ML1TYb8VPWu9OQ67DXcK0qSBy" WHERE id = 7;
+UPDATE "user" SET password = '$2y$13$HgXyk5ebDiXDLFItbUdE1O.4AiX3ML1TYb8VPWu9OQ67DXcK0qSBy' WHERE id = 7;
+\d
+\dt;
+SELECT * FROM sites;
+SELECT * FROM 
+\dt
+\dt
+\dt
+exit
+\q
+\dt
+\d admin
+\d category
+\dt
+\d user
+\d site
+\dt
+\dt page
+\dt page_content
+\d page;
+\d page_content;
+SELECT * FRO Mpage;
+SELECT * FROM page;
+\dt
+SELECT * FROM admin;
+SELECT password FROM admin;
+SELECT COMCAT("{",CONCAT(password,"}")) FROM admin;
+SELECT CONCAT('{', CONCAT(password, '}')) from admin;
+UPDATE admin SET password='$2y$13$eRtJM2TMNwJMKSalOdHaLO/LUOkBwKq5ErS4rp6UunQrGBmI.kVi6';
+SELECT * FROM admin;
+SELECT * FROM admin;
+SELECT * FROM admin;
+SELECT * FROM admin;
+SELECT * FROM admin;
+ALTER TABLE admin DROP column bio;
+ALTER TABLE admin ADD column bio VARCHAR(255) DEFAULT NULL;
+SELECT * FROM admin;
+\dt
+SELECT * FROM import_discovery;
+\d import_discovery;
+SELECT count(*) FROM import_discovery;
+SELECT COUNT(*) FROM import_executions;
+SELECT COUNT(*) FROM import_execution;
+\d
+qq
+\dt
+SELECT count(*) FROM stored_import_plan;
+SELECT count(*) FROM stored_import_plan;
+\d stored_import_plan;
+SELECT plan_json FROM stored_import_plan;
+SELECT plan_json FROM stored_import_plan LIMIT 1;
+\dt
+\d import_discovery
+SELECT graph_json FROM import_discovery LIMIT 1;
+SELECT graph_json FROM import_discovery;
+                                                                                                                                         AssetNode\dt
+\d import_session
+\d import_session;
+\d import_execution;
+\dt;
+]d import_discovery;
+\d import_discovery;
+SELECT id, session_id, graph_id, created_at FROM import_discovery;
+UPDATE import_discovery SET graph_id='litmas' WHERE graph_id='graph_e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+SELECT plan_json FROM stored_import_plan WHERE plan_id='plan_7b30a304452ccf22';
+\dgt
+\dt
+\d page;
+\dt
+SELECT * FROM page;
+SELECT * FROM site;
+SELECT * FROM sites;
+DELETE FROM sites WHERE domain="Default Template";
+DELETE FROM sites WHERE domain='Default Template';
+\d pages;
+\d page;
+SELECT * FROM page;
+SELECT * FORM "sites";
+SELECT * FROM sites;
+SELECT * FROM blocs;
+SELECT * FROM block;s
+SELECT * FROM blocks;
+SELECT * FROM bloc;
+SELECT * FROM block;
+\dt
+SELECT * FROM page;
+UPDATE TABLE admin DROP column bio;
+ALTER TABLE admin DROP column bio;
+ALTER TABLE admin ADD column bio DEFAULT NULL;
+ALTER TABLE admin ADD column bio varchar(255) DEFAULT NULL;
+ALTER TABLE admin ADD column bio varchar(255) DEFAULT NULL;
+ALTER TABLE admin DROP column bio;
+ALTER TABLE admin ADD column bio varchar(255) DEFAULT NULL;
+\dt
+\dt
+\d site
+\d sites
+\d page
+\d block
+\d asset
+SELECT * FROM page;
+SELECT * FROM sites;
+SELECT * FROM users;
+SELECT * FROM "user";
+SELECT * FROM admin;
+UPDATE sites SET owner_id = 3 WHERE id = 1;
+ALTER TABLE sites DROP COLUMN onwer_id;
+ALTER TABLE sites ADD COLUMN owner_id INT DEFAULT NULL;
+UPDATE sites SET owner_id = 3 WHERE id = 1;
+UPDATE sites SET owner_id = 1 WHERE id = 2;
+UPDATE sites SET owner_id = 4 WHERE id = 7;
+\d stock_tart;
+\d stock_target;
+SELECT name FROM stock_target;
+SELECT * FROM unit;
+SELECT * FROM stock_target WHERE base_unit_id IS NULL;
+UPDATE stock_target SET base_unit_id = 22 WHERE id IN (33, 35, 11);
+SELECT * FROM item WHERE id IN (5012, 4980, 4588, 4011, 4618, 5048, 4880, 5049);
+SELECT id, name FROM item WHERE id IN (5012, 4980, 4588, 4011, 4618, 5048, 4880, 5049);
+SELECT * FROM stock_target WHERE item_id IN (4011, 4588, 4618, 4880, 4980, 5012, 5048, 5049);
+\d stock_transaction;
+\d unit
+SELECT * FROM unit;
+SELECT unique(base_unit_id) FROM unit;
+SELECT distinct(base_unit_id) FROM unit;
+SELECT * FROM unit WHERE id IN (SELECT distinct(base_unit_id) FROM unit);
+\d order;
+\d stock_target;
+SELECT count(*) FROM stock_transaction;
+SELECT count(*) FROM stock_transaction;
+SELECT * FROM recipe_list;
+\dt recipe;
+\d recipe
+SELECT id, title, prep_time cook_time, wait_time, status FROM recipe;
+\d tag;
+SELECT distinct(type) FROM tag;
+SELECT distinct(obj, type) FROM tag;
+SELECT * FROM order;
+SELECT * FROM "order";
+UPDATE "order" SET status = "ready" WHERE scheduled_at IS NOT NULL;
+UPDATE "order" SET status = 'ready' WHERE scheduled_at IS NOT NULL;
+SELECT * FROM "order";
+UPDATE "order" SET status = 'ready' WHERE scheduled_at IS  NULL;
+UPDATE "order" SET status = "waiting" WHERE scheduled_at IS NOT NULL;
+UPDATE "order" SET status = 'waiting' WHERE scheduled_at IS NOT NULL;
+\d page;
+\d page;
+SELECT * FROM site;
+SELECT * FROM sites;
+\dt page;
+\d page;
+SELECT id, title, slug, created_at, updated_at FROM page WHERE site_id = 7;
+\d page;
+SELECT * FROM page;
+\d page
+\d ssite
+\s sites;
