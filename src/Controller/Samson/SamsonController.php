@@ -36,8 +36,12 @@ class SamsonController extends AbstractController
 
   // TODO: store and map individual media pages
   #[Route('/media/{id}', name: 'samson_media_view')]
-  public function view_media(Request $request): Response
+  public function view_media(
+    Request $request,
+    string $id)
+    : Response
   {
-    return $this->render('samson/media.html.twig');
+    // TODO return a better 404
+    return $this->render("samson/media/$id.html.twig");
   }
 }
