@@ -16,6 +16,7 @@ class SamsonController extends AbstractController
   )
   {}
 
+  #[Route('/', name: 'samson_landing')]
   #[Route('/home', name: 'samson_home')]
   public function home(Request $request): Response
   {
