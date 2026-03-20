@@ -1,6 +1,7 @@
 name: is-here
 
 type: 'php:8.4'
+size: XS
 
 dependencies:
   php:
